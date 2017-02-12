@@ -4,6 +4,7 @@
 ### Pros
 ### Cons
 ## Design 2
+![ywang3134](../Design-Individual/ywang3134/design.pdf)
 ### Pros
 ### Cons
 ## Design 3
