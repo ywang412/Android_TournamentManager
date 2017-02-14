@@ -8,6 +8,7 @@
 ### Pros
 ### Cons
 ## Design 3
+![jtran46](.../Design-Individual/jtran46/design.png)
 ### Pros
 ### Con
 ## Design 4
