@@ -47,5 +47,7 @@ The simple design without inheritance might make it difficult to add additional 
 Add/delete player operation should occur between manager and user. It is not clear that how match list is created by tournament manager. 
 
 # Team Design
+![team37](design.png)
+
 # Summary
 
