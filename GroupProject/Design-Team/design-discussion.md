@@ -75,5 +75,23 @@ The main pros and cons of the four individual designs are listed here as in team
 
 
 # Team Design
+
+
+
+Design 2
+
+Commonalities:
+
+The team design and design 2 has the same ways to represent tournament and match class. Some operations and parameters in tournament class are similar.
+ 
+Differences:
+
+Team design has player and manager inherated from user class. The TournamentResult class is better organized and contains necessary methods. An application class in team design is used to initiate the tournament and fetched the tournament result. Therefore, the team design UML demonstrates good use of class inheritance, class organization and methods.
+
+ 
 # Summary
+
+Group dicussion generated more ideas to make a better design. Everyone had an unique perspective to the design. The relationship between classes became clearer. The designs should be more abstract with less implementation details. Some redundancy in classes are removed.  
+
+ 
 
