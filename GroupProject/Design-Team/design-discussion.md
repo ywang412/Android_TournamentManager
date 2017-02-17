@@ -75,6 +75,8 @@ The main pros and cons of the four individual designs are listed here as in team
 
 # Team Design
 
+![Team Design](design.png)
+
 ## Design 1
 
 > As a team we decided on Design 1 as our group design.  Only a few modifications were made to incorporate the symplicity of Design 4 as well as a Class name change to make understanding Class roles clearer. 
