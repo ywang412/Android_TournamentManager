@@ -88,10 +88,12 @@ Differences:
 
 Team design has player and manager inherated from user class. The TournamentResult class is better organized and contains necessary methods. An application class in team design is used to initiate the tournament and fetched the tournament result. Therefore, the team design UML demonstrates good use of class inheritance, class organization and methods.
 
+Justification:
+Good middle ground between abstraction and simplicity.  Reduce amount of redundancies while supporting the requirements, and the design still leaves room for flexibility in case requirements do change.
+
  
 # Summary
 
 Group dicussion generated more ideas to make a better design. Everyone had an unique perspective to the design. The relationship between classes became clearer. The designs should be more abstract with less implementation details. Some redundancy in classes are removed.  
 
- 
-
+Had some back and forth between simplicity of the design for ease of implementation vs a more object-oriented design for a more robust solution.
