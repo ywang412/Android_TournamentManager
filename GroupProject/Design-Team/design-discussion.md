@@ -73,37 +73,59 @@ The main pros and cons of the four individual designs are listed here as in team
 > 
 
 
-
 # Team Design
 
+##Design 1
 
+> As a team we decided on Design 1 as our group design.  Only a few modifications were made to incorporate the symplicity of Design 4 as well as a Class name change to make understanding Class roles clearer. 
 
-Design 2
+##Design 2
 
-Commonalities:
+> ** Commonalities: **
 
-The team design and design 2 has the same ways to represent tournament and match class. Some operations and parameters in tournament class are similar.
+> - The team design shares similar ways to represent tournament and match class with this design.
+> - Some operations and parameters in tournament class behave in the same manner.
  
-Differences:
+> ** Differences: **
 
-Team design has player and manager inherated from user class. The TournamentResult class is better organized and contains necessary methods. An application class in team design is used to initiate the tournament and fetched the tournament result. Therefore, the team design UML demonstrates good use of class inheritance, class organization and methods.
+> - Team design has player and manager inherated from user class.
+> - The TournamentResult class is better organized and contains necessary methods.
+> - An ApplicationUtility class is implemented in the team design and used to initiate the tournament as well as fetching the tournament result.
+> - The team design UML demonstrates better uses of class inheritance, class organization and methods.
 
-Justification:
-Good middle ground between abstraction and simplicity.  Reduce amount of redundancies while supporting the requirements, and the design still leaves room for flexibility in case requirements do change.
+> ** Justification: **
 
+> - Good middle ground between abstraction and simplicity.
+> - Reduced the amount of redundancies while supporting the requirements.
+> - The design still leaves room for flexibility in case requirements do change.
 
-Design 4
+##Design 3
 
-Commonalities:
+> ** Commonalities: **
 
-The team design and design 4 share similar classes by representing a Manager, Player, Match, and Tournament, as well as a utility database class.
+> - Both designs share some of the same classes (Manager, Player, Match, Tournament) as well as their operators.
+
+> ** Differences: **
+
+> - This design had relationships incorrectly defined, with a lack of clarity in which methods belong to which classes.  In that regard, the group design is much easier to follow and understand.
+> - The team design has inheritance used for the User and Manager/Player classes.  Additional classes of Date and Currency, as well as enumerations defined.
+> - Instead of a Database class, the team design shows the actual implementation.
+> - Many of the methods are clearly planned out in the team design.
+
+##Design 4
+
+> ** Commonalities: **
+
+> - The team design and design 4 share similar classes by representing a Manager, Player, Match, and Tournament, as well as a utility database class.
  
-Differences:
+> ** Differences: **
 
-The utility database class in team design is better organized in terms of how it can be accessed and managed. In addition, the team design demonstrates good use of class inheritance, which will accommodate future design requirements more easily. The team design is also more self-explanatory on how each method is implemented. 
+> - The utility database class in team design is better organized in terms of how it can be accessed and managed.
+> - In addition, the team design demonstrates good use of class inheritance, which will accommodate future design requirements more easily. 
+> - The team design is also more self-explanatory on how each method is implemented. 
 
-Justification:
-The team design covers every aspect of requirements with good details. It also demonstrates clear relationships, and flexible to accommodate additional design requirements.
+> ** Justification: **
+> - The team design covers every aspect of requirements with good details. It also demonstrates clear relationships, and flexible to accommodate additional design requirements.
  
 # Summary
 
