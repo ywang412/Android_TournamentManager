@@ -91,6 +91,19 @@ Team design has player and manager inherated from user class. The TournamentResu
 Justification:
 Good middle ground between abstraction and simplicity.  Reduce amount of redundancies while supporting the requirements, and the design still leaves room for flexibility in case requirements do change.
 
+
+Design 4
+
+Commonalities:
+
+The team design and design 4 share similar classes by representing a Manager, Player, Match, and Tournament, as well as a utility database class.
+ 
+Differences:
+
+The utility database class in team design is better organized in terms of how it can be accessed and managed. In addition, the team design demonstrates good use of class inheritance, which will accommodate future design requirements more easily. The team design is also more self-explanatory on how each method is implemented. 
+
+Justification:
+The team design covers every aspect of requirements with good details. It also demonstrates clear relationships, and flexible to accommodate additional design requirements.
  
 # Summary
 
