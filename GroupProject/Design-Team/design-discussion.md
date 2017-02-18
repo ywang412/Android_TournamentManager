@@ -90,7 +90,7 @@ The main pros and cons of the four individual designs are listed here as in team
  
 > **Differences:**
 
-> - Team design has player and manager inherated from user class.
+> - Team design has player and manager inherited from user class.
 > - The TournamentResult class is better organized and contains necessary methods.
 > - An ApplicationUtility class is implemented in the team design and used to initiate the tournament as well as fetching the tournament result.
 > - The team design UML demonstrates better uses of class inheritance, class organization and methods.
