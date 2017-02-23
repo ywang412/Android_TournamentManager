@@ -8,15 +8,20 @@
 
 ### 1.1 Assumptions
 
-*Describe any assumption, background, or dependencies of the software, its use, the operational environment, or significant project issues.*
+* The application will only run on an Android device with touch screen or equivalent control
+* Android SDK target 15
+* No player driven data.  All data entry will be done by the tournament manager
+* No webservice interaction
+* Single device management - the tournament data is not expected to be available on more than one system
 
 ### 1.2 Constraints
 
-*Describe any constraints on the system that have a significant impact on the design of the system.*
+* requires that only one device is used for the tournament
 
 ### 1.3 System Environment
 
-*Describe the hardware and software that the system must operate in and interact with.*
+* Android OS
+* Android device with touch screen (or equivalent control)
 
 ## 2 Architectural Design
 
