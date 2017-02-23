@@ -50,7 +50,7 @@ As a stand-alone Android app, we did not see the necessity of a deployment diagr
 
 ### 3.1 Class Diagram
 
-*In the case of an OO design, the internal structure of a software component would typically be expressed as a UML class diagram that represents the static class structure for the component and their relationships.*
+![class](Supporting Files/Class Diagram.png)
 
 ### 3.2 Other Diagrams
 
