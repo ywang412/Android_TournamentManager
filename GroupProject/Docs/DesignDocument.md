@@ -42,7 +42,7 @@ Infrastructure:
 
 ### 2.2 Deployment Diagram
 
-*This section should describe how the different components will be deployed on actual hardware devices. Similar to the previous subsection, this diagram may be unnecessary for simple systems; in these cases, simply state so and concisely state why.*
+As a stand-alone Android app, we did not see the necessity of a deployment diagram.  Android Studio provides all the necessary tools to package all the classes and resources into an APK, which can be added to the Play Store for deployment through the Google Play Store.
 
 ## 3 Low-Level Design
 
