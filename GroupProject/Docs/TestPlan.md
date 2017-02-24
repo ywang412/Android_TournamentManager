@@ -53,21 +53,25 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 |4|	Add player	|New player creation	 |	Player details stored in database				| | |
 |5|	Edit player	information | Player information change	 |	Player details changed in database				| | |
 |6|	Delete player	|Player deletion	 |	Player details deleted from database			| | |	
-|7|	Display prizes and profits |	Total prizes display	 |	Totals for every player and house profits				| | |
-|8|	View the match list |	Tournament status display	 |	Match list status				| | |
-|9|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
-|10|	End match	|Allow manager to end a match in list	 |	Match result display			| | |	
-|11|	End tournament 	|Allow manager to end a tournament  | 	Session log-out | |  |			
-|12|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |		
-|13|	Log-out	|Session termination	 |	Session log-out		| | | 		
-|14|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
-|15| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
-|16|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
-|17|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
-|18|	Input error	massage | To check if invalid input is handled	|	Input Error massage displayed				| | |
-|19|	Exit | Allow user to exit from the app 	|	App exits				| | |
-|20|	Delete history | Allow user to delete tournament history record 	|	Correctly delete data after confirmation				| | |
-|21|	Session maintenance	|To ensure user is logged on till log-out	|	Session maintained		| | |		
+|7|	Display total prizes  |	Total prizes ranking display	 |	Total ranking for all player and house profits				| | |
+|8|	Display individual prize |	Individual prizes in past tournaments display	 |	Individual player prizes displayed				| | |
+|9|	Display house profits |	House profits display	in chronological order |	House profits	displayed			| | |
+|10|	Total prizes calculation |	To test if total prizes for each player	is calculated correctly |	Correct player prizes		| | |
+|11|	House profits calculation |	To test if house profits	calculation is correct |	Correct house profits				| | |
+|12|	View the match list |	Tournament status display	 |	Match list status				| | |
+|13|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
+|14|	End match	|Allow manager to end a match in list	 |	Match result display			| | |	
+|15|	End tournament 	|Allow manager to end a tournament  | 	Session log-out | |  |			
+|16|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |		
+|17|	Log-out	|Session termination	 |	Session log-out		| | | 		
+|18|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
+|19| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
+|20|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
+|21|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
+|22|	Input error	massage | To check if invalid input is handled	|	Input Error massage displayed				| | |
+|23|	Exit | Allow user to exit from the app by Home button 	|	App exits				| | |
+|24|	Delete history | Allow user to delete tournament history record 	|	Correctly delete data after confirmation				| | |
+|25|	Session maintenance	|To ensure user is logged on till log-out	|	Session maintained		| | |		
 
 
 
