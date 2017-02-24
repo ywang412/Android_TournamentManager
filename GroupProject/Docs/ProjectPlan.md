@@ -40,11 +40,12 @@ Team 37 is developing a Tourney Manager application for Android utilizing the Un
 
 
 **Role Table**:
-| Name          | Project Manager | Developer | Tester | Architect | Business Analyst |
-| ------------- |:---------------:|:---------:|:------:|:---------:|:----------------:|
-| John Tran     |x                |x          |x       |x          |x                 |
-| Don Lee       |x                |x          |x       |x          |x                 |
-| Rulan Gong    |x                |x          |x       |x          |x                 |
-| Yu Wang       |x                |x          |x       |x          |x                 |
+
+| Name  | Project Manager | Developer | Tester | Architect | Business Analyst |
+| ------------- | :-------------: | :-------------: | :-------------: | :-------------: | :-------------: |
+| John Tran  |  ✓ | ✓ | ✓ | ✓ | ✓ | 
+| Don Lee  | ✓ | ✓ | ✓ | ✓ | ✓ | 
+| Rulan Gong  | ✓ | ✓ | ✓ | ✓ | ✓ | 
+| Yu Wang  | ✓ | ✓ | ✓ | ✓ | ✓ | 
 
 For this project, the team decided that the best course of action to familiarize ourselves with each role is to take turns sharing their duties from week to week.  This allows each member to see first hand that the software development process is truly a team effort requiring each role's contributions in order to result in a successful product.
