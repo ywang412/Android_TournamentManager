@@ -38,7 +38,7 @@ Returns to the home page.
 - **Description:**  The manager selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. If manager selects the player from the list. The system displays a list of the player’s individual prizes Then selects 'Close' Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
 - **Alternative Flows:** If there is any ongoing tournament,the system displays a suitable message.
-- 
+
 **Use Case: displayHouseProfits** 
 - **Actors:**  TournamentManager
 - **Pre-conditions:**   User logs into the system in Manager mode. 
