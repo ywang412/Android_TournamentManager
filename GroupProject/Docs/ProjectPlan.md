@@ -31,12 +31,13 @@ Team 37 is developing a Tourney Manager application for Android utilizing the Un
 ## 3 Team
 
 **Team members**: John Tran, Don Lee, Yu Wang, Rulan Gong
+
 **Roles**: 
-- Project Manager - Allocates resources appropriately to ensure the plan and design are executed successfully.  Determines what the risks are and mitigates them before they can impact the overall success of the project.  Organizes tasks and prioritizes work to meet deadlines.
-- Developer - Utilizes their programming expertise to transform the design into code.  Needs to be able to analyze the design diagram and translate that into efficient code that does not waste valuable hardware or software resources. 
-- Tester - By both manual and automatic means, tests the overall functionality of the code to ensure each behavior is working as intended.  The tester works must effectively documents any defects, steps for reproduction, and test environment to aid in debugging.  Once a fix for a defect is found, the tester has to validate.  Testers need to also be strong developers in order to spot problems within the code.
-- Architect - Comes up with the high-level blueprint of the project and uses their knowledge to select the best tools, hardware and software to proceed with.  Has to communicate the design well enough for the developers to understand.  The architect has to research and stay on top of industry standards and trends. 
-- Business Analyst - The business analyst works closely with the customer and has to get all the business requirements of the project as well as identify any potential roadblocks that might affect the business.
+- **Project Manager** - Allocates resources appropriately to ensure the plan and design are executed successfully.  Determines what the risks are and mitigates them before they can impact the overall success of the project.  Organizes tasks and prioritizes work to meet deadlines.
+- **Developer** - Utilizes their programming expertise to transform the design into code.  Needs to be able to analyze the design diagram and translate that into efficient code that does not waste valuable hardware or software resources. 
+- **Tester** - By both manual and automatic means, tests the overall functionality of the code to ensure each behavior is working as intended.  The tester works must effectively documents any defects, steps for reproduction, and test environment to aid in debugging.  Once a fix for a defect is found, the tester has to validate.  Testers need to also be strong developers in order to spot problems within the code.
+- **Architect** - Comes up with the high-level blueprint of the project and uses their knowledge to select the best tools, hardware and software to proceed with.  Has to communicate the design well enough for the developers to understand.  The architect has to research and stay on top of industry standards and trends. 
+- **Business Analyst** - The business analyst works closely with the customer and has to get all the business requirements of the project as well as identify any potential roadblocks that might affect the business.
 
 
 **Role Table**:
