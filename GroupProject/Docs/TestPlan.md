@@ -32,7 +32,7 @@ We will perform independent testing from four testers to ensure the quality of t
 The team will use a shared Google Excel sheet to document bug information, severity, and status. The bug will be logged with bug ID. Team members will discuss the status of the bug and strategy.
 
 Bug tracker spreadsheet
-https://docs.google.com/spreadsheets/d/18OVkQaXlwxPq3r6HxCRhlBuKU_iwWjTx9jL4NEDbGEE/edit#gid=0
+https://docs.google.com/spreadsheets/d/1tev9KGNxq6pVBH_RUMbR4kNkfWbnWHF4nTWXHk5wzqw/edit#gid=0
 
 ### 1.5 Technology
 
