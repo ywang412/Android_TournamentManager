@@ -13,7 +13,7 @@ The Tournament management Android App will undergo a number of rigorous testing 
 
 ### 1.2 Test Selection
 
-We plan to use black-box testing technique to test the Tournament management App. We will focus on the inputs and outputs based on software requirement and specifications. Both functional testing and non-functional testing (performance, scalability and usability) will be conducted. More, regression testing will be done after each bug fixes to check that the new code has not affected the existing code. 
+We plan to use black-box testing technique to test the Tournament management App. We will focus on the inputs and outputs based on software requirement and specifications. Both functional testing and non-functional testing (performance, scalability and usability) will be conducted. More regression testing will be done after each bug fix to check that the new code has not affected the existing code. 
 The tester will first examine the initial requirement and specifications. Both valid inputs and invalid inputs will be tested for positive test scenario and negative test scenario. The actual output will be compared with expected output. We will fix defects and re-testing the updates. 
 
 ### 1.3 Adequacy Criterion
