@@ -7,10 +7,11 @@
 ### 1.1 Assumptions
 
 * The application will only run on an Android device with touch screen or equivalent control
-* Android SDK target 15
+* Android API level 19
 * No player driven data.  All data entry will be done by the tournament manager
 * No webservice interaction
 * Single device management - the tournament data is not expected to be available on more than one system
+ * The application will use Android's built in SQLite database
 
 ### 1.2 Constraints
 
