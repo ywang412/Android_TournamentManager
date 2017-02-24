@@ -1,6 +1,6 @@
 # Project Plan
 
-**Author**: \<Team 37\>
+**Author**: \<Team 37 - Hi-Team\>
 
 ## 1 Introduction
 
@@ -14,7 +14,7 @@ Team 37 is developing a Tourney Manager application for Android utilizing the Un
 - **Exit criteria**: Team member feedback, completed Group UML diagram that can handle changing requirements
 
 **Activity 2**:  Planning
-- **Description**:  Clearly define a project plan with each member's role in the project.  Develop a use-case model that lists the interactions between actors and the system.  Create a requirements list that will meet the customer's needs.  Create documentation to describe the low-level design and internal structure of the program.  Finally, we need to create a thorough test plan to execute and ensure the functionality of the application. 
+- **Description**:  Clearly define a project plan.  Develop a use-case model that lists the interactions between actors and the system.  Create a requirements list that will meet the customer's needs.  Create documentation to describe the low-level design and internal structure of the program.  Finally, we need to create a thorough test plan to execute and ensure the functionality of the application. 
 - **Entrance criteria**:  completed group UML diagram, team member feedback
 - **Exit criteria**: Use Case model, Requirements list, Design document, Project plan, Test plan
 
