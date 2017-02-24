@@ -1,5 +1,5 @@
 # Extra Requirements
 
-**Author**: \<person or team name\>
+**Author**: \<Team 37\>
 
-*Supplementary requirements (i.e., requirements that do not fit the use-case model, such as non-functional requirements).*
+**Supplementary requirements**:
