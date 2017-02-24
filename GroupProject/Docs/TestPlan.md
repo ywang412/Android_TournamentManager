@@ -9,9 +9,9 @@ We test an Android application that manages a Tournament game. The Manager will 
 
 The application will run on a single Android mobile device. The assumption is made that security is not an important feature to customer; therefore, log-in credential is not required. Local database is used to store users' data.
 
-Testing Environment: Android version 2.3 and above
-Testing platform: JUnit 5, JDK 1.6, Android SDK
-Android API: Android Studio with ADT plug-in
+- Testing Environment: Android version 2.3 and above
+- Testing platform: JUnit 5, JDK 1.6, Android SDK
+- Android API: Android Studio with ADT plug-in
 
 
 ### 1.1 Overall strategy
@@ -36,13 +36,13 @@ https://docs.google.com/spreadsheets/d/18OVkQaXlwxPq3r6HxCRhlBuKU_iwWjTx9jL4NEDb
 
 ### 1.5 Technology
 
-For unit testing of the App, we will depend on JUnit testing. We will also use JUnit for integration and regression testing. It helps testers to identify any errors, defects or gaps in contrary to the expected results of the application under test. We may also use Junit parameterized tests for App performance testing. 
+For unit testing of the App, we will depend on JUnit testing. We will also use JUnit for integration and regression testing to identify any errors, defects or gaps in contrary to the expected results of the application. We may also use Junit parameterized tests for App performance testing. 
 
 
 
 ## 2 Test Cases
 
-As the application is still in design phase, to avoid frequent updates to the document, testing steps are omitted and will be updated in next version. 
+*As the application is still in design phase, to avoid frequent updates to the document, testing steps are omitted and will be updated in next version.*
 
  
 | ID | Test Case | Purpose | Expected result | Actual result | Pass/Fail |
@@ -50,8 +50,9 @@ As the application is still in design phase, to avoid frequent updates to the do
 |1|Player log-in	|Player mode selection |		Player Log-in access| | | 		
 |2|	Manager log-in	|Manager mode selection |		Manager Log-in access 		| | |
 |3|	New tournament	|To ensure tournament creation |		Creation of a new tournament without errors				| | |
-|4|	Add Player	|New player creation	 |	Player details stored in database				| | |
-|5|	Delete Player	|Player deletion	 |	Player details deleted from database			| | |	
+|4|	Add player	|New player creation	 |	Player details stored in database				| | |
+|4|	Edit player	information | Player information change	 |	Player details changed in database				| | |
+|5|	Delete player	|Player deletion	 |	Player details deleted from database			| | |	
 |6|	Display prizes and profits |	Total prizes display	 |	Totals for every player and house profits				| | |
 |7|	View the match list |	Tournament status display	 |	Match list status				| | |
 |8|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
@@ -63,8 +64,10 @@ As the application is still in design phase, to avoid frequent updates to the do
 |14| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
 |15|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
 |16|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
-|17|	Add Player	|New player creation	|	Player details stored in database				| | |
-
+|17|	Input error	massage | To check if invalid input is handled	|	Input Error massage displayed				| | |
+|18|	Exit | Allow user to exit from the app 	|	App exits				| | |
+|18|	Delete history | Allow user to delete tournament history record 	|	Correctly delete data after confirmation				| | |
+|19|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
 
 
 
