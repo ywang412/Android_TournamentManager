@@ -51,23 +51,23 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 |2|	Manager log-in	|Manager mode selection |		Manager Log-in access 		| | |
 |3|	New tournament	|To ensure tournament creation |		Creation of a new tournament without errors				| | |
 |4|	Add player	|New player creation	 |	Player details stored in database				| | |
-|4|	Edit player	information | Player information change	 |	Player details changed in database				| | |
-|5|	Delete player	|Player deletion	 |	Player details deleted from database			| | |	
-|6|	Display prizes and profits |	Total prizes display	 |	Totals for every player and house profits				| | |
-|7|	View the match list |	Tournament status display	 |	Match list status				| | |
-|8|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
-|9|	End match	|Allow manager to end a match in list	 |	Match result display			| | |	
-|10|	End tournament 	|Allow manager to end a tournament  | 	Session log-out | |  |			
-|11|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |		
-|12|	Log-out	|Session termination	 |	Session log-out		| | | 		
-|13|	Session maintenance	|To ensure user is logged on till log-out	|	Session maintained		| | |		
-|14| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
-|15|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
-|16|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
-|17|	Input error	massage | To check if invalid input is handled	|	Input Error massage displayed				| | |
-|18|	Exit | Allow user to exit from the app 	|	App exits				| | |
-|18|	Delete history | Allow user to delete tournament history record 	|	Correctly delete data after confirmation				| | |
-|19|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
+|5|	Edit player	information | Player information change	 |	Player details changed in database				| | |
+|6|	Delete player	|Player deletion	 |	Player details deleted from database			| | |	
+|7|	Display prizes and profits |	Total prizes display	 |	Totals for every player and house profits				| | |
+|8|	View the match list |	Tournament status display	 |	Match list status				| | |
+|9|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
+|10|	End match	|Allow manager to end a match in list	 |	Match result display			| | |	
+|11|	End tournament 	|Allow manager to end a tournament  | 	Session log-out | |  |			
+|12|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |		
+|13|	Log-out	|Session termination	 |	Session log-out		| | | 		
+|14|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
+|15| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
+|16|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
+|17|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
+|18|	Input error	massage | To check if invalid input is handled	|	Input Error massage displayed				| | |
+|19|	Exit | Allow user to exit from the app 	|	App exits				| | |
+|20|	Delete history | Allow user to delete tournament history record 	|	Correctly delete data after confirmation				| | |
+|21|	Session maintenance	|To ensure user is logged on till log-out	|	Session maintained		| | |		
 
 
 
