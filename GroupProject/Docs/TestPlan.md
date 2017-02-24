@@ -62,9 +62,9 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 |13|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
 |14|	End match	|Allow manager to end a match in list	 |	Match result display			| | |	
 |15|	End tournament 	|Allow manager to end a tournament  | 	Session log-out | |  |			
-|16|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |		
+|16|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
 |17|	Log-out	|Session termination	 |	Session log-out		| | | 		
-|18|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
+|18|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |	
 |19| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
 |20|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
 |21|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
