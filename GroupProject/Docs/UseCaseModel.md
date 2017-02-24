@@ -32,12 +32,19 @@ Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
 - **Alternative Flows:**  If manager tries to end tournament and there is any ongoing match the system displays an error message.
 
-**Use Case: viewHouseProfits** 
-- **Actors: **  TournamentManager
+**Use Case: displayPlayerPrizes** 
+- **Actors:**  TournamentManager
+- **Pre-conditions:**  User logs into the system in Manager mode
+- **Description:**  The manager selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. If manager selects the player from the list. The system displays a list of the player’s individual prizes Then selects 'Close' Returns to the home page.
+- **Post-conditions:**  Main menu is displayed
+- **Alternative Flows:** If there is any ongoing tournament,the system displays a suitable message.
+- 
+**Use Case: displayHouseProfits** 
+- **Actors:**  TournamentManager
 - **Pre-conditions:**   User logs into the system in Manager mode. 
 - **Description:**  The manager selects the option 'Show House Profits' The system then displays list of past house profits in chronological order and the total. Then selects 'Close' Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
-- **Alternative Flows:**  
+- **Alternative Flows:**  If there is no ongoing tournament, the system displays a suitable message.
 
 **Use Case: viewMatchList** 
 - **Actors:**  TournamentManager,TournamentPlayer
@@ -46,17 +53,18 @@ Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
 - **Alternative Flows:** If there is no ongoing tournament,the system displays a suitable message.
 
-**Use Case: displayPlayerList** 
+**Use Case: viewPlayerList** 
 - **Actors:**  TournamentManager,TournamentPlayer
 - **Pre-conditions:**  User logs into the system in Manager mode or Player mode. 
 - **Description:**  The user selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. Then selects 'Close' Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
+- **Alternative Flows:**  If there is no ongoing tournament, the system displays a suitable message.
+
+**Use Case: pickDeck** 
+- **Actors:**  TournamentPlayer
+- **Pre-conditions:**  User logs into the system in Player mode. 
+- **Description:**  
+- **Post-conditions:**  Main menu is displayed
 - **Alternative Flows:**  If there any ongoing tournament,the system displays a suitable message.
 
-**Use Case: displayPlayerPrizes** 
-- **Actors:**  TournamentManager
-- **Pre-conditions:**  User logs into the system in Manager mode
-- **Description:**  The manager selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. If manager selects the player from the list. The system displays a list of the player’s individual prizes Then selects 'Close' Returns to the home page.
-- **Post-conditions:**  Main menu is displayed
-- **Alternative Flows:** If there is any ongoing tournament,the system displays a suitable message.
 
