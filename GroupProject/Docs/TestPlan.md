@@ -53,9 +53,9 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 |4|	Add player	|New player creation	 |	Player details stored in database				| | |
 |5|	Edit player	information | Player information change	 |	Player details changed in database				| | |
 |6|	Delete player	|Player deletion	 |	Player details deleted from database			| | |	
-|7|	Display total prizes  |	Total prizes ranking display	 |	Total ranking for all player and house profits				| | |
+|7|	Display total prizes  |	Total prizes ranking display	 |	Total prizes ranking for all player displayed		| | |
 |8|	Display individual prize |	Individual prizes in past tournaments display	 |	Individual player prizes displayed				| | |
-|9|	Display house profits |	House profits display	in chronological order |	House profits	displayed			| | |
+|9|	Display house profits |	House profits in chronological order display |	House profits	displayed			| | |
 |10|	Total prizes calculation |	To test if total prizes for each player	is calculated correctly |	Correct player prizes		| | |
 |11|	House profits calculation |	To test if house profits	calculation is correct |	Correct house profits				| | |
 |12|	View the match list |	Tournament status display	 |	Match list status				| | |
