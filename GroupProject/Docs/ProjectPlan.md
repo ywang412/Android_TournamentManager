@@ -1,6 +1,6 @@
 # Project Plan
 
-**Author**: \<Team 37 - Hi-Team\>
+**Author**: Team 37 - Hi-Team
 
 ## 1 Introduction
 

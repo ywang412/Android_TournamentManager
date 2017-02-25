@@ -1,6 +1,6 @@
 # Use Case Model
 
-**Author**: \<Team 37 - Hi-Team\>
+**Author**: Team 37 - Hi-Team
 
 ## 1 Use Case Diagram
 

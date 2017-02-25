@@ -1,7 +1,6 @@
 # Test Plan
 
-
-**Author**: \<Team37\>
+**Author**: Team 37 - Hi-Team
 
 ## 1 Testing Strategy
 
