@@ -11,12 +11,10 @@
 
 **Use Case: createTournament**  
 - **Actors:**  TournamentManager
-- **Pre-conditions:**  User logs into the system in Manager mode.
-- **Description:**  User clicks on 'Start New Tournament' The System then prompts to enter required values. The tournament manager will enter the house cut. The tournament manager will enter the entry price. The tournament manager will enter all player usernames.
-The tournament manager will then Submit information. The system will display the player names, the potential prizes and profit. The tournament manager then 'Confirms' the information or goes 'Back' if at all he wishes to modify any parameter. If manager selects 'Confirm' new tournament gets started.
-Returns to the home page.
-- **Post-conditions:**  Main menu is displayed.
-- **Alternative Flows:**  In case there is already an ongoing tournament system doesn't allow user to start the tournament and suitable message is displayed. In case user enters any invalid value or in case any parameter is missing the system displays error message accordingly.
+- **Pre-conditions:**  User logs in with Manager mode.
+- **Description:**  Use case "createTournament" includes two sub use cases: enterHouseCut and enterEntryPrice. User clicks on 'Creat Tournament' button. And the System will prompt to enter required values, i.e., HouseCut and EntryPrice, respectively. The tournament manager will then submit information. The system will ask for confirmation as well as displaying the potential prizes and profit. The tournament manager will confirm the information or go back if any information need to be modified. Finally the manager will confirm that new tournament gets started, and the system will return to home page.
+- **Post-conditions:**  Home page (main menu) will be displayed.
+- **Alternative Flows:**  If there is already an ongoing tournament, the system will not allow user to start a tournament. Suitable  error message will be displayed. Parameters cannot be invalid value or be left black, otherwise the system will display error message accordingly.
 
 **Use Case: managePlayer**  
 - **Actors:**  TournamentManager
@@ -46,12 +44,6 @@ Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
 - **Alternative Flows:**  If there is no ongoing tournament, the system displays a suitable message.
 
-**Use Case: viewMatchList** 
-- **Actors:**  TournamentManager,TournamentPlayer
-- **Pre-conditions:**  User logs into the system in Manager mode or Player mode.
-- **Description:**  The user selects the option 'Show Matches' The system then displays list of matches Then selects 'Close' Returns to the home page. 
-- **Post-conditions:**  Main menu is displayed
-- **Alternative Flows:** If there is no ongoing tournament,the system displays a suitable message.
 
 **Use Case: viewPlayerList** 
 - **Actors:**  TournamentManager,TournamentPlayer
@@ -59,6 +51,13 @@ Returns to the home page.
 - **Description:**  The user selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. Then selects 'Close' Returns to the home page.
 - **Post-conditions:**  Main menu is displayed
 - **Alternative Flows:**  If there is no ongoing tournament, the system displays a suitable message.
+
+**Use Case: viewMatchList** 
+- **Actors:**  TournamentManager,TournamentPlayer
+- **Pre-conditions:**  User logs into the system in Manager mode or Player mode.
+- **Description:**  The user selects the option 'Show Matches' The system then displays list of matches Then selects 'Close' Returns to the home page. 
+- **Post-conditions:**  Main menu is displayed
+- **Alternative Flows:** If there is no ongoing tournament,the system displays a suitable message.
 
 **Use Case: pickDeck** 
 - **Actors:**  TournamentPlayer
