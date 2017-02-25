@@ -57,5 +57,6 @@ As a stand-alone Android app, we did not see the necessity of a deployment diagr
 We do not currently have any other diagrams to describe our design.  As of now, as a standalone Android app, we feel that the Component Diagram and the Class Diagram sufficiently describe our application.
 
 ## 4 User Interface Design
-*For GUI-based systems, this section should provide the specific format/layout of the user interface of the system (e.g., in the form of graphical mockups).*
+
+![class](Supporting Files/UI Mockup.png)
 
