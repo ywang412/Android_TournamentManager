@@ -26,44 +26,44 @@
 **Use Case: conductMatch** 
 - **Actors:**  TournamentManager
 - **Pre-conditions:**  User logs in with Manager mode.
-- **Description:**  The manager selects the option 'Show Matches' The manager then selects a match from the list If manager selects a specific match and clicks on 'Start' The system then prompts to select two players from the player list. If manager selects 'End'. System then prompts to specify result and match ends. If manager selects 'End tournament' the tournament ends. Returns to the home page. The system will return to home page.
+- **Description:**  Use case "conductMatch" includes three sub use cases: start match, end match, and record winner. When the user selects "conductMatch", a match list will be diplayed and the user selects one match from the list. The system will then ask user to select two players from the player list. The user then selects "start Match" to start a match. If user selects 'End Match'. System will prompt to "record winner" and the match ends. When all matches are finished, the user can select 'End tournament' and the tournament ends. The system will return to home page.
 - **Post-conditions:**  Home page (main menu) will be displayed.
-- **Alternative Flows:**  If manager tries to end tournament and there is any ongoing match the system displays an error message.
+- **Alternative Flows:**  If manager tries to end tournament when there are ongoing matches, an error message will be displayed.
 
 **Use Case: displayPlayerPrizes** 
 - **Actors:**  TournamentManager
 - **Pre-conditions:**  User logs in with Manager mode
-- **Description:**  The manager selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. If manager selects the player from the list. The system displays a list of the player’s individual prizes Then selects 'Close' Returns to the home page. The system will return to home page.
-- **Post-conditions:**  Main menu is displayed
-- **Alternative Flows:** If there is any ongoing tournament,the system displays a suitable message.
+- **Description:**  The manager selects the option "Show Player Prizes", and the system will show total prizes for each player in the system as a list, and sorted by total prizes. If manager selects the player from the list, the system will display this player’s individual prizes. The manager can select "Close" and the system will return to home page.
+- **Post-conditions:**  Home page (main menu) is displayed,
+- **Alternative Flows:** If there is any ongoing tournament, a suitable message will be displayed.
 
 **Use Case: displayHouseProfits** 
 - **Actors:**  TournamentManager
 - **Pre-conditions:**   User logs in with Manager mode. 
-- **Description:**  The manager selects the option 'Show House Profits' The system then displays list of past house profits in chronological order and the total. Then selects 'Close' Returns to the home page. The system will return to home page.
+- **Description:**  The manager selects the option "Show House Profits", and the system will show a list of past house profits in chronological order and the total. The manager can select "Close" and the system will return to home page.
 - **Post-conditions:**  Home page (main menu) will be displayed.
-- **Alternative Flows:**  If there is no ongoing tournament, the system displays a suitable message.
+- **Alternative Flows:**  If there is any ongoing tournament, a suitable message will be displayed.
 
 
 **Use Case: viewPlayerList** 
 - **Actors:**  TournamentManager,TournamentPlayer
 - **Pre-conditions:**  User logs in with Manager mode or Player mode. 
-- **Description:**  The user selects the option 'Show Player Totals' The system then displays will show totals for every player in the system as a list sorted by total. Then selects 'Close' Returns to the home page. The system will return to home page.
+- **Description:**  The user selects the option "Show Player List", and the system will display totals for every player in the system as a list sorted by total. The user can slect "close" and the system will return to home page.
 - **Post-conditions:**  Home page (main menu) will be displayed.
-- **Alternative Flows:**  If there is no ongoing tournament, the system will display a suitable message.
+- **Alternative Flows:**  If there is any ongoing tournament, the system will display a suitable message.
 
 **Use Case: viewMatchList** 
 - **Actors:**  TournamentManager,TournamentPlayer
 - **Pre-conditions:**  User logs in with Manager mode or Player mode.
-- **Description:**  The user selects the option "Show Matches". And the system will display a list of matches. The user will select "Return" once finished viwing the list. The system will return to home page.
+- **Description:**  The user selects the option "Show Matches". And the system will display a list of matches. The user will select "Return" once finished viwing the list, and the system will return to home page.
 - **Post-conditions:**  Home page (main menu) will be displayed.
-- **Alternative Flows:** If there is no ongoing tournament, the system will display a suitable message.
+- **Alternative Flows:** If there is any ongoing tournament, the system will display a suitable message.
 
 **Use Case: pickDeck** 
 - **Actors:**  TournamentPlayer
 - **Pre-conditions:**  User logs in with Player mode. 
-- **Description:**  The user selects the option “pickDeck”, then selects from a list of decks. The user will review the select, modify the selection if necessary, or confirm the deck choice. The system will return to home page.  
+- **Description:**  The user selects the option “pickDeck”, then selects from a list of decks. The user will review the selection, modify the selection if necessary, or confirm the deck choice. The system will return to home page.  
 - **Post-conditions:**  Home page (main menu) will be displayed.
-- **Alternative Flows:**  If there is no ongoing tournament, the system will display a suitable message.
+- **Alternative Flows:**  If there is any ongoing tournament, the system will display a suitable message.
 
 
