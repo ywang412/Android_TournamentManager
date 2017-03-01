@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         players.add("Yu Wang");
         players.add("Don Lee");
 
+
         ArrayAdapter<String> arrayAdapter =
                 new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, players);
 
