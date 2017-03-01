@@ -136,11 +136,11 @@ public class TestDb {
     }
 
     /*
-        Students: Use this to create some default weather values for your database tests.
+        Students: Use this to create some default user values for your database tests.
      */
-    static ContentValues createUserValues(long locationRowId) {
+    static ContentValues createUserValues(long deckRowId) {
         ContentValues userValues = new ContentValues();
-        userValues.put(TourneyManagerContract.UserEntry.COLUMN_DECK_ID, locationRowId);
+        userValues.put(TourneyManagerContract.UserEntry.COLUMN_DECK_ID, deckRowId);
         userValues.put(TourneyManagerContract.UserEntry.COLUMN_IS_MANAGER, 1);
         userValues.put(TourneyManagerContract.UserEntry.COLUMN_NAME, "Player 1");
         userValues.put(TourneyManagerContract.UserEntry.COLUMN_PASSWORD, "gibberish");
