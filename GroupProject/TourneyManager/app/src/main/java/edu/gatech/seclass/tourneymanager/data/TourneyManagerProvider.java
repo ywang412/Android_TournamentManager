@@ -8,14 +8,14 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.gatech.seclass.tourneymanager.model.Deck;
-import edu.gatech.seclass.tourneymanager.model.Manager;
-import edu.gatech.seclass.tourneymanager.model.Match;
-import edu.gatech.seclass.tourneymanager.model.Player;
+import edu.gatech.seclass.tourneymanager.Deck;
+import edu.gatech.seclass.tourneymanager.Manager;
+import edu.gatech.seclass.tourneymanager.Match;
+import edu.gatech.seclass.tourneymanager.Player;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerContract.*;
-import edu.gatech.seclass.tourneymanager.model.Prize;
-import edu.gatech.seclass.tourneymanager.model.Status;
-import edu.gatech.seclass.tourneymanager.model.Tournament;
+import edu.gatech.seclass.tourneymanager.Prize;
+import edu.gatech.seclass.tourneymanager.Status;
+import edu.gatech.seclass.tourneymanager.Tournament;
 
 /**
  * class used to execute database queries

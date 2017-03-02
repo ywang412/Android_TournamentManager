@@ -1,4 +1,4 @@
-package edu.gatech.seclass.tourneymanager.model;
+package edu.gatech.seclass.tourneymanager;
 
 /**
  * Created by Yu on 3/1/2017.
