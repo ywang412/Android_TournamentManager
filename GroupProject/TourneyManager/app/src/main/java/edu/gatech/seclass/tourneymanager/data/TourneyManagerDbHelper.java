@@ -44,6 +44,7 @@ public class TourneyManagerDbHelper extends SQLiteOpenHelper {
         // insert constant status values
         for (Status status : Status.values()) {
             ContentValues values = new ContentValues();
+            values.put(StatusEntry._ID, status.statusId);
             values.put(StatusEntry.COLUMN_STATUS_NAME, status.name());
             db.insert(StatusEntry.TABLE_NAME, null, values);
         }

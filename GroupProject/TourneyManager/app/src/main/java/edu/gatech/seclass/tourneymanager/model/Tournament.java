@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Tournament {
 
-    private int tournament_name;
+    private String tournament_name;
     private int tournament_id;
     private String start_date_time;
     private String end_date_time;
@@ -76,11 +76,11 @@ public class Tournament {
         this.playerslist = playerslist;
     }
 
-    public int getTournament_name() {
+    public String getTournament_name() {
         return tournament_name;
     }
 
-    public void setTournament_name(int tournament_name) {
+    public void setTournament_name(String tournament_name) {
         this.tournament_name = tournament_name;
     }
 

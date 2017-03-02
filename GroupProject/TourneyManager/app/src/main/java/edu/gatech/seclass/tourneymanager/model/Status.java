@@ -6,10 +6,16 @@ package edu.gatech.seclass.tourneymanager.model;
 
 
 public enum Status {
-    Setup,
-    Ready,
-    InProgress,
-    Completed,
-    Cancelled;
+    Setup(1),
+    Ready(2),
+    InProgress(3),
+    Completed(4),
+    Cancelled(5);
+
+    public final int statusId;
+
+    Status(int statusId) {
+        this.statusId = statusId;
+    }
 }
 
