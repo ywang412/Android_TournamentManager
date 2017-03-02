@@ -9,6 +9,7 @@ import edu.gatech.seclass.tourneymanager.Status;
 public class Match {
 
         private int match_id;
+        private int next_match_id;
         private int tournament_id;
         private Status Mstatus;
         private int match_round;
