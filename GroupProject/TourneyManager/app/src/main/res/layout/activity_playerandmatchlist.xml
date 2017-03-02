@@ -16,6 +16,13 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="440dp"
-        android:id="@+id/playerlist" />
+        android:layout_height="359dp"
+        android:id="@+id/playerlist"
+        android:layout_weight="0.13" />
+
+    <Button
+        android:text="Add Player"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addplayer" />
 </LinearLayout>
