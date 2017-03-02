@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
     public void layoutPlayer(View view) {
@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_playerandmatchlist);
         ListView playerList = (ListView) findViewById(R.id.playerlist);
         TextView playerListHeader = (TextView) findViewById(R.id.playerListHeader);
+        Button addPlayer = (Button) findViewById(R.id.addplayer);
+
         playersmatches = new ArrayList<String>();
 
         /* If tournament is active, show matchlist.  If tournament is inactive, show players list and totals */
@@ -45,13 +47,18 @@ public class MainActivity extends AppCompatActivity {
             playersmatches.add("Don vs Yu");
             playersmatches.add("Yu vs Rulan");
             playersmatches.add("John vs Don");
+            addPlayer.setVisibility(View.INVISIBLE);
 
             //playersmatches = dummyClass.getMatchList();
 
         } else {
             if (mode == 0) {
                 playerListHeader.setText("Leaderboard");
+                addPlayer.setVisibility(View.INVISIBLE);
+            } else {
+                addPlayer.setVisibility(View.VISIBLE);
             }
+
             playersmatches.add("John Tran - $1029");
             playersmatches.add("Rulan Gong - $993");
             playersmatches.add("Yu Wang - $970");
