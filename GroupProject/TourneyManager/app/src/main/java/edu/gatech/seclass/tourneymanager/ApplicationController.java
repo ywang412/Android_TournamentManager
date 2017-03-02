@@ -17,8 +17,9 @@ public class ApplicationController {
 
     public static void deletePlayer(Player player){};
 
-    public static Tournament createTournament(){
-        Tournament tournament= new Tournament();
+
+    public static Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist){
+        Tournament tournament= new Tournament(tournament_id, house_cut,  entry_price, playerslist);
         return tournament;
     };
 
