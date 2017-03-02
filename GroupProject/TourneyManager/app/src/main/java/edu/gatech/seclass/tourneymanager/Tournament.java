@@ -1,9 +1,9 @@
-package edu.gatech.seclass.tourneymanager;
+package edu.gatech.seclass.tourneymanager.model;
+
+import android.net.wifi.WifiConfiguration;
 
 import java.util.ArrayList;
-
-import edu.gatech.seclass.tourneymanager.Match;
-import edu.gatech.seclass.tourneymanager.Status;
+import java.util.List;
 
 /**
  * Created by Yu on 2/28/2017.
@@ -11,7 +11,7 @@ import edu.gatech.seclass.tourneymanager.Status;
 
 public class Tournament {
 
-    private int tournament_name;
+    private String tournament_name;
     private int tournament_id;
     private String start_date_time;
     private String end_date_time;
@@ -24,13 +24,13 @@ public class Tournament {
     private int house_profit;
     private TournamentResult result;
     private Status Tstatus;
-    private ArrayList<Match> matchlist;
-    private ArrayList<Player> playerslist;
+    private List<Match> matchlist;
+    private List<Player> playerslist;
 
     public Tournament() {
     }
 
-    public Tournament(int house_cut, int entry_price, ArrayList<Player> playerslist) {
+    public Tournament(int house_cut, int entry_price, List<Player> playerslist) {
         this.house_cut = house_cut;
         this.tournament_id = entry_price;
         this.playerslist = playerslist;
@@ -47,7 +47,7 @@ public class Tournament {
                 for (int i = 0; i < playerslist.size()-1; i++) {
                     Player player1 = playerslist.get(i);
                     Player player2 = playerslist.get(i+1);
-                    Match match = new Match(match_id, tournament_id, match_round,player1, player2);
+                    Match match = new Match(match_id, this, match_round,player1, player2);
                     matchlist.add(match);
 //                    MatchDA.addmatch(Match);
                     match_id ++;
@@ -55,18 +55,136 @@ public class Tournament {
             }
             else {
                 for (int i = 0; i < playerslist.size()/(int)(Math.pow(2,match_round)); i++) {
-                    Match match = new Match(match_id, tournament_id,match_round);
+                    Match match = new Match(match_id, this, match_round);
                     matchlist.add(match);
 //                    MatchDA.addmatch(Match);
                     match_id ++;
-                }
             }
         }
-        Match match = new Match(match_id, tournament_id, match_round);
+        }
+        Match match = new Match(match_id, this, match_round);
         matchlist.add(match);
 //        MatchDA.addmatch(Match);
 //        TournamentDA.addmatch(this);
     }
 
+    public List<Player> getPlayerslist() {
+        return playerslist;
+    }
 
+    public void setPlayerslist(List<Player> playerslist) {
+        this.playerslist = playerslist;
+    }
+
+    public String getTournament_name() {
+        return tournament_name;
+    }
+
+    public void setTournament_name(String tournament_name) {
+        this.tournament_name = tournament_name;
+    }
+
+    public int getTournament_id() {
+        return tournament_id;
+    }
+
+    public void setTournament_id(int tournament_id) {
+        this.tournament_id = tournament_id;
+    }
+
+    public String getStart_date_time() {
+        return start_date_time;
+    }
+
+    public void setStart_date_time(String start_date_time) {
+        this.start_date_time = start_date_time;
+    }
+
+    public String getEnd_date_time() {
+        return end_date_time;
+    }
+
+    public void setEnd_date_time(String end_date_time) {
+        this.end_date_time = end_date_time;
+    }
+
+    public int getEntry_price() {
+        return entry_price;
+    }
+
+    public void setEntry_price(int entry_price) {
+        this.entry_price = entry_price;
+    }
+
+    public int getPriz2nd() {
+        return priz2nd;
+    }
+
+    public void setPriz2nd(int priz2nd) {
+        this.priz2nd = priz2nd;
+    }
+
+    public int getPriz1st() {
+        return priz1st;
+    }
+
+    public void setPriz1st(int priz1st) {
+        this.priz1st = priz1st;
+    }
+
+    public int getPriz3rd() {
+        return priz3rd;
+    }
+
+    public void setPriz3rd(int priz3rd) {
+        this.priz3rd = priz3rd;
+    }
+
+    public int getStatus_id() {
+        return status_id;
+    }
+
+    public void setStatus_id(int status_id) {
+        this.status_id = status_id;
+    }
+
+    public int getHouse_cut() {
+        return house_cut;
+    }
+
+    public void setHouse_cut(int house_cut) {
+        this.house_cut = house_cut;
+    }
+
+    public int getHouse_profit() {
+        return house_profit;
+    }
+
+    public void setHouse_profit(int house_profit) {
+        this.house_profit = house_profit;
+    }
+
+    public TournamentResult getResult() {
+        return result;
+    }
+
+    public void setResult(TournamentResult result) {
+        this.result = result;
+    }
+
+    public Status getStatus() {
+        return Tstatus;
+    }
+
+    public void setStatus(Status status) {
+        this.Tstatus = status;
+    }
+
+    public List<Match> getMatchlist() {
+        return matchlist;
+    }
+
+    public void setMatchlist(List<Match> matchlist) {
+        this.matchlist = matchlist;
+    }
 }
