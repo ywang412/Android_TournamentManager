@@ -28,37 +28,34 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import edu.gatech.seclass.tourneymanager.Deck;
+
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 public class TestDb {
-    private TourneyManagerDbHelper dbHelper;
-    private SQLiteDatabase db;
+    private TourneyManagerProvider provider;
+    private static final String TEST_DECK = "Engineer"; //  “Engineer”, “Buzz”, “Sideways”, “Wreck”, “T”, “RAT”
 
     @Before
     public void setUp() {
         InstrumentationRegistry.getTargetContext().deleteDatabase(TourneyManagerDbHelper.DATABASE_NAME);
-        dbHelper = new TourneyManagerDbHelper(InstrumentationRegistry.getTargetContext());
-        db = dbHelper.getWritableDatabase();
+        provider = new TourneyManagerProvider(InstrumentationRegistry.getTargetContext());
     }
 
     @After
     public void tearDown() {
-        if (db != null) {
-            db.close();
-        }
-        if (dbHelper != null) {
-            dbHelper.close();
-        }
+        provider.shutdown();
         InstrumentationRegistry.getTargetContext().deleteDatabase(TourneyManagerDbHelper.DATABASE_NAME);
     }
 
     @Test
     public void testCreateDb() throws Throwable {
-        assertEquals(true, db.isOpen());
+        assertEquals(true, provider.isOpen());
 
-        Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
+        Cursor c = provider.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null);
         assertTrue("Error: This means that the database has not been created correctly",
                 c.moveToFirst());
 
@@ -80,7 +77,7 @@ public class TestDb {
                 tableNameHashSet.isEmpty());
 
         // now, do our tables contain the correct columns?
-        c = db.rawQuery("PRAGMA table_info(" + TourneyManagerContract.DeckEntry.TABLE_NAME + ")",
+        c = provider.rawQuery("PRAGMA table_info(" + TourneyManagerContract.DeckEntry.TABLE_NAME + ")",
                 null);
 
         assertTrue("Error: This means that we were unable to query the database for table information.",
@@ -102,6 +99,18 @@ public class TestDb {
     }
 
     @Test
+    public void testInsertDeck() throws Throwable {
+        testCreateDb();
+        Deck deck = new Deck();
+        deck.setName(TEST_DECK);
+        provider.insertDeck(deck);
+        Deck fetchedDeck = provider.fetchDeck(TEST_DECK);
+
+        assertNotNull(fetchedDeck.getId());
+        assertEquals(fetchedDeck.getName(), TEST_DECK);
+    }
+
+    @Test
     public void testDeckTable() throws Throwable {
         testCreateDb();
         insertDeck();
@@ -115,10 +124,10 @@ public class TestDb {
 
         ContentValues userValues = createUserValues(deckRowId);
 
-        long userRowId = db.insert(TourneyManagerContract.UserEntry.TABLE_NAME, null, userValues);
+        long userRowId = provider.insert(TourneyManagerContract.UserEntry.TABLE_NAME, userValues);
         assertTrue(userRowId != -1);
 
-        Cursor cursor = db.query(
+        Cursor cursor = provider.query(
                 TourneyManagerContract.UserEntry.TABLE_NAME,  // Table to Query
                 null, // leaving "columns" null just returns all the columns.
                 null, // cols for "where" clause
@@ -154,10 +163,10 @@ public class TestDb {
 
         ContentValues testValues = createSampleDeckValue();
 
-        long deckRowId = db.insert(TourneyManagerContract.DeckEntry.TABLE_NAME, null, testValues);
+        long deckRowId = provider.insert(TourneyManagerContract.DeckEntry.TABLE_NAME, testValues);
         assertTrue(deckRowId != -1);
 
-        Cursor cursor = db.query(
+        Cursor cursor = provider.query(
                 TourneyManagerContract.DeckEntry.TABLE_NAME,  // Table to Query
                 null, // all columns
                 null, // Columns for the "where" clause
@@ -175,8 +184,6 @@ public class TestDb {
     }
 
     static ContentValues createSampleDeckValue() {
-        String TEST_DECK = "Engineer"; //  “Engineer”, “Buzz”, “Sideways”, “Wreck”, “T”, “RAT”
-
         // Create a new map of values, where column names are the keys
         ContentValues testValues = new ContentValues();
         testValues.put(TourneyManagerContract.DeckEntry.COLUMN_DECK_NAME, TEST_DECK);
