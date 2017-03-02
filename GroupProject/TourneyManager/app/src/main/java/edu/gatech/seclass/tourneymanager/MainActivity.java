@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -132,7 +134,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createTournament(View view) {
-        setContentView(R.layout.activity_createtournament);
-
+        setContentView(R.layout.activity_tourneycreate);
     }
+
+
+    public void handleClick(View view) {
+
+        boolean errorInvalid = false;
+        int entranceFee = 0, entrants = 0, housePercentage = 0;
+
+        EditText txt = (EditText) findViewById(R.id.entranceFee);
+        if (txt.getText().toString().length() == 0) {
+            txt.setError("Invalid Fee");
+            errorInvalid = true;
+        } else {
+            entranceFee = Integer.parseInt(txt.getText().toString());
+            if (entranceFee < 0) {
+                errorInvalid = true;
+                txt.setError("Invalid Fee");
+            }
+        }
+
+        txt = (EditText) findViewById(R.id.housePercentage);
+        if (txt.getText().toString().length() == 0) {
+            txt.setError("Invalid House Percentage");
+            errorInvalid = true;
+        } else {
+            housePercentage = Integer.parseInt(txt.getText().toString());
+            // 0 to 100 inclusive
+            if (housePercentage < 0 || housePercentage > 100) {
+                errorInvalid = true;
+                txt.setError("Invalid House Percentage");
+            }
+        }
+
+        if (errorInvalid == false) {
+
+
+        }
+    }
+
 }
+
