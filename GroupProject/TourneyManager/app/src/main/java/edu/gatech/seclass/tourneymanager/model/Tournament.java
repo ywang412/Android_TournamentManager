@@ -3,6 +3,7 @@ package edu.gatech.seclass.tourneymanager.model;
 import android.net.wifi.WifiConfiguration;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Yu on 2/28/2017.
@@ -23,13 +24,13 @@ public class Tournament {
     private int house_profit;
     private TournamentResult result;
     private Status Tstatus;
-    private ArrayList<Match> matchlist;
-    private ArrayList<String> playerslist;
+    private List<Match> matchlist;
+    private List<Player> playerslist;
 
     public Tournament() {
     }
 
-    public Tournament(int house_cut, int entry_price, ArrayList<String> playerslist) {
+    public Tournament(int house_cut, int entry_price, List<Player> playerslist) {
         this.house_cut = house_cut;
         this.tournament_id = entry_price;
         this.playerslist = playerslist;
@@ -44,9 +45,9 @@ public class Tournament {
         for (match_round = 1; match_round<= total_round ; match_round++ ){
             if (match_round ==1 ){
                 for (int i = 0; i < playerslist.size()-1; i++) {
-                    String player1 = playerslist.get(i);
-                    String player2 = playerslist.get(i+1);
-                    Match match = new Match(match_id, tournament_id, match_round,player1, player2);
+                    Player player1 = playerslist.get(i);
+                    Player player2 = playerslist.get(i+1);
+                    Match match = new Match(match_id, this, match_round,player1, player2);
                     matchlist.add(match);
 //                    MatchDA.addmatch(Match);
                     match_id ++;
@@ -54,24 +55,24 @@ public class Tournament {
             }
             else {
                 for (int i = 0; i < playerslist.size()/(int)(Math.pow(2,match_round)); i++) {
-                    Match match = new Match(match_id, tournament_id,match_round);
+                    Match match = new Match(match_id, this, match_round);
                     matchlist.add(match);
 //                    MatchDA.addmatch(Match);
                     match_id ++;
             }
         }
         }
-        Match match = new Match(match_id, tournament_id, match_round);
+        Match match = new Match(match_id, this, match_round);
         matchlist.add(match);
 //        MatchDA.addmatch(Match);
 //        TournamentDA.addmatch(this);
     }
 
-    public ArrayList<String> getPlayerslist() {
+    public List<Player> getPlayerslist() {
         return playerslist;
     }
 
-    public void setPlayerslist(ArrayList<String> playerslist) {
+    public void setPlayerslist(List<Player> playerslist) {
         this.playerslist = playerslist;
     }
 
@@ -179,11 +180,11 @@ public class Tournament {
         this.Tstatus = status;
     }
 
-    public ArrayList<Match> getMatchlist() {
+    public List<Match> getMatchlist() {
         return matchlist;
     }
 
-    public void setMatchlist(ArrayList<Match> matchlist) {
+    public void setMatchlist(List<Match> matchlist) {
         this.matchlist = matchlist;
     }
 }

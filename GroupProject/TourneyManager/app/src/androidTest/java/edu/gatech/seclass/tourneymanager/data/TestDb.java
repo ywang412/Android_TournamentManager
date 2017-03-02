@@ -17,7 +17,6 @@ package edu.gatech.seclass.tourneymanager.data;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.test.InstrumentationRegistry;
 
 import org.junit.After;
@@ -28,7 +27,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import edu.gatech.seclass.tourneymanager.Deck;
+import edu.gatech.seclass.tourneymanager.model.Deck;
+import edu.gatech.seclass.tourneymanager.model.Player;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -36,8 +36,13 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 public class TestDb {
-    private TourneyManagerProvider provider;
     private static final String TEST_DECK = "Engineer"; //  “Engineer”, “Buzz”, “Sideways”, “Wreck”, “T”, “RAT”
+    private static final String TEST_USERNAME = "username";
+    private static final String TEST_PLAYER_NAME = "player1";
+    private static final String TEST_PHONE_NUMBER = "0123456789";
+    private static final String TEST_PASSWORD = "password";
+
+    private TourneyManagerProvider provider;
 
     @Before
     public void setUp() {
@@ -101,13 +106,34 @@ public class TestDb {
     @Test
     public void testInsertDeck() throws Throwable {
         testCreateDb();
-        Deck deck = new Deck();
-        deck.setName(TEST_DECK);
+        Deck deck = new Deck(TEST_DECK);
         provider.insertDeck(deck);
         Deck fetchedDeck = provider.fetchDeck(TEST_DECK);
 
         assertNotNull(fetchedDeck.getId());
-        assertEquals(fetchedDeck.getName(), TEST_DECK);
+        assertEquals(fetchedDeck.getDeck_name(), TEST_DECK);
+
+        Deck fetchedDeck1 = provider.fetchDeck(fetchedDeck.getId());
+        assertEquals(fetchedDeck1.getDeck_name(), TEST_DECK);
+    }
+
+    @Test
+    public void testInsertPlayer() throws Throwable {
+        testCreateDb();
+        Player player = new Player();
+        player.setUsername(TEST_USERNAME);
+        player.setName(TEST_PLAYER_NAME);
+        player.setPhone_number(TEST_PHONE_NUMBER);
+        player.setDeck(new Deck(TEST_DECK));
+
+        provider.insertPlayer(player);
+        Player fetchedPlayer = provider.fetchPlayer(TEST_USERNAME);
+
+        assertEquals(fetchedPlayer.getUsername(), TEST_USERNAME);
+        assertEquals(fetchedPlayer.getPhone_number(), TEST_PHONE_NUMBER);
+        assertEquals(fetchedPlayer.getName(), TEST_PLAYER_NAME);
+        assertNotNull(fetchedPlayer.getDeck());
+        assertEquals(fetchedPlayer.getDeck().getDeck_name(), TEST_DECK);
     }
 
     @Test

@@ -7,8 +7,8 @@ package edu.gatech.seclass.tourneymanager.model;
 public class Match {
 
         private int match_id;
-        private int tournament_id;
-        private Status Mstatus;
+        private Tournament tournament;
+        private Status status;
         private int match_round;
         private Player winner;
         private Player player_1;
@@ -17,18 +17,18 @@ public class Match {
         public Match() {
         }
 
-        public Match(int match_id,int tournament_id,int match_round,Player player1, Player player2) {
+        public Match(int match_id,Tournament tournament,int match_round,Player player1, Player player2) {
             this.match_id = match_id;
-            this.tournament_id = tournament_id;
+            this.tournament = tournament;
             this.match_round = match_round;
             this.player_1 = player1;
             this.player_2 = player2;
         }
 
-        public Match(int match_id, int tournament_id, int match_round) {
+        public Match(int match_id, Tournament tournament, int match_round) {
         this.match_id = match_id;
         this.match_round=match_round;
-        this.tournament_id = tournament_id;
+        this.tournament = tournament;
 
         }
 
@@ -51,20 +51,20 @@ public class Match {
         this.match_id = match_id;
     }
 
-    public int getTournament_id() {
-        return tournament_id;
+    public Tournament getTournament() {
+        return tournament;
     }
 
-    public void setTournament_id(int tournament_id) {
-        this.tournament_id = tournament_id;
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
 
-    public Status getMstatus() {
-        return Mstatus;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setMstatus(Status mstatus) {
-        this.Mstatus = mstatus;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public int getMatch_round() {

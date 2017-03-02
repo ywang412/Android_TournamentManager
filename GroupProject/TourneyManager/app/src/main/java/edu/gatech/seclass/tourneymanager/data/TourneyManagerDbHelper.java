@@ -1,10 +1,12 @@
 package edu.gatech.seclass.tourneymanager.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerContract.*;
+import edu.gatech.seclass.tourneymanager.model.Status;
 
 import static edu.gatech.seclass.tourneymanager.data.TourneyManagerSqlScripts.CREATE_DECK_TABLE;
 import static edu.gatech.seclass.tourneymanager.data.TourneyManagerSqlScripts.CREATE_MATCH_TABLE;
@@ -38,6 +40,13 @@ public class TourneyManagerDbHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TOURNAMENT_TABLE);
         db.execSQL(CREATE_TOURNAMENT_PLAYER_LINK_TABLE);
         db.execSQL(CREATE_USER_TABLE);
+
+        // insert constant status values
+        for (Status status : Status.values()) {
+            ContentValues values = new ContentValues();
+            values.put(StatusEntry.COLUMN_STATUS_NAME, status.name());
+            db.insert(StatusEntry.TABLE_NAME, null, values);
+        }
     }
 
     @Override
