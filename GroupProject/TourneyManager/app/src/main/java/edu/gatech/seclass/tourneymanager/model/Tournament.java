@@ -1,5 +1,7 @@
 package edu.gatech.seclass.tourneymanager.model;
 
+import android.net.wifi.WifiConfiguration;
+
 import java.util.ArrayList;
 
 /**
@@ -19,6 +21,8 @@ public class Tournament {
     private int status_id;
     private int house_cut;
     private int house_profit;
+    private TournamentResult result;
+    private Status Tstatus;
     private ArrayList<Match> matchlist;
     private ArrayList<String> playerslist;
 
@@ -61,6 +65,14 @@ public class Tournament {
         matchlist.add(match);
 //        MatchDA.addmatch(Match);
 //        TournamentDA.addmatch(this);
+    }
+
+    public ArrayList<String> getPlayerslist() {
+        return playerslist;
+    }
+
+    public void setPlayerslist(ArrayList<String> playerslist) {
+        this.playerslist = playerslist;
     }
 
     public int getTournament_name() {
@@ -151,6 +163,22 @@ public class Tournament {
         this.house_profit = house_profit;
     }
 
+    public TournamentResult getResult() {
+        return result;
+    }
+
+    public void setResult(TournamentResult result) {
+        this.result = result;
+    }
+
+    public Status getStatus() {
+        return Tstatus;
+    }
+
+    public void setStatus(Status status) {
+        this.Tstatus = status;
+    }
+
     public ArrayList<Match> getMatchlist() {
         return matchlist;
     }
@@ -158,13 +186,4 @@ public class Tournament {
     public void setMatchlist(ArrayList<Match> matchlist) {
         this.matchlist = matchlist;
     }
-
-    public ArrayList<String> getPlayerslist() {
-        return playerslist;
-    }
-
-    public void setPlayerslist(ArrayList<String> playerslist) {
-        this.playerslist = playerslist;
-    }
-
 }

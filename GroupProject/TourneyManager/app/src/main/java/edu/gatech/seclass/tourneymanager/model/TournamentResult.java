@@ -7,16 +7,16 @@ import java.util.ArrayList;
  */
 
 public class TournamentResult {
-    private int tournament_id;
+    private Tournament tournament;
     private ArrayList<Prize> prizes;
     private int house_profit;
 
-    public int getTournament_id() {
-        return tournament_id;
+    public Tournament getTournament() {
+        return tournament;
     }
 
-    public void setTournament_id(int tournament_id) {
-        this.tournament_id = tournament_id;
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
     }
 
     public ArrayList<Prize> getPrizes() {

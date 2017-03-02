@@ -5,15 +5,11 @@ package edu.gatech.seclass.tourneymanager.model;
  */
 
 public class Deck {
-    private int deck_id;
+
     private int deck_name;
 
-    public int getDeck_id() {
-        return deck_id;
-    }
-
-    public void setDeck_id(int deck_id) {
-        this.deck_id = deck_id;
+    public Deck(int deck_name) {
+        this.deck_name = deck_name;
     }
 
     public int getDeck_name() {
