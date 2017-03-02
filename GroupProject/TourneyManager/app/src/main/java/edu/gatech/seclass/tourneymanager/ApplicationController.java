@@ -9,30 +9,30 @@ import java.util.ArrayList;
 public class ApplicationController {
 
 
-    public void logon(User user){};
+    public static void logon(User user){};
 
-    public Player registerPlayer(String player){
+    public static Player registerPlayer(String player){
         return new Player();
     };
 
-    public void deletePlayer(Player player){};
+    public static void deletePlayer(Player player){};
 
-    public Tournament createTournament(){
+    public static Tournament createTournament(){
         Tournament tournament= new Tournament();
         return tournament;
     };
 
-    public Tournament fetchCurrentTournament(){
+    public static Tournament fetchCurrentTournament(){
         return new Tournament();
     };
 
-    public int fetchProfits(){
+    public static int fetchProfits(){
         return 0;
     };
-    public ArrayList<Prize> fetchPrizes(){
+    public static ArrayList<Prize> fetchPrizes(){
         return new ArrayList<Prize>();
     };
-    public Tournament fetchPlayers(){
+    public static Tournament fetchPlayers(){
         return new Tournament();
     };
 
