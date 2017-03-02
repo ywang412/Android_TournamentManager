@@ -6,10 +6,13 @@ import java.util.ArrayList;
  * Created by rulan on 3/1/2017.
  */
 
-class Player {
+public class Player {
+    private String username;
     String name;
     String phoneNumber;
     Deck deck;
+
+    public Player(){}
 
     public Player(String name, String phoneNumber, Deck deck){
         this.name=name;
@@ -28,5 +31,37 @@ class Player {
 
     public void pickDeck(Deck deck){
         this.deck=deck;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
     }
 }

@@ -5,9 +5,21 @@ package edu.gatech.seclass.tourneymanager;
  */
 
 public class Deck {
-    String name;
+    private int id;
+    private String name;
+
+    public Deck(){}
+
     Deck(String deckName){
         name = deckName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
