@@ -337,6 +337,15 @@ public class TourneyManagerProvider {
     }
 
     /**
+     * fetches the tournament whose status is not {@link Status#Completed} or {@link Status#Cancelled).  If there are no such tournament, returns null
+     * @return
+     */
+    public Tournament fetchCurrentTournament() {
+
+        return null;
+    }
+
+    /**
      * fetch tournament by id
      * @param id
      * @return
