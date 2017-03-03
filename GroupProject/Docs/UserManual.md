@@ -10,6 +10,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 ## Functionality Overview:
 
 - **Manager mode: this mode enables the user to:**
+- 
 1)	Add player to the system
 
 
@@ -21,6 +22,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 4)	Display house and player prizes and profit
 
 - **Player mode: this mode enables user to:**
+
 1)	View player prizes
 
 
