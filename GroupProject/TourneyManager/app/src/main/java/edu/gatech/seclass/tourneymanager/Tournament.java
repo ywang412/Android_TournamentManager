@@ -101,7 +101,7 @@ public class Tournament {
         return start_date_time;
     }
 
-    public void setStartDateTtime(Date start_date_time) {
+    public void setStartDateTime(Date start_date_time) {
         this.start_date_time = start_date_time;
     }
 
@@ -117,7 +117,7 @@ public class Tournament {
         return entry_price;
     }
 
-    public void setEntryPrrice(int entry_price) {
+    public void setEntryPrice(int entry_price) {
         this.entry_price = entry_price;
     }
 
@@ -125,7 +125,7 @@ public class Tournament {
         return t_status;
     }
 
-    public void setStatusId(Status status) {
+    public void setStatus(Status status) {
         this.t_status = status;
     }
 

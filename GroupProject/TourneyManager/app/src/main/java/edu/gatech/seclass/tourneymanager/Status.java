@@ -17,4 +17,13 @@ public enum Status {
     Status(int statusId) {
         this.statusId = statusId;
     }
+
+    public static Status getStatus(int statusId) {
+        for (Status status : Status.values()) {
+            if (status.statusId == statusId) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("No status with statusId of " + statusId);
+    }
 }

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.gatech.seclass.tourneymanager.Deck;
 import edu.gatech.seclass.tourneymanager.Manager;
@@ -119,11 +118,28 @@ public class TourneyManagerProvider {
     }
 
     /**
+     * updates match row by matchId
+     * @param match
+     * @return
+     */
+    public long updateMatch(Match match) {
+        ContentValues matchValues = new ContentValues();
+        matchValues.put(MatchEntry.COLUMN_TOURNAMENT_ID, match.getTournament().getTournamentId());
+        matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getStatus().statusId);
+        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatchRound());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
+        matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+
+        return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatchId())});
+    }
+
+    /**
      * fetches all the matches for a tournament
      * @param tournament
      * @return
      */
-    public List<Match> fetchMatches(Tournament tournament) {
+    public ArrayList<Match> fetchMatches(Tournament tournament) {
         String tableName = MatchEntry.TABLE_NAME;
         String[] columns = new String[]{
                 MatchEntry._ID,
@@ -138,7 +154,7 @@ public class TourneyManagerProvider {
         String[] selectionArgs = new String[]{String.valueOf(tournament.getTournamentId())};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
-        List<Match> matchList = new ArrayList<Match>();
+        ArrayList<Match> matchList = new ArrayList<Match>();
         c.moveToFirst();
         do {
             matchList.add(mapToMatch(c, tournament));
@@ -173,15 +189,29 @@ public class TourneyManagerProvider {
      * @param player
      * @return
      */
-    public String insertPlayer(Player player) {
+    public long insertPlayer(Player player) {
         ContentValues playerValues = new ContentValues();
         playerValues.put(UserEntry.COLUMN_USERNAME, player.getUsername());
         playerValues.put(UserEntry.COLUMN_NAME, player.getName());
         playerValues.put(UserEntry.COLUMN_PHONE_NUMBER, player.getPhoneNumber());
         playerValues.put(UserEntry.COLUMN_DECK_ID, fetchDeck(player.getDeck().getName()).getId());
         playerValues.put(UserEntry.COLUMN_IS_MANAGER, 0);
-        insert(UserEntry.TABLE_NAME, playerValues);
-        return player.getUsername();
+        return insert(UserEntry.TABLE_NAME, playerValues);
+    }
+
+    /**
+     * updates player entry in db by the player's username
+     * @param player
+     * @return
+     */
+    public long updatePlayer(Player player) {
+        ContentValues playerValues = new ContentValues();
+        playerValues.put(UserEntry.COLUMN_USERNAME, player.getUsername());
+        playerValues.put(UserEntry.COLUMN_NAME, player.getName());
+        playerValues.put(UserEntry.COLUMN_PHONE_NUMBER, player.getPhoneNumber());
+        playerValues.put(UserEntry.COLUMN_DECK_ID, fetchDeck(player.getDeck().getName()).getId());
+        playerValues.put(UserEntry.COLUMN_IS_MANAGER, 0);
+        return update(UserEntry.TABLE_NAME, playerValues, UserEntry.COLUMN_USERNAME + " = ?", new String[]{player.getUsername()});
     }
 
     public void deletePlayer(Player player){
@@ -230,7 +260,7 @@ public class TourneyManagerProvider {
      * returns a list of all players
      * @return
      */
-    public List<Player> fetchPlayers() {
+    public ArrayList<Player> fetchPlayers() {
         String tableName = UserEntry.TABLE_NAME;
         String[] columns = new String[]{
                 UserEntry.COLUMN_USERNAME,
@@ -241,9 +271,33 @@ public class TourneyManagerProvider {
         String selection = UserEntry.COLUMN_IS_MANAGER + " = 0";
         Cursor c = query(tableName, columns, selection, null, null, null, null);
         c.moveToFirst();
-        List<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<Player>();
         do {
             players.add(mapToPlayer(c));
+        }
+        while (c.moveToNext());
+        return players;
+    }
+
+    /**
+     * returns a list of all players in a tournament
+     * @return
+     */
+    public ArrayList<Player> fetchPlayers(Tournament tournament) {
+        String tableName = TournamentPlayerLinkEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID,
+                TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME,
+        };
+        String selection = TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(tournament.getTournamentId())};
+        Cursor c = query(tableName, columns, selection, null, null, null, null);
+
+        ArrayList<Player> players = new ArrayList<Player>();
+        int playerUserNameIndex = c.getColumnIndex(TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME);
+        c.moveToFirst();
+        do {
+            players.add(fetchPlayer(c.getString(playerUserNameIndex)));
         }
         while (c.moveToNext());
         return players;
@@ -264,13 +318,63 @@ public class TourneyManagerProvider {
     }
 
     /**
+     * updates prize entry in db by the tournament id and the place
+     * @param prize
+     * @return
+     */
+    public long updatePrize(Prize prize) {
+        ContentValues prizeValues = new ContentValues();
+        prizeValues.put(PrizeEntry.COLUMN_PLACE, prize.getPlace());
+        prizeValues.put(PrizeEntry.COLUMN_PLAYER_USERNAME, prize.getPlayer().getUsername());
+        prizeValues.put(PrizeEntry.COLUMN_PRIZE_AMOUNT, prize.getPrizeAmount());
+        prizeValues.put(PrizeEntry.COLUMN_TOURNAMENT_ID, prize.getTournament().getTournamentId());
+        String whereClause = PrizeEntry.COLUMN_TOURNAMENT_ID + " = ? AND"
+                + PrizeEntry.COLUMN_PLACE + " = ?";
+        String[] whereArgs = new String[]{
+                String.valueOf(prize.getTournament().getTournamentId()),
+                String.valueOf(prize.getPlace())
+        };
+        return update(PrizeEntry.TABLE_NAME, prizeValues, whereClause, whereArgs);
+    }
+
+    /**
      * returns all prizes for a tournament
      * @param tournament
      * @return
      */
-    public List<Prize> fetchPrizes(Tournament tournament) {
-        // TODO
-        return new ArrayList<Prize>();
+    public ArrayList<Prize> fetchPrizes(Tournament tournament) {
+        String tableName = PrizeEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                PrizeEntry.COLUMN_TOURNAMENT_ID,
+                PrizeEntry.COLUMN_PLAYER_USERNAME,
+                PrizeEntry.COLUMN_PLACE,
+                PrizeEntry.COLUMN_PRIZE_AMOUNT
+        };
+        String selection = PrizeEntry.COLUMN_TOURNAMENT_ID + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(tournament.getTournamentId())};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
+
+        ArrayList<Prize> prizes = new ArrayList<Prize>();
+        c.moveToFirst();
+        do {
+            prizes.add(mapToPrize(c, tournament));
+        }
+        while (c.moveToNext());
+        return prizes;
+    }
+
+    protected Prize mapToPrize(Cursor cursor, Tournament tournament) {
+        int playerUsernameIndex = cursor.getColumnIndex(PrizeEntry.COLUMN_PLAYER_USERNAME);
+        int placeIndex = cursor.getColumnIndex(PrizeEntry.COLUMN_PLACE);
+        int prizeAmountIndex = cursor.getColumnIndex(PrizeEntry.COLUMN_PRIZE_AMOUNT);
+
+        Prize prize = new Prize();
+        prize.setTournament(tournament);
+        prize.setPlayer(fetchPlayer(cursor.getString(playerUsernameIndex)));
+        prize.setPlace(cursor.getInt(placeIndex));
+        prize.setPrizeAmount(cursor.getInt(prizeAmountIndex));
+
+        return prize;
     }
 
     /**
@@ -278,9 +382,39 @@ public class TourneyManagerProvider {
      * @param player
      * @return
      */
-    public List<Prize> fetchPrizes(Player player) {
-        // TODO
-        return new ArrayList<Prize>();
+    public ArrayList<Prize> fetchPrizes(Player player) {
+        String tableName = PrizeEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                PrizeEntry.COLUMN_TOURNAMENT_ID,
+                PrizeEntry.COLUMN_PLAYER_USERNAME,
+                PrizeEntry.COLUMN_PLACE,
+                PrizeEntry.COLUMN_PRIZE_AMOUNT
+        };
+        String selection = PrizeEntry.COLUMN_PLAYER_USERNAME + " = ?";
+        String[] selectionArgs = new String[]{player.getUsername()};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
+
+        ArrayList<Prize> prizes = new ArrayList<Prize>();
+        c.moveToFirst();
+        do {
+            prizes.add(mapToPrize(c, player));
+        }
+        while (c.moveToNext());
+        return prizes;
+    }
+
+    protected Prize mapToPrize(Cursor cursor, Player player) {
+        int tournamentIdIndex = cursor.getColumnIndex(PrizeEntry.COLUMN_TOURNAMENT_ID);
+        int placeIndex = cursor.getColumnIndex(PrizeEntry.COLUMN_PLACE);
+        int prizeAmountIndex = cursor.getColumnIndex(PrizeEntry.COLUMN_PRIZE_AMOUNT);
+
+        Prize prize = new Prize();
+        prize.setTournament(fetchTournament(cursor.getInt(tournamentIdIndex)));
+        prize.setPlayer(player);
+        prize.setPlace(cursor.getInt(placeIndex));
+        prize.setPrizeAmount(cursor.getInt(prizeAmountIndex));
+
+        return prize;
     }
 
     protected Status fetchStatus(int id) {
@@ -345,8 +479,39 @@ public class TourneyManagerProvider {
      * @return
      */
     public Tournament fetchCurrentTournament() {
+        String tableName = TournamentEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentEntry._ID,
+                TournamentEntry.COLUMN_TOURNAMENT_NAME,
+                TournamentEntry.COLUMN_STATUS_ID,
+                TournamentEntry.COLUMN_ENTRY_PRICE,
+                TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_START_DATE,
+                TournamentEntry.COLUMN_END_DATE
+        };
+        String selection = TournamentEntry.COLUMN_STATUS_ID + " NOT ? AND " + TournamentEntry.COLUMN_STATUS_ID + " NOT ?";
+        String[] selectionArgs = new String[]{String.valueOf(Status.Cancelled.statusId), String.valueOf(Status.Completed.statusId)};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
+        return c.moveToFirst() ? mapToTournament(c) : null;
+    }
 
-        return null;
+    protected Tournament mapToTournament(Cursor cursor) {
+        int tournamentIdIndex = cursor.getColumnIndex(TournamentEntry._ID);
+        int tournamentNameIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_TOURNAMENT_NAME);
+        int statusIdIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_STATUS_ID);
+        int entryPriceIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_ENTRY_PRICE);
+        int houseCutIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_CUT);
+
+        Tournament tournament = new Tournament();
+        tournament.setTournamentId(cursor.getInt(tournamentIdIndex));
+        tournament.setTournamentName(cursor.getString(tournamentNameIndex));
+        tournament.setStatus(Status.getStatus(cursor.getInt(statusIdIndex)));
+        tournament.setEntryPrice(cursor.getInt(entryPriceIndex));
+        tournament.setHouseCut(cursor.getInt(houseCutIndex));
+
+        tournament.setPlayerslist(fetchPlayers());
+
+        return tournament;
     }
 
     /**
@@ -355,17 +520,70 @@ public class TourneyManagerProvider {
      * @return
      */
     public Tournament fetchTournament(int id) {
-        // TODO
-        return null;
+        String tableName = TournamentEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentEntry._ID,
+                TournamentEntry.COLUMN_TOURNAMENT_NAME,
+                TournamentEntry.COLUMN_STATUS_ID,
+                TournamentEntry.COLUMN_ENTRY_PRICE,
+                TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_START_DATE,
+                TournamentEntry.COLUMN_END_DATE
+        };
+        String selection = TournamentEntry._ID + " = ? ";
+        String[] selectionArgs = new String[]{String.valueOf(Status.Cancelled.statusId), String.valueOf(Status.Completed.statusId)};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
+        return c.moveToFirst() ? mapToTournament(c) : null;
     }
 
     /**
      * fetches all tournaments
      * @return
      */
-    public List<Tournament> fetchTournaments() {
-        // TODO
-        return new ArrayList<Tournament>();
+    public ArrayList<Tournament> fetchTournaments() {
+        String tableName = TournamentEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentEntry._ID,
+                TournamentEntry.COLUMN_TOURNAMENT_NAME,
+                TournamentEntry.COLUMN_STATUS_ID,
+                TournamentEntry.COLUMN_ENTRY_PRICE,
+                TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_START_DATE,
+                TournamentEntry.COLUMN_END_DATE
+        };
+        Cursor c = query(tableName, columns, null, null, null, null, null);
+
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        c.moveToFirst();
+        do {
+            tournaments.add(mapToTournament(c));
+        }
+        while (c.moveToNext());
+        return tournaments;
+    }
+
+    /**
+     * returns a list of all tournaments a player participated in
+     * @return
+     */
+    public ArrayList<Tournament> fetchTournaments(Player player) {
+        String tableName = TournamentPlayerLinkEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID,
+                TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME,
+        };
+        String selection = TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(player.getUsername())};
+        Cursor c = query(tableName, columns, selection, null, null, null, null);
+
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        int tournamentIdIndex = c.getColumnIndex(TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID);
+        c.moveToFirst();
+        do {
+            tournaments.add(fetchTournament(c.getInt(tournamentIdIndex)));
+        }
+        while (c.moveToNext());
+        return tournaments;
     }
 
     /**
@@ -403,6 +621,18 @@ public class TourneyManagerProvider {
      */
     public long insert(String table, ContentValues values) {
         return db.insert(table, null, values);
+    }
+
+    /**
+     * directly invokes (@link {@link SQLiteDatabase#update(String, ContentValues, String, String[])}
+     * @param table
+     * @param values
+     * @param whereClause
+     * @param whereArgs
+     * @return
+     */
+    public long update(String table, ContentValues values, String whereClause, String[] whereArgs) {
+        return db.update(table, values, whereClause, whereArgs);
     }
 
     /**
