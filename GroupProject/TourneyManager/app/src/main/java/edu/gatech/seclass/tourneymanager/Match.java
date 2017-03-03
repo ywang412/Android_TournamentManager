@@ -13,7 +13,7 @@ public class Match {
         private Status m_status;
         private int match_round;
         private Player winner;
-        private int next_match_id;
+        private Match nextMatch;
         private Player player_1;
         private Player player_2;
 
@@ -49,7 +49,69 @@ public class Match {
 //      MatchDA.addmatch(this);
     }
 
+    public int getMatchId() {
+        return match_id;
+    }
 
+    public void setMatchId(int match_id) {
+        this.match_id = match_id;
+    }
+
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+
+    public Status getStatus() {
+        return m_status;
+    }
+
+    public void setStatus(Status m_status) {
+        this.m_status = m_status;
+    }
+
+    public int getMatchRound() {
+        return match_round;
+    }
+
+    public void setMatchRound(int match_round) {
+        this.match_round = match_round;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
+    }
+
+    public Match getNextMatch() {
+        return nextMatch;
+    }
+
+    public void setNextMatch(Match nextMatch) {
+        this.nextMatch = nextMatch;
+    }
+
+    public Player getPlayer1() {
+        return player_1;
+    }
+
+    public void setPlayer1(Player player_1) {
+        this.player_1 = player_1;
+    }
+
+    public Player getPlayer2() {
+        return player_2;
+    }
+
+    public void setPlayer2(Player player_2) {
+        this.player_2 = player_2;
+    }
 }
 
 
