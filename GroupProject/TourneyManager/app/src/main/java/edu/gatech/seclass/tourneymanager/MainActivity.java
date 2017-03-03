@@ -61,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
         ListView playerList = (ListView) findViewById(R.id.playerlist);
         TextView playerListHeader = (TextView) findViewById(R.id.playerListHeader);
         Button addPlayer = (Button) findViewById(R.id.addplayer);
+        ArrayAdapter arrayAdapter;
 
-        playersmatches = new ArrayList<String>();
+        playersmatches = new ArrayList<>();
 
         /* If tournament is active, show matchlist.  If tournament is inactive, show players list and totals */
         if (tourneyActive == 1 && mode == 0) {
@@ -70,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
             matches = mProvider.fetchMatches(mController.fetchCurrentTournament());
             addPlayer.setVisibility(View.INVISIBLE);
+            arrayAdapter =
+                    new ArrayAdapter<Match>(this, android.R.layout.simple_list_item_1, matches);
 
         } else {
             if (mode == 0) {
@@ -81,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
 
             players = mProvider.fetchPlayers();
 
+            arrayAdapter =
+                    new ArrayAdapter<Player>(this, android.R.layout.simple_list_item_1, players);
         }
-
-        ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, playersmatches);
 
         playerList.setAdapter(arrayAdapter);
         playerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -127,8 +129,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    //dummyClass.endMatch(matchNum, winner);
-                                    // arrayAdapter.NotifyDataSetChanged();
+                                    
                                     break;
 
                                 case DialogInterface.BUTTON_NEGATIVE:
@@ -186,6 +187,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mController.registerPlayer(input.getText().toString());
+                setContentView(R.layout.activity_main);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
