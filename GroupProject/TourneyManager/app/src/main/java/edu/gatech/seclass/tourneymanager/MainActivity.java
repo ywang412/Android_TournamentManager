@@ -126,6 +126,24 @@ public class MainActivity extends AppCompatActivity {
 
                     builder.setMessage("Remove Player?").setPositiveButton("Yes", dialogClickListener)
                             .setNegativeButton("No", dialogClickListener).show();
+                } else if (tourneyActive == 1 && mode == 1) {
+                    DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch (which) {
+                                case DialogInterface.BUTTON_POSITIVE:
+                                    //dummyClass.endMatch(matchNum, winner);
+                                    // arrayAdapter.NotifyDataSetChanged();
+                                    break;
+
+                                case DialogInterface.BUTTON_NEGATIVE:
+                                    break;
+                            }
+                        }
+                    };
+
+                    builder.setMessage("End Match?").setPositiveButton("Yes", dialogClickListener)
+                            .setNegativeButton("No", dialogClickListener).show();
                 }
 
             }
@@ -154,10 +172,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void createTournament(View view) {
         setContentView(R.layout.activity_tourneycreate);
+
+        // loop for amount of players chosen in radioGroup
+        // get names, create tourney
     }
 
+    public void addPlayer(View view) {
+        // dialog box with text input for playerName
 
-    public void handleClick(View view) {
+    }
+
+    public void tourneyCreate(View view) {
 
         boolean errorInvalid = false;
         int entranceFee = 0, entrants = 0, housePercentage = 0;
@@ -188,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (errorInvalid == false) {
-
+            tourneyActive = 1;
 
         }
     }
