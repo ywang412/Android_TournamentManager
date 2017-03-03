@@ -65,10 +65,12 @@ To display prizes and profit, simply navigate to Manager Mode, Display Prizes/Pr
 - **Player Mode**
 
 1)	View player prizes
+
 To display prizes and profit, simply navigate to Player Mode, View Total Prizes as shown below:
 
 
 2)	View current matches in the existing tournament
+
 To display prizes and profit, simply navigate to Player Mode->View Match List as shown below:
 
 
