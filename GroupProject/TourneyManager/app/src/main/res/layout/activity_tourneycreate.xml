@@ -15,28 +15,21 @@
         android:layout_height="wrap_content"
         android:text="Entrance Fee:"
         android:id="@+id/textView"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/entranceFee"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/entranceFee" />
 
     <Button
         android:text="Create Tournament"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonCalculate"
-        android:onClick="handleClick"
+        android:onClick="tourneyCreate"
         android:layout_marginBottom="14dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
-
-    <TextView
-        android:text="House Percentage:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView3"
-        android:layout_alignBaseline="@+id/housePercentage"
-        android:layout_alignBottom="@+id/housePercentage"
-        android:layout_alignParentStart="true"
-        android:textSize="18sp" />
 
     <TextView
         android:text="Entrants:"
@@ -82,8 +75,7 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/entranceFee"
-        android:layout_alignBaseline="@+id/textView"
-        android:layout_alignBottom="@+id/textView"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
     <EditText
@@ -94,7 +86,16 @@
         android:id="@+id/housePercentage"
         android:layout_below="@+id/entranceFee"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_marginTop="14dp" />
+
+    <TextView
+        android:text="House Percentage:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="18sp"
+        android:layout_alignTop="@+id/housePercentage"
+        android:layout_alignParentStart="true" />
 
     android:layout_width="fill_parent"
         android:layout_height="wrap_content"
