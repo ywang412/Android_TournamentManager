@@ -32,16 +32,16 @@ public class ApplicationController {
         mProvider.shutdown();
     }
 
-    public static void logon(User user){}
+    public void logon(User user){}
 
-    public static Player registerPlayer(String player){
+    public Player registerPlayer(String player){
         return new Player();
     }
 
-    public static void deletePlayer(Player player){}
+    public void deletePlayer(Player player){}
 
 
-    public static Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist){
+    public Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist){
         Tournament tournament= new Tournament(tournament_id, house_cut,  entry_price, playerslist);
         return tournament;
     }
@@ -50,13 +50,13 @@ public class ApplicationController {
         return mProvider.fetchCurrentTournament();
     }
 
-    public static int fetchProfits(){
+    public int fetchProfits(){
         return 0;
     }
-    public static ArrayList<Prize> fetchPrizes(){
+    public ArrayList<Prize> fetchPrizes(){
         return new ArrayList<Prize>();
     }
-    public static Tournament fetchPlayers(){
+    public Tournament fetchPlayers(){
         return new Tournament();
     }
 
