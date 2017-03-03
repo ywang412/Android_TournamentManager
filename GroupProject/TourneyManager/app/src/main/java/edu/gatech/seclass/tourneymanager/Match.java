@@ -13,7 +13,7 @@ public class Match {
         private Status m_status;
         private int match_round;
         private Player winner;
-        private Match nextMatch;
+        private int nextmatch_id;
         private Player player_1;
         private Player player_2;
 
@@ -38,16 +38,20 @@ public class Match {
            // System.out.println(match_round+"d"+ match_id+m_status);
         }
 
-    public void startmatch() {
 
-//        MatchDA.addmatch(this)
-        }
-
-    public void endmatch(String name) {
-
-
-//      MatchDA.addmatch(this);
+    public void startMatch(){
+        this.m_status= Status.InProgress;
     }
+
+    public void endMatch(Player player){
+        this.m_status= Status.Completed;
+        this.winner = player;
+    }
+
+    public void cancelMatch(){
+        this.m_status= Status.Cancelled;
+    }
+
 
     public int getMatchId() {
         return match_id;
@@ -89,12 +93,12 @@ public class Match {
         this.winner = winner;
     }
 
-    public Match getNextMatch() {
-        return nextMatch;
+    public int getNextMatch() {
+        return nextmatch_id;
     }
 
-    public void setNextMatch(Match nextMatch) {
-        this.nextMatch = nextMatch;
+    public void setNextMatch(int nextMatch) {
+        this.nextmatch_id = nextMatch;
     }
 
     public Player getPlayer1() {

@@ -50,6 +50,11 @@ public class ApplicationController {
 
     public Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist){
         Tournament tournament= new Tournament(tournament_id, house_cut,  entry_price, playerslist);
+        mProvider.insertTournament(tournament);
+
+        for (Match match : tournament.getMatchlist()){
+            mProvider.insertMatch(match);
+        }
         return tournament;
     }
 
@@ -57,15 +62,24 @@ public class ApplicationController {
         return mProvider.fetchCurrentTournament();
     }
 
-    public int fetchProfits(){
-        return 0;
+    public ArrayList<Profit> fetchProfits(){
+        ArrayList<Tournament> tournaments = mProvider.fetchTournaments();
+        ArrayList<Profit> profits = new ArrayList<>();
+
+        for (Tournament tournament:tournaments){
+            TournamentResult tournamentresult = tournament.getResult();
+            Profit houseprofit = new Profit(tournament, tournamentresult.getHouseProfit());
+            profits.add(houseprofit);
+        }
+        return profits;
     }
+
     public ArrayList<Prize> fetchPrizes(){
         return new ArrayList<Prize>();
     }
+
     public Tournament fetchPlayers(){
         return new Tournament();
     }
-
 
 }

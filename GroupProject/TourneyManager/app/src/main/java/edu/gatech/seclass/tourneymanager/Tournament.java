@@ -44,6 +44,7 @@ public class Tournament {
         this.priz3rd = (int) Math.round((entry_price * this.playerslist.size() - Math.round(house_cut * entry_price * this.playerslist.size() / 100.))*0.2);
         int total_round = (int) (Math.log(playerslist.size())/Math.log(2));
         int match_id = 1;
+        int nextmatch_id =0;
         //System.out.println(house_profit);
         //System.out.println(priz1st+"d"+priz2nd+"d"+priz3rd);
         //System.out.println(playerslist);
@@ -57,22 +58,30 @@ public class Tournament {
                 for (int i = 0; i < playerslist.size()-1; i=i+2) {
                     Player player1 = playerslist.get(i);
                     Player player2 = playerslist.get(i+1);
+                    nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
+
                     Match match = new Match(match_id, this, match_round,player1, player2);
+                    match.setNextMatch(nextmatch_id);
                     matchlist.add(match);
 //                    MatchDA.addmatch(Match);
     //                TourneyManagerProvider.insert
                     match_id ++;
                 }
             }
+
             else {
                 for (int i = 0; i < playerslist.size()/(int)(Math.pow(2,match_round)); i++) {
+
+                    nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
                     Match match = new Match(match_id, this, match_round);
+                    match.setNextMatch(nextmatch_id);
                     matchlist.add(match);
 //                    MatchDA.addmatch(Match);
                     match_id ++;
                 }
             }
         }
+
         Match match = new Match(match_id, this, match_round-1);
         matchlist.add(match);
         System.out.println(matchlist.size());
@@ -80,6 +89,22 @@ public class Tournament {
 //        MatchDA.addmatch(Match);
 //        TournamentDA.addmatch(this);
     }
+
+
+    public void startTournament(){
+        this.t_status= Status.InProgress;
+    }
+
+    public void endTournament(){
+        this.t_status= Status.Completed;
+    }
+
+    public void cancelTournament(){
+        this.t_status= Status.Cancelled;
+    }
+
+
+
 
     public String getTournamentName() {
         return tournament_name;
