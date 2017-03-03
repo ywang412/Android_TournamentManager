@@ -10,6 +10,9 @@ public class TournamentResult {
     Tournament tournament;
     ArrayList<Prize> prizes;
     int houseProfit;
+
+    public TournamentResult(){};
+
     public TournamentResult(Tournament tournament, ArrayList<Prize> prizes, int houseProfit){
         this.tournament=tournament;
         this.prizes=prizes;

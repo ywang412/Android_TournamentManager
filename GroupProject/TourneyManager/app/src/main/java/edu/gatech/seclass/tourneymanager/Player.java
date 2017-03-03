@@ -6,8 +6,7 @@ import java.util.ArrayList;
  * Created by rulan on 3/1/2017.
  */
 
-public class Player {
-    private String username;
+public class Player extends User {
     String name;
     String phoneNumber;
     Deck deck;
@@ -31,14 +30,6 @@ public class Player {
 
     public void pickDeck(Deck deck){
         this.deck=deck;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getName() {

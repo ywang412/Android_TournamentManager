@@ -16,9 +16,9 @@ public class TourneyManagerSqlScripts {
             MatchEntry._ID + " INTEGER PRIMARY KEY," +
             MatchEntry.COLUMN_ROUND + " INTEGER NOT NULL, " +
             MatchEntry.COLUMN_TOURNAMENT_ID + " INTEGER NOT NULL, " +
-            MatchEntry.COLUMN_STATUS_ID + " INTEGER NOT NULL, " +
-            MatchEntry.COLUMN_PLAYER_1_USERNAME + " TEXT NOT NULL, " +
-            MatchEntry.COLUMN_PLAYER_2_USERNAME + " TEXT NOT NULL, " +
+            MatchEntry.COLUMN_STATUS_ID + " INTEGER, " +
+            MatchEntry.COLUMN_PLAYER_1_USERNAME + " TEXT, " +
+            MatchEntry.COLUMN_PLAYER_2_USERNAME + " TEXT, " +
             MatchEntry.COLUMN_WINNER_USERNAME + " TEXT, " +
 
             " FOREIGN KEY (" + MatchEntry.COLUMN_STATUS_ID + ") REFERENCES " + StatusEntry.TABLE_NAME + " (" + StatusEntry._ID + "), " +
@@ -35,7 +35,7 @@ public class TourneyManagerSqlScripts {
             PrizeEntry.COLUMN_PLACE + " INTEGER NOT NULL, " +
             PrizeEntry.COLUMN_PRIZE_AMOUNT + " INTEGER NOT NULL, " +
             PrizeEntry.COLUMN_TOURNAMENT_ID + " INTEGER NOT NULL, " +
-            PrizeEntry.COLUMN_PLAYER_USERNAME + " TEXT NOT NULL, " +
+            PrizeEntry.COLUMN_PLAYER_USERNAME + " TEXT, " +
 
             " FOREIGN KEY (" + PrizeEntry.COLUMN_TOURNAMENT_ID + ") REFERENCES " + TournamentEntry.TABLE_NAME + " (" + TournamentEntry._ID + "), " +
             " FOREIGN KEY (" + PrizeEntry.COLUMN_PLAYER_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_USERNAME + "), " +
@@ -51,19 +51,19 @@ public class TourneyManagerSqlScripts {
     static final String CREATE_TOURNAMENT_TABLE = "CREATE TABLE " + TournamentEntry.TABLE_NAME + " (" +
             TournamentEntry._ID + " INTEGER PRIMARY KEY," +
             TournamentEntry.COLUMN_TOURNAMENT_NAME + " TEXT UNIQUE NOT NULL, " +
-            TournamentEntry.COLUMN_START_DATE + " INTEGER UNIQUE NOT NULL, " +
+            TournamentEntry.COLUMN_START_DATE + " INTEGER NOT NULL, " +
             TournamentEntry.COLUMN_END_DATE + " INTEGER, " +
-            TournamentEntry.COLUMN_ENTRY_PRICE + " INTEGER UNIQUE NOT NULL, " +
-            TournamentEntry.COLUMN_HOUSE_CUT + " INTEGER UNIQUE NOT NULL, " +
-            TournamentEntry.COLUMN_STATUS_ID + " INTEGER UNIQUE NOT NULL, " +
+            TournamentEntry.COLUMN_ENTRY_PRICE + " INTEGER NOT NULL, " +
+            TournamentEntry.COLUMN_HOUSE_CUT + " INTEGER NOT NULL, " +
+            TournamentEntry.COLUMN_STATUS_ID + " INTEGER NOT NULL, " +
 
             " FOREIGN KEY (" + TournamentEntry.COLUMN_STATUS_ID + ") REFERENCES " + StatusEntry.TABLE_NAME + " (" + StatusEntry._ID + ") " +
             " );";
 
     static final String CREATE_TOURNAMENT_PLAYER_LINK_TABLE = "CREATE TABLE " + TournamentPlayerLinkEntry.TABLE_NAME + " (" +
             TournamentPlayerLinkEntry._ID + " INTEGER PRIMARY KEY," +
-            TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + " INTEGER UNIQUE NOT NULL, " +
-            TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + " TEXT UNIQUE NOT NULL, " +
+            TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + " INTEGER NOT NULL, " +
+            TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + " TEXT, " +
 
             " FOREIGN KEY (" + TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + ") REFERENCES " + TournamentEntry.TABLE_NAME + " (" + TournamentEntry._ID + "), " +
             " FOREIGN KEY (" + TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry._ID + "), " +

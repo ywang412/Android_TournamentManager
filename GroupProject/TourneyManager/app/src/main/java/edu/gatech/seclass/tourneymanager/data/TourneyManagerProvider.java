@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.gatech.seclass.tourneymanager.Deck;
 import edu.gatech.seclass.tourneymanager.Manager;
 import edu.gatech.seclass.tourneymanager.Match;
 import edu.gatech.seclass.tourneymanager.Player;
+import edu.gatech.seclass.tourneymanager.TournamentResult;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerContract.*;
 import edu.gatech.seclass.tourneymanager.Prize;
 import edu.gatech.seclass.tourneymanager.Status;
@@ -463,11 +465,66 @@ public class TourneyManagerProvider {
         return insert(TournamentEntry.TABLE_NAME, tournamentValue);
     }
 
+    /**
+     * update tournament based on tournament id
+     * @param tournament
+     * @return
+     */
+    public long updateTournament(Tournament tournament) {
+        ContentValues tournamentValue = new ContentValues();
+        tournamentValue.put(TournamentEntry.COLUMN_TOURNAMENT_NAME, tournament.getTournamentName());
+        tournamentValue.put(TournamentEntry.COLUMN_ENTRY_PRICE, tournament.getEntryPrice());
+        tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouseCut());
+        tournamentValue.put(TournamentEntry.COLUMN_STATUS_ID, tournament.getStatus().statusId);
+
+        updatePlayersInTournament(tournament);
+
+        for (Match match : tournament.getMatchlist()) {
+            updateMatch(match);
+        }
+
+        for (Prize prize : tournament.getResult().getPrizes()) {
+            updatePrize(prize);
+        }
+
+        return update(TournamentEntry.TABLE_NAME, tournamentValue, TournamentEntry._ID + " = ? ", new String[]{String.valueOf(tournament.getTournamentId())});
+    }
+
+
+    public void updatePlayersInTournament(Tournament tournament) {
+        ArrayList<Player> playersInTournament = fetchPlayers(tournament);
+        List<Player> newPlayersInTournament = tournament.getPlayerslist();
+
+        List<Player> playersToAdd = new ArrayList<>();
+        playersToAdd.addAll(newPlayersInTournament);
+        playersToAdd.removeAll(playersInTournament);
+        for (Player player : playersToAdd) {
+            addPlayerToTournament(tournament, player);
+        }
+
+        List<Player> playersToRemove = new ArrayList<>();
+        playersToRemove.addAll(playersInTournament);
+        playersToRemove.removeAll(newPlayersInTournament);
+        for (Player player : playersToRemove) {
+            removePlayerFromTournament(tournament, player);
+        }
+    }
+
     public long addPlayerToTournament(Tournament tournament, Player player) {
         ContentValues tournamentPlayerLinkValue = new ContentValues();
         tournamentPlayerLinkValue.put(TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME, player.getUsername());
         tournamentPlayerLinkValue.put(TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID, tournament.getTournamentId());
         return insert(TournamentPlayerLinkEntry.TABLE_NAME, tournamentPlayerLinkValue);
+    }
+
+    public long removePlayerFromTournament(Tournament tournament, Player player) {
+        String whereClause = TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + " = ? AND "
+                + TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + " = ?";
+        String[] whereArgs = new String[] {
+                String.valueOf(tournament.getTournamentId()),
+                player.getUsername()
+        };
+        return delete(TournamentPlayerLinkEntry.TABLE_NAME, whereClause, whereArgs);
     }
 
     /**
@@ -505,7 +562,13 @@ public class TourneyManagerProvider {
         tournament.setEntryPrice(cursor.getInt(entryPriceIndex));
         tournament.setHouseCut(cursor.getInt(houseCutIndex));
 
-        tournament.setPlayerslist(fetchPlayers());
+        tournament.setPlayerslist(fetchPlayers(tournament));
+        tournament.setMatchlist(fetchMatches(tournament));
+
+        TournamentResult result = new TournamentResult();
+        result.setTournament(tournament);
+        result.setPrizes(fetchPrizes(tournament));
+        tournament.setResult(result);
 
         return tournament;
     }
@@ -589,7 +652,18 @@ public class TourneyManagerProvider {
      * @return
      */
     public boolean validateManagerAuth(Manager manager, String password) {
-        // TODO
+        String tableName = UserEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                UserEntry.COLUMN_USERNAME,
+                UserEntry.COLUMN_PASSWORD
+        };
+        String selection = UserEntry.COLUMN_USERNAME + " = ?";
+        String[] selectionArgs = new String[]{manager.getUsername()};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
+        if (c.moveToFirst()) {
+            int passwordIndex = c.getColumnIndex(UserEntry.COLUMN_PASSWORD);
+            return c.getString(passwordIndex).equals(password);
+        }
         return false;
     }
 
@@ -629,6 +703,10 @@ public class TourneyManagerProvider {
      */
     public long update(String table, ContentValues values, String whereClause, String[] whereArgs) {
         return db.update(table, values, whereClause, whereArgs);
+    }
+
+    private long delete(String table, String whereClause, String[] whereArgs) {
+        return db.delete(table, whereClause, whereArgs);
     }
 
     /**
