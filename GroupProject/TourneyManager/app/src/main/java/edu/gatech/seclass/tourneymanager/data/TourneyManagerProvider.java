@@ -114,6 +114,7 @@ public class TourneyManagerProvider {
         matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
         matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
         matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+        matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
         return insert(MatchEntry.TABLE_NAME, matchValues);
     }
 
@@ -130,8 +131,63 @@ public class TourneyManagerProvider {
         matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
         matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
         matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+        matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
 
         return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatchId())});
+    }
+
+    /**
+     * fetches the match by its id
+     * @param matchId
+     * @return
+     */
+    public ArrayList<Match> fetchMatch(int matchId) {
+        String tableName = MatchEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                MatchEntry._ID,
+                MatchEntry.COLUMN_TOURNAMENT_ID,
+                MatchEntry.COLUMN_STATUS_ID,
+                MatchEntry.COLUMN_ROUND,
+                MatchEntry.COLUMN_PLAYER_1_USERNAME,
+                MatchEntry.COLUMN_PLAYER_2_USERNAME,
+                MatchEntry.COLUMN_WINNER_USERNAME,
+                MatchEntry.COLUMN_NEXT_MATCH_ID
+        };
+        String selection = MatchEntry._ID + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(matchId)};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
+
+        ArrayList<Match> matchList = new ArrayList<Match>();
+        if (c.moveToFirst()) {
+            do {
+                matchList.add(mapToMatch(c));
+            }
+            while (c.moveToNext());
+        }
+        return matchList;
+    }
+
+    protected Match mapToMatch(Cursor cursor) {
+        int idIndex = cursor.getColumnIndex(MatchEntry._ID);
+        int tournamentIdIndex = cursor.getColumnIndex(MatchEntry.COLUMN_TOURNAMENT_ID);
+        int statusIdIndex = cursor.getColumnIndex(MatchEntry.COLUMN_STATUS_ID);
+        int roundIndex = cursor.getColumnIndex(MatchEntry.COLUMN_ROUND);
+        int player1Index = cursor.getColumnIndex(MatchEntry.COLUMN_PLAYER_1_USERNAME);
+        int player2Index = cursor.getColumnIndex(MatchEntry.COLUMN_PLAYER_2_USERNAME);
+        int winnerIndex = cursor.getColumnIndex(MatchEntry.COLUMN_WINNER_USERNAME);
+        int nextMatchIndex = cursor.getColumnIndex(MatchEntry.COLUMN_NEXT_MATCH_ID);
+
+        Match match = new Match();
+        match.setMatchId(cursor.getInt(idIndex));
+        match.setTournament(fetchTournament(cursor.getInt(tournamentIdIndex)));
+        match.setStatus(fetchStatus(cursor.getInt(statusIdIndex)));
+        match.setMatchRound(cursor.getInt(roundIndex));
+        match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
+        match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
+        match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
+        match.setNextMatch(cursor.getInt(nextMatchIndex));
+
+        return match;
     }
 
     /**
@@ -148,7 +204,8 @@ public class TourneyManagerProvider {
                 MatchEntry.COLUMN_ROUND,
                 MatchEntry.COLUMN_PLAYER_1_USERNAME,
                 MatchEntry.COLUMN_PLAYER_2_USERNAME,
-                MatchEntry.COLUMN_WINNER_USERNAME
+                MatchEntry.COLUMN_WINNER_USERNAME,
+                MatchEntry.COLUMN_NEXT_MATCH_ID
         };
         String selection = MatchEntry.COLUMN_TOURNAMENT_ID + " = ?";
         String[] selectionArgs = new String[]{String.valueOf(tournament.getTournamentId())};
@@ -172,6 +229,7 @@ public class TourneyManagerProvider {
         int player1Index = cursor.getColumnIndex(MatchEntry.COLUMN_PLAYER_1_USERNAME);
         int player2Index = cursor.getColumnIndex(MatchEntry.COLUMN_PLAYER_2_USERNAME);
         int winnerIndex = cursor.getColumnIndex(MatchEntry.COLUMN_WINNER_USERNAME);
+        int nextMatchIndex = cursor.getColumnIndex(MatchEntry.COLUMN_NEXT_MATCH_ID);
 
         Match match = new Match();
         match.setMatchId(cursor.getInt(idIndex));
@@ -181,6 +239,7 @@ public class TourneyManagerProvider {
         match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
         match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
         match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
+        match.setNextMatch(cursor.getInt(nextMatchIndex));
 
         return match;
     }

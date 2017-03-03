@@ -20,6 +20,7 @@ public class TourneyManagerSqlScripts {
             MatchEntry.COLUMN_PLAYER_1_USERNAME + " TEXT, " +
             MatchEntry.COLUMN_PLAYER_2_USERNAME + " TEXT, " +
             MatchEntry.COLUMN_WINNER_USERNAME + " TEXT, " +
+            MatchEntry.COLUMN_NEXT_MATCH_ID + " INTEGER, " +
 
             " FOREIGN KEY (" + MatchEntry.COLUMN_STATUS_ID + ") REFERENCES " + StatusEntry.TABLE_NAME + " (" + StatusEntry._ID + "), " +
             " FOREIGN KEY (" + MatchEntry.COLUMN_TOURNAMENT_ID + ") REFERENCES " + TournamentEntry.TABLE_NAME + " (" + TournamentEntry._ID + "), " +

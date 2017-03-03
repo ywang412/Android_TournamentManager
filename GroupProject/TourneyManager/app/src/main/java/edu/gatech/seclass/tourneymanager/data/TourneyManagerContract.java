@@ -56,6 +56,7 @@ public class TourneyManagerContract {
         public static final String COLUMN_WINNER_USERNAME = "winner_username";
         public static final String COLUMN_PLAYER_1_USERNAME = "player_1_username";
         public static final String COLUMN_PLAYER_2_USERNAME = "player_2_username";
+        public static final String COLUMN_NEXT_MATCH_ID = "next_match_id";
 
         public static Uri buildLocationUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
