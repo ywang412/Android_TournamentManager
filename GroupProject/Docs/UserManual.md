@@ -31,7 +31,13 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 1)	Add player to the system
 
+To add a player to the system, user will log in with Manager mode. And Add Player as shown below.
+
+And then enter all the required information: Name, Phone Number, 
+
 2)	Remove player from the system
+
+
 
 3)	Manage existing tournament or create a new tournament
 
