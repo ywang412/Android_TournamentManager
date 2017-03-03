@@ -15,6 +15,7 @@ public class ApplicationController {
 
     private Context mContext;
     private TourneyManagerProvider mProvider;
+    private User mCurrentUser;
 
     /**
      * instantiate in {@link android.support.v7.app.AppCompatActivity#onResume} method
@@ -32,13 +33,19 @@ public class ApplicationController {
         mProvider.shutdown();
     }
 
-    public void logon(User user){}
-
-    public Player registerPlayer(String player){
-        return new Player();
+    public void logon(User user){
+        mCurrentUser=user;
     }
 
-    public void deletePlayer(Player player){}
+    public Player registerPlayer(String player){
+        Player newPlayer = new Player(player,"",new Deck(""));
+        mProvider.insertPlayer(newPlayer);
+        return newPlayer;
+    }
+
+    public void deletePlayer(Player player){
+        mProvider.deletePlayer(player);
+    }
 
 
     public Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist){

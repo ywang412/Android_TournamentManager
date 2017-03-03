@@ -214,6 +214,10 @@ public class TourneyManagerProvider {
         return update(UserEntry.TABLE_NAME, playerValues, UserEntry.COLUMN_USERNAME + " = ?", new String[]{player.getUsername()});
     }
 
+    public void deletePlayer(Player player){
+        /* TODO */
+    }
+
     /**
      * fetch player by username
      * @param username
