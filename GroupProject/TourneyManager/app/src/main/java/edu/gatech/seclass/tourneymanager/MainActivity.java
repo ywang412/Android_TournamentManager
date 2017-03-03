@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         // tourneyActive = dummyClass.getTourneyStatus();
 
         setContentView(R.layout.activity_playerandmatchlist);
-        ListView playerList = (ListView) findViewById(R.id.playerlist);
+        final ListView playerList = (ListView) findViewById(R.id.playerlist);
         TextView playerListHeader = (TextView) findViewById(R.id.playerListHeader);
         Button addPlayer = (Button) findViewById(R.id.addplayer);
         ArrayAdapter arrayAdapter;
@@ -88,10 +88,12 @@ public class MainActivity extends AppCompatActivity {
                     new ArrayAdapter<Player>(this, android.R.layout.simple_list_item_1, players);
         }
 
+        Player selectedPlayer;
+        Match selectedMatch;
         playerList.setAdapter(arrayAdapter);
         playerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+            public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
                                     long arg3) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog alertDialog = builder.create();
                     builder.setTitle("Player Details");
                     alertDialog.setMessage("Number of tournaments won: 43\nMoney won: $29329");
-                    Toast.makeText(getApplicationContext(), playersmatches.get(arg2), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), players.get(arg2).getName(), Toast.LENGTH_SHORT).show();
                     alertDialog.show();
                 } else if (tourneyActive == 0 && mode == 1) {
                     DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
@@ -129,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    
+                                    mController.deletePlayer(players.get(arg2));
                                     break;
 
                                 case DialogInterface.BUTTON_NEGATIVE:
@@ -152,11 +154,14 @@ public class MainActivity extends AppCompatActivity {
         mode = 1;
         setContentView(R.layout.activity_manager);
 
-        // int houseProfits = dummyClass.getProfits();
-        // int numberTourneys = dummyClass.getTourneysCount();
+        int houseProfits = 0;
 
-        int houseProfits = 650;
-        int numberTourneys = 14;
+        ArrayList<Tournament> tournaments = mProvider.fetchTournaments();
+        int numberTourneys = tournaments.size();
+
+        for (Tournament t : tournaments) {
+            houseProfits += t.getHouseProfit();
+        }
 
         TextView houseProfitText = (TextView) findViewById(R.id.totalprofit);
         houseProfitText.setText("Total profits:   $" + houseProfits);
