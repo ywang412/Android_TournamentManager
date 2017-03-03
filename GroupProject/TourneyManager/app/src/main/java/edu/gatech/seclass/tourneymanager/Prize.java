@@ -9,6 +9,9 @@ public class Prize {
     Player player;
     int place;
     int prizeAmount;
+
+    public Prize() {}
+
     public Prize(Tournament tournament, Player player, int place, int prizeAmount){
         this.tournament=tournament;
         this.player=player;
