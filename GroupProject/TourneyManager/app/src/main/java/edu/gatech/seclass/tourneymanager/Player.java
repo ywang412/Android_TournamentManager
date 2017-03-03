@@ -1,6 +1,9 @@
 package edu.gatech.seclass.tourneymanager;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 /**
  * Created by rulan on 3/1/2017.
@@ -20,13 +23,14 @@ public class Player {
         this.deck=deck;
     }
 
-    public ArrayList<Prize> fecthPrizes(){
-        Tournament dummyTournament = new Tournament();
+    public List<Prize> fetchPrizes(TourneyManagerProvider theProvider){
+/*        Tournament dummyTournament = new Tournament();
         ArrayList<Prize> thePrizeList = new ArrayList<Prize>();
         thePrizeList.add(new Prize(dummyTournament, this, 1, 100));
         thePrizeList.add(new Prize(dummyTournament, this, 2, 50));
-        thePrizeList.add(new Prize(dummyTournament, this, 3, 20));
-        return thePrizeList;
+        thePrizeList.add(new Prize(dummyTournament, this, 3, 20));*/
+        return theProvider.fetchPrizes(this);
+//        return thePrizeList;
     }
 
     public void pickDeck(Deck deck){
