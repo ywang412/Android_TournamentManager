@@ -30,8 +30,8 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 - **Manager Mode**
 
 1.	Add player to the system
-    To add a player to the system, user will log in with Manager mode. And click "Add Player".  
-    The user will enter all the required information: Name, Phone Number, and Deck. Then click "Add Player".  
+  * To add a player to the system, user will log in with Manager mode. And click "Add Player".  
+  * The user will enter all the required information: Name, Phone Number, and Deck. Then click "Add Player".  
 
 2.	Remove player from the system
    To remove a player from the system, simply navigate to Manager -> Remove Player  
