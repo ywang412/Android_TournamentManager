@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             matches = mProvider.fetchMatches(mController.fetchCurrentTournament());
             addPlayer.setVisibility(View.INVISIBLE);
             arrayAdapter =
-                    new ArrayAdapter<Match>(this, android.R.layout.simple_list_item_1, matches);
+                    new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, matches);
 
         } else {
             if (mode == 0) {
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             players = mProvider.fetchPlayers();
 
             arrayAdapter =
-                    new ArrayAdapter<Player>(this, android.R.layout.simple_list_item_1, players);
+                    new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, players);
         }
 
         playerList.setAdapter(arrayAdapter);
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                     int tourneysWon = 0;
                     int moneyWon = 0;
 
-                    for (Prize p: prizes) {
+                    for (Prize p : prizes) {
                         moneyWon += p.getPrizeAmount();
                         if (p.getPlace() == 1) {
                             tourneysWon++;
@@ -179,14 +180,6 @@ public class MainActivity extends AppCompatActivity {
     public void createTournament(View view) {
         setContentView(R.layout.activity_tourneycreate);
 
-        // loop for amount of players chosen in radioGroup
-        // get names, create tourney
-
-        ArrayList<Player> playerlist = new ArrayList<Player>();
-
-
-
-
     }
 
     public void addPlayer(View view) {
@@ -249,6 +242,37 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (errorInvalid == false) {
+
+            final ArrayList<Player> playerlist = new ArrayList<Player>();
+            RadioGroup rg = (RadioGroup) findViewById(R.id.radioentrants);
+            int entrantsValue = Integer.parseInt(((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString());
+
+            for (int i = entrantsValue; i > 0; i--) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(i + "/" + entrantsValue + " - Player name:");
+
+                final EditText input = new EditText(this);
+                input.setInputType(InputType.TYPE_CLASS_TEXT);
+                builder.setView(input);
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        playerlist.add(mProvider.fetchPlayer(input.getText().toString()));
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+
+                builder.show();
+            }
+
+            mController.createTournament(mProvider.fetchTournaments().size(), housePercentage, entranceFee, playerlist);
             tourneyActive = 1;
 
         }
