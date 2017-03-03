@@ -38,7 +38,7 @@ public class ApplicationController {
     }
 
     public Player registerPlayer(String player){
-        Player newPlayer = new Player(player,"",new Deck(""));
+        Player newPlayer = new Player(player, player,"",null);
         mProvider.insertPlayer(newPlayer);
         return newPlayer;
     }

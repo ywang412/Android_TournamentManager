@@ -195,7 +195,9 @@ public class TourneyManagerProvider {
         playerValues.put(UserEntry.COLUMN_USERNAME, player.getUsername());
         playerValues.put(UserEntry.COLUMN_NAME, player.getName());
         playerValues.put(UserEntry.COLUMN_PHONE_NUMBER, player.getPhoneNumber());
-        playerValues.put(UserEntry.COLUMN_DECK_ID, fetchDeck(player.getDeck().getName()).getId());
+        if (player.getDeck() != null) {
+            playerValues.put(UserEntry.COLUMN_DECK_ID, fetchDeck(player.getDeck().getName()).getId());
+        }
         playerValues.put(UserEntry.COLUMN_IS_MANAGER, 0);
         return insert(UserEntry.TABLE_NAME, playerValues);
     }
