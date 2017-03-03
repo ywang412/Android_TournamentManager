@@ -112,6 +112,11 @@ public class Match {
     public void setPlayer2(Player player_2) {
         this.player_2 = player_2;
     }
+
+    @Override
+    public String toString() {
+        return this.match_id + ". " + this.player_1 + " vs " + this.player_2 + " [" + this.m_status + "]";
+    }
 }
 
 
