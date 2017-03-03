@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -69,8 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
             matches = mProvider.fetchMatches(mController.fetchCurrentTournament());
             addPlayer.setVisibility(View.INVISIBLE);
-
-
 
         } else {
             if (mode == 0) {
@@ -174,7 +173,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addPlayer(View view) {
-        // dialog box with text input for playerName
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Player name to add:");
+
+
+        final EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mController.registerPlayer(input.getText().toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
 
     }
 
