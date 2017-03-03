@@ -71,8 +71,7 @@ public class TourneyManagerProvider {
         String selection = DeckEntry.COLUMN_DECK_NAME + " = ?";
         String[] selectionArgs = new String[]{deckName};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
-        c.moveToFirst();
-        return mapToDeck(c);
+        return c.moveToFirst() ? mapToDeck(c) : null;
     }
 
     /**
@@ -89,8 +88,7 @@ public class TourneyManagerProvider {
         String selection = DeckEntry._ID + " = ?";
         String[] selectionArgs = new String[]{String.valueOf(id)};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
-        c.moveToFirst();
-        return mapToDeck(c);
+        return c.moveToFirst() ? mapToDeck(c) : null;
     }
 
     protected Deck mapToDeck(Cursor cursor) {
@@ -157,11 +155,12 @@ public class TourneyManagerProvider {
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
         ArrayList<Match> matchList = new ArrayList<Match>();
-        c.moveToFirst();
-        do {
-            matchList.add(mapToMatch(c, tournament));
+        if (c.moveToFirst()) {
+            do {
+                matchList.add(mapToMatch(c, tournament));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         tournament.setMatchlist(matchList);
         return matchList;
     }
@@ -236,8 +235,7 @@ public class TourneyManagerProvider {
         String selection = UserEntry.COLUMN_USERNAME + " = ?";
         String[] selectionArgs = new String[]{username};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
-        c.moveToFirst();
-        return mapToPlayer(c);
+        return c.moveToFirst() ? mapToPlayer(c) : null;
     }
 
     protected Player mapToPlayer(Cursor cursor) {
@@ -272,12 +270,13 @@ public class TourneyManagerProvider {
         };
         String selection = UserEntry.COLUMN_IS_MANAGER + " = 0";
         Cursor c = query(tableName, columns, selection, null, null, null, null);
-        c.moveToFirst();
         ArrayList<Player> players = new ArrayList<Player>();
-        do {
-            players.add(mapToPlayer(c));
+        if (c.moveToFirst()) {
+            do {
+                players.add(mapToPlayer(c));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         return players;
     }
 
@@ -297,11 +296,12 @@ public class TourneyManagerProvider {
 
         ArrayList<Player> players = new ArrayList<Player>();
         int playerUserNameIndex = c.getColumnIndex(TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME);
-        c.moveToFirst();
-        do {
-            players.add(fetchPlayer(c.getString(playerUserNameIndex)));
+        if (c.moveToFirst()) {
+            do {
+                players.add(fetchPlayer(c.getString(playerUserNameIndex)));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         return players;
     }
 
@@ -357,11 +357,13 @@ public class TourneyManagerProvider {
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
         ArrayList<Prize> prizes = new ArrayList<Prize>();
-        c.moveToFirst();
-        do {
-            prizes.add(mapToPrize(c, tournament));
+
+        if (c.moveToFirst()) {
+            do {
+                prizes.add(mapToPrize(c, tournament));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         return prizes;
     }
 
@@ -397,11 +399,12 @@ public class TourneyManagerProvider {
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
         ArrayList<Prize> prizes = new ArrayList<Prize>();
-        c.moveToFirst();
-        do {
-            prizes.add(mapToPrize(c, player));
+        if (c.moveToFirst()) {
+            do {
+                prizes.add(mapToPrize(c, player));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         return prizes;
     }
 
@@ -428,8 +431,7 @@ public class TourneyManagerProvider {
         String selection = DeckEntry._ID + " = ?";
         String[] selectionArgs = new String[]{String.valueOf(id)};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
-        c.moveToFirst();
-        return mapToStatus(c);
+        return c.moveToFirst() ? mapToStatus(c) : null;
     }
 
     protected Status mapToStatus(Cursor cursor) {
@@ -617,11 +619,12 @@ public class TourneyManagerProvider {
         Cursor c = query(tableName, columns, null, null, null, null, null);
 
         ArrayList<Tournament> tournaments = new ArrayList<>();
-        c.moveToFirst();
-        do {
-            tournaments.add(mapToTournament(c));
+        if (c.moveToFirst()) {
+            do {
+                tournaments.add(mapToTournament(c));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         return tournaments;
     }
 
@@ -641,11 +644,12 @@ public class TourneyManagerProvider {
 
         ArrayList<Tournament> tournaments = new ArrayList<>();
         int tournamentIdIndex = c.getColumnIndex(TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID);
-        c.moveToFirst();
-        do {
-            tournaments.add(fetchTournament(c.getInt(tournamentIdIndex)));
+        if (c.moveToFirst()) {
+            do {
+                tournaments.add(fetchTournament(c.getInt(tournamentIdIndex)));
+            }
+            while (c.moveToNext());
         }
-        while (c.moveToNext());
         return tournaments;
     }
 
