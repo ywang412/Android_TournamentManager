@@ -27,8 +27,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import edu.gatech.seclass.tourneymanager.model.Deck;
-import edu.gatech.seclass.tourneymanager.model.Player;
+import edu.gatech.seclass.tourneymanager.Deck;
+import edu.gatech.seclass.tourneymanager.Player;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -106,15 +106,16 @@ public class TestDb {
     @Test
     public void testInsertDeck() throws Throwable {
         testCreateDb();
-        Deck deck = new Deck(TEST_DECK);
+        Deck deck = new Deck();
+        deck.setName(TEST_DECK);
         provider.insertDeck(deck);
         Deck fetchedDeck = provider.fetchDeck(TEST_DECK);
 
         assertNotNull(fetchedDeck.getId());
-        assertEquals(fetchedDeck.getDeck_name(), TEST_DECK);
+        assertEquals(fetchedDeck.getName(), TEST_DECK);
 
         Deck fetchedDeck1 = provider.fetchDeck(fetchedDeck.getId());
-        assertEquals(fetchedDeck1.getDeck_name(), TEST_DECK);
+        assertEquals(fetchedDeck1.getName(), TEST_DECK);
     }
 
     @Test
@@ -123,17 +124,20 @@ public class TestDb {
         Player player = new Player();
         player.setUsername(TEST_USERNAME);
         player.setName(TEST_PLAYER_NAME);
-        player.setPhone_number(TEST_PHONE_NUMBER);
-        player.setDeck(new Deck(TEST_DECK));
+        player.setPhoneNumber(TEST_PHONE_NUMBER);
+        Deck deck = new Deck();
+        deck.setName(TEST_DECK);
+        player.setDeck(deck);
 
+        provider.insertDeck(deck);
         provider.insertPlayer(player);
         Player fetchedPlayer = provider.fetchPlayer(TEST_USERNAME);
 
         assertEquals(fetchedPlayer.getUsername(), TEST_USERNAME);
-        assertEquals(fetchedPlayer.getPhone_number(), TEST_PHONE_NUMBER);
+        assertEquals(fetchedPlayer.getPhoneNumber(), TEST_PHONE_NUMBER);
         assertEquals(fetchedPlayer.getName(), TEST_PLAYER_NAME);
         assertNotNull(fetchedPlayer.getDeck());
-        assertEquals(fetchedPlayer.getDeck().getDeck_name(), TEST_DECK);
+        assertEquals(fetchedPlayer.getDeck().getName(), TEST_DECK);
     }
 
     @Test

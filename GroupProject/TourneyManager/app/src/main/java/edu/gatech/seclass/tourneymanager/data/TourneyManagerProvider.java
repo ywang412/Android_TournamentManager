@@ -52,7 +52,7 @@ public class TourneyManagerProvider {
      */
     public long insertDeck(Deck deck) {
         ContentValues deckValues = new ContentValues();
-        deckValues.put(DeckEntry.COLUMN_DECK_NAME, deck.getDeck_name());
+        deckValues.put(DeckEntry.COLUMN_DECK_NAME, deck.getName());
         return insert(DeckEntry.TABLE_NAME, deckValues);
     }
 
@@ -98,7 +98,7 @@ public class TourneyManagerProvider {
 
         Deck deck = new Deck();
         deck.setId(cursor.getInt(idIndex));
-        deck.setDeck_name(cursor.getString(nameIndex));
+        deck.setName(cursor.getString(nameIndex));
         return deck;
     }
 
@@ -109,11 +109,11 @@ public class TourneyManagerProvider {
      */
     public long insertMatch(Match match) {
         ContentValues matchValues = new ContentValues();
-        matchValues.put(MatchEntry.COLUMN_TOURNAMENT_ID, match.getTournament().getTournament_id());
+        matchValues.put(MatchEntry.COLUMN_TOURNAMENT_ID, match.getTournament().getTournamentId());
         matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getStatus().statusId);
-        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatch_round());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer_1().getUsername());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer_2().getUsername());
+        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatchRound());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
         matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
         return insert(MatchEntry.TABLE_NAME, matchValues);
     }
@@ -135,7 +135,7 @@ public class TourneyManagerProvider {
                 MatchEntry.COLUMN_WINNER_USERNAME
         };
         String selection = MatchEntry.COLUMN_TOURNAMENT_ID + " = ?";
-        String[] selectionArgs = new String[]{String.valueOf(tournament.getTournament_id())};
+        String[] selectionArgs = new String[]{String.valueOf(tournament.getTournamentId())};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
         List<Match> matchList = new ArrayList<Match>();
@@ -157,12 +157,12 @@ public class TourneyManagerProvider {
         int winnerIndex = cursor.getColumnIndex(MatchEntry.COLUMN_WINNER_USERNAME);
 
         Match match = new Match();
-        match.setMatch_id(cursor.getInt(idIndex));
+        match.setMatchId(cursor.getInt(idIndex));
         match.setTournament(tournament);
         match.setStatus(fetchStatus(cursor.getInt(statusIdIndex)));
-        match.setMatch_round(cursor.getInt(roundIndex));
-        match.setPlayer_1(fetchPlayer(cursor.getString(player1Index)));
-        match.setPlayer_2(fetchPlayer(cursor.getString(player2Index)));
+        match.setMatchRound(cursor.getInt(roundIndex));
+        match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
+        match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
         match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
 
         return match;
@@ -177,8 +177,8 @@ public class TourneyManagerProvider {
         ContentValues playerValues = new ContentValues();
         playerValues.put(UserEntry.COLUMN_USERNAME, player.getUsername());
         playerValues.put(UserEntry.COLUMN_NAME, player.getName());
-        playerValues.put(UserEntry.COLUMN_PHONE_NUMBER, player.getPhone_number());
-        playerValues.put(UserEntry.COLUMN_DECK_ID, player.getDeck().getId());
+        playerValues.put(UserEntry.COLUMN_PHONE_NUMBER, player.getPhoneNumber());
+        playerValues.put(UserEntry.COLUMN_DECK_ID, fetchDeck(player.getDeck().getName()).getId());
         playerValues.put(UserEntry.COLUMN_IS_MANAGER, 0);
         insert(UserEntry.TABLE_NAME, playerValues);
         return player.getUsername();
@@ -213,7 +213,7 @@ public class TourneyManagerProvider {
         Player player = new Player();
         player.setUsername(cursor.getString(usernameIndex));
         player.setName(cursor.getString(nameIndex));
-        player.setPhone_number(cursor.getString(phoneNumberIndex));
+        player.setPhoneNumber(cursor.getString(phoneNumberIndex));
 
         if (cursor.getString(deckIdIndex) != null) {
             player.setDeck(fetchDeck(cursor.getInt(deckIdIndex)));
@@ -254,8 +254,8 @@ public class TourneyManagerProvider {
         ContentValues prizeValues = new ContentValues();
         prizeValues.put(PrizeEntry.COLUMN_PLACE, prize.getPlace());
         prizeValues.put(PrizeEntry.COLUMN_PLAYER_USERNAME, prize.getPlayer().getUsername());
-        prizeValues.put(PrizeEntry.COLUMN_PRIZE_AMOUNT, prize.getPrize_amount());
-        prizeValues.put(PrizeEntry.COLUMN_TOURNAMENT_ID, prize.getTournament().getTournament_id());
+        prizeValues.put(PrizeEntry.COLUMN_PRIZE_AMOUNT, prize.getPrizeAmount());
+        prizeValues.put(PrizeEntry.COLUMN_TOURNAMENT_ID, prize.getTournament().getTournamentId());
         return insert(PrizeEntry.TABLE_NAME, prizeValues);
     }
 
@@ -309,9 +309,9 @@ public class TourneyManagerProvider {
      */
     public long insertTournament(Tournament tournament) {
         ContentValues tournamentValue = new ContentValues();
-        tournamentValue.put(TournamentEntry.COLUMN_TOURNAMENT_NAME, tournament.getTournament_name());
-        tournamentValue.put(TournamentEntry.COLUMN_ENTRY_PRICE, tournament.getEntry_price());
-        tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouse_cut());
+        tournamentValue.put(TournamentEntry.COLUMN_TOURNAMENT_NAME, tournament.getTournamentName());
+        tournamentValue.put(TournamentEntry.COLUMN_ENTRY_PRICE, tournament.getEntryPrice());
+        tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouseCut());
         tournamentValue.put(TournamentEntry.COLUMN_STATUS_ID, tournament.getStatus().statusId);
 
         for (Player player : tournament.getPlayerslist()) {
@@ -332,8 +332,17 @@ public class TourneyManagerProvider {
     public long addPlayerToTournament(Tournament tournament, Player player) {
         ContentValues tournamentPlayerLinkValue = new ContentValues();
         tournamentPlayerLinkValue.put(TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME, player.getUsername());
-        tournamentPlayerLinkValue.put(TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID, tournament.getTournament_id());
+        tournamentPlayerLinkValue.put(TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID, tournament.getTournamentId());
         return insert(TournamentPlayerLinkEntry.TABLE_NAME, tournamentPlayerLinkValue);
+    }
+
+    /**
+     * fetches the tournament whose status is not {@link Status#Completed} or {@link Status#Cancelled).  If there are no such tournament, returns null
+     * @return
+     */
+    public Tournament fetchCurrentTournament() {
+
+        return null;
     }
 
     /**

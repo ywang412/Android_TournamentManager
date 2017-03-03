@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,10 +26,27 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<String> playersmatches;
 
+    private ApplicationController mController;
+    private TourneyManagerProvider mProvider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mController = new ApplicationController(getApplicationContext());
+        mProvider = new TourneyManagerProvider(getApplicationContext());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mController.shutdown();
+        mProvider.shutdown();
     }
 
     public void layoutPlayer(View view) {

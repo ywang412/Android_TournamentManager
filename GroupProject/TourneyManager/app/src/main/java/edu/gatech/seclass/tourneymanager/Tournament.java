@@ -81,5 +81,91 @@ public class Tournament {
 //        TournamentDA.addmatch(this);
     }
 
+    public String getTournamentName() {
+        return tournament_name;
+    }
 
+    public void setTournamentName(String tournament_name) {
+        this.tournament_name = tournament_name;
+    }
+
+    public int getTournamentId() {
+        return tournament_id;
+    }
+
+    public void setTournamentId(int tournament_id) {
+        this.tournament_id = tournament_id;
+    }
+
+    public Date getStartDateTime() {
+        return start_date_time;
+    }
+
+    public void setStartDateTtime(Date start_date_time) {
+        this.start_date_time = start_date_time;
+    }
+
+    public Date getEndDateTime() {
+        return end_date_time;
+    }
+
+    public void setEndDateTime(Date end_date_time) {
+        this.end_date_time = end_date_time;
+    }
+
+    public int getEntryPrice() {
+        return entry_price;
+    }
+
+    public void setEntryPrrice(int entry_price) {
+        this.entry_price = entry_price;
+    }
+
+    public Status getStatus() {
+        return t_status;
+    }
+
+    public void setStatusId(Status status) {
+        this.t_status = status;
+    }
+
+    public int getHouseCut() {
+        return house_cut;
+    }
+
+    public void setHouseCut(int house_cut) {
+        this.house_cut = house_cut;
+    }
+
+    public int getHouseProfit() {
+        return house_profit;
+    }
+
+    public void setHouseProfit(int house_profit) {
+        this.house_profit = house_profit;
+    }
+
+    public TournamentResult getResult() {
+        return result;
+    }
+
+    public void setResult(TournamentResult result) {
+        this.result = result;
+    }
+
+    public List<Match> getMatchlist() {
+        return matchlist;
+    }
+
+    public void setMatchlist(List<Match> matchlist) {
+        this.matchlist = matchlist;
+    }
+
+    public List<Player> getPlayerslist() {
+        return playerslist;
+    }
+
+    public void setPlayerslist(List<Player> playerslist) {
+        this.playerslist = playerslist;
+    }
 }
