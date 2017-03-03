@@ -88,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     new ArrayAdapter<Player>(this, android.R.layout.simple_list_item_1, players);
         }
 
-        Player selectedPlayer;
-        Match selectedMatch;
         playerList.setAdapter(arrayAdapter);
         playerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -99,12 +97,20 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 if (tourneyActive == 0 && mode == 0) {
 
-                    //int tourneysWon = dummyClass.getTourneysWon(players.get(arg2));
-                    //int moneyWon = dummyClass.getMoneyWon(players.get(arg2));
-                    //alertDialog.setMessage("Number of tournaments won: " + tourneysWon + "\nMoney won: $" + moneyWon);
+                    ArrayList<Prize> prizes = mProvider.fetchPrizes(players.get(arg2));
+                    int tourneysWon = 0;
+                    int moneyWon = 0;
+
+                    for (Prize p: prizes) {
+                        moneyWon += p.getPrizeAmount();
+                        if (p.getPlace() == 1) {
+                            tourneysWon++;
+                        }
+                    }
+
                     AlertDialog alertDialog = builder.create();
                     builder.setTitle("Player Details");
-                    alertDialog.setMessage("Number of tournaments won: 43\nMoney won: $29329");
+                    alertDialog.setMessage("Number of tournaments won: " + tourneysWon + "\nMoney won: $" + moneyWon);
                     Toast.makeText(getApplicationContext(), players.get(arg2).getName(), Toast.LENGTH_SHORT).show();
                     alertDialog.show();
                 } else if (tourneyActive == 0 && mode == 1) {
@@ -155,7 +161,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manager);
 
         int houseProfits = 0;
-
         ArrayList<Tournament> tournaments = mProvider.fetchTournaments();
         int numberTourneys = tournaments.size();
 
@@ -176,6 +181,12 @@ public class MainActivity extends AppCompatActivity {
 
         // loop for amount of players chosen in radioGroup
         // get names, create tourney
+
+        ArrayList<Player> playerlist = new ArrayList<Player>();
+
+
+
+
     }
 
     public void addPlayer(View view) {
