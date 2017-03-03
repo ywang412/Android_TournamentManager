@@ -174,12 +174,10 @@ public class MainActivity extends AppCompatActivity {
 
         TextView numOfTourneys = (TextView) findViewById(R.id.numtourneys);
         numOfTourneys.setText("# of Tournaments:   " + numberTourneys);
-
     }
 
     public void createTournament(View view) {
         setContentView(R.layout.activity_tourneycreate);
-
     }
 
     public void addPlayer(View view) {
@@ -208,7 +206,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         builder.show();
-
     }
 
     public void tourneyCreate(View view) {
@@ -247,36 +244,15 @@ public class MainActivity extends AppCompatActivity {
             RadioGroup rg = (RadioGroup) findViewById(R.id.radioentrants);
             int entrantsValue = Integer.parseInt(((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString());
 
-            for (int i = entrantsValue; i > 0; i--) {
+            EditText name1 = (EditText) findViewById(R.id.name1);
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle(i + "/" + entrantsValue + " - Player name:");
 
-                final EditText input = new EditText(this);
-                input.setInputType(InputType.TYPE_CLASS_TEXT);
-                builder.setView(input);
-
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        playerlist.add(mProvider.fetchPlayer(input.getText().toString()));
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-
-                builder.show();
-            }
-
-            mController.createTournament(mProvider.fetchTournaments().size(), housePercentage, entranceFee, playerlist);
+            int tourneyID = mProvider.fetchTournaments().size();
+            mController.createTournament(tourneyID, housePercentage, entranceFee, playerlist);
+            Toast.makeText(getApplicationContext(), "Tournament created!  ID: " + tourneyID, Toast.LENGTH_SHORT).show();
             tourneyActive = 1;
 
         }
     }
 
 }
-

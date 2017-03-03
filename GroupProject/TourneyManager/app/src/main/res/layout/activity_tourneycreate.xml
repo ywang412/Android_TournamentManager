@@ -85,9 +85,10 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/housePercentage"
+        android:layout_marginTop="15dp"
         android:layout_below="@+id/entranceFee"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="14dp" />
+        android:layout_toEndOf="@+id/textView3"
+        android:layout_marginStart="29dp" />
 
     <TextView
         android:text="House Percentage:"
@@ -97,6 +98,98 @@
         android:textSize="18sp"
         android:layout_alignTop="@+id/housePercentage"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/name3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/name1"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/name2"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player3" />
+
+    <EditText
+        android:id="@+id/name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player1"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="14dp" />
+
+    <EditText
+        android:id="@+id/name4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name3"
+        android:layout_alignBottom="@+id/name3"
+        android:layout_alignStart="@+id/name2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player4" />
+
+    <EditText
+        android:id="@+id/name6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name5"
+        android:layout_alignBottom="@+id/name5"
+        android:layout_alignStart="@+id/name4"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player6" />
+
+    <EditText
+        android:id="@+id/name5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/name3"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/name3"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player5" />
+
+    <EditText
+        android:id="@+id/name7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name8"
+        android:layout_alignBottom="@+id/name8"
+        android:layout_alignEnd="@+id/name5"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player7" />
+
+    <EditText
+        android:id="@+id/name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name1"
+        android:layout_alignBottom="@+id/name1"
+        android:layout_alignStart="@+id/housePercentage"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player2" />
+
+    <EditText
+        android:id="@+id/name8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/name6"
+        android:layout_below="@+id/name6"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Player8" />
 
     android:layout_width="fill_parent"
         android:layout_height="wrap_content"
