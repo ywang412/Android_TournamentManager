@@ -184,6 +184,10 @@ public class TourneyManagerProvider {
         return player.getUsername();
     }
 
+    public void deletePlayer(Player player){
+        /* TODO */
+    }
+
     /**
      * fetch player by username
      * @param username
