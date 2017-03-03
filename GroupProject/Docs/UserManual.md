@@ -37,7 +37,7 @@ The user will enter all the required information: Name, Phone Number, and Deck. 
 
 2)	Remove player from the system
 
-To remove a player from the system, simply navigate to Manager -> Remove Player 
+To remove a player from the system, simply navigate to Manager -> Remove Player
 
 Enter the desired username then click on the Remove Player button.
 
@@ -49,7 +49,7 @@ To create a new tournament, the user must enter the house cut, entry price, numb
 
 After all the information has been entered, simply click on the Display Prizes and Profit button and the application will automatically calculate the house profit amount as well as the first, second, and third prizes based on the user inputs.
 
-The house profit is generated based on the House Cut percentage input of the total amount of money collected. The 1st, 2nd, and 3rd prizes are 50%, 30% and 20% of the prize pool remaining after the house cut. Please note that the results are rounded to the nearest integer.
+The house profit is generated based on the House Cut percentage input of the total amount of money collected. The 1st, 2nd, and 3rd prizes are 50%, 30% and 20% of the prize pool remaining after the house cut. Please note that the results are rounded to the nearest integer.
 
 Once the users validate the information, simply click on the Start Tournament button to create a tournament as shown below
 
