@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     int tourneyActive; // flag for whether or not a tournament is active.  0 = inactive, 1 = active.
 
     ArrayList<String> playersmatches;
+    ArrayList<Player> players;
+    ArrayList<Match> matches;
 
     private ApplicationController mController;
     private TourneyManagerProvider mProvider;
@@ -64,13 +66,11 @@ public class MainActivity extends AppCompatActivity {
         /* If tournament is active, show matchlist.  If tournament is inactive, show players list and totals */
         if (tourneyActive == 1 && mode == 0) {
             playerListHeader.setText("Match List");
-            playersmatches.add("John vs Rulan");
-            playersmatches.add("Don vs Yu");
-            playersmatches.add("Yu vs Rulan");
-            playersmatches.add("John vs Don");
+
+            matches = mProvider.fetchMatches(mController.fetchCurrentTournament());
             addPlayer.setVisibility(View.INVISIBLE);
 
-            //playersmatches = dummyClass.getMatchList();
+
 
         } else {
             if (mode == 0) {
@@ -80,11 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 addPlayer.setVisibility(View.VISIBLE);
             }
 
-            playersmatches.add("John Tran - $1029");
-            playersmatches.add("Rulan Gong - $993");
-            playersmatches.add("Yu Wang - $970");
-            playersmatches.add("Don Lee - $100");
-            //playersmatches = dummyClass.getLeaderboard();  // sorted by winnings
+            players = mProvider.fetchPlayers();
 
         }
 

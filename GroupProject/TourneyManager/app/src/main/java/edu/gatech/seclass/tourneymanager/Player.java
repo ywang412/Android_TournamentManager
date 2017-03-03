@@ -64,4 +64,9 @@ public class Player {
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
