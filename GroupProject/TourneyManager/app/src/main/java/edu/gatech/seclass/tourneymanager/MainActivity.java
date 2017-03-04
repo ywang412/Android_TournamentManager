@@ -245,7 +245,33 @@ public class MainActivity extends AppCompatActivity {
             int entrantsValue = Integer.parseInt(((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString());
 
             EditText name1 = (EditText) findViewById(R.id.name1);
+            EditText name2 = (EditText) findViewById(R.id.name2);
+            EditText name3 = (EditText) findViewById(R.id.name3);
+            EditText name4 = (EditText) findViewById(R.id.name4);
+            EditText name5 = (EditText) findViewById(R.id.name5);
+            EditText name6 = (EditText) findViewById(R.id.name6);
+            EditText name7 = (EditText) findViewById(R.id.name7);
+            EditText name8 = (EditText) findViewById(R.id.name8);
 
+            Player player1 = mProvider.fetchPlayer(name1.getText().toString());
+            Player player2 = mProvider.fetchPlayer(name2.getText().toString());
+            Player player3 = mProvider.fetchPlayer(name3.getText().toString());
+            Player player4 = mProvider.fetchPlayer(name4.getText().toString());
+            Player player5 = mProvider.fetchPlayer(name5.getText().toString());
+            Player player6 = mProvider.fetchPlayer(name6.getText().toString());
+            Player player7 = mProvider.fetchPlayer(name7.getText().toString());
+            Player player8 = mProvider.fetchPlayer(name8.getText().toString());
+
+            // if one or more players don't exist, need to output error
+
+            playerlist.add(player1);
+            playerlist.add(player2);
+            playerlist.add(player3);
+            playerlist.add(player4);
+            playerlist.add(player5);
+            playerlist.add(player6);
+            playerlist.add(player7);
+            playerlist.add(player8);
 
             int tourneyID = mProvider.fetchTournaments().size();
             mController.createTournament(tourneyID, housePercentage, entranceFee, playerlist);
