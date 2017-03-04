@@ -38,7 +38,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 ![component](Supporting Files/alpha_add_player.png)  
 2.	Remove a player from the system
   * User login with Manager mode. The player list will automatically displayed.
-  * User clicks on the desired username that he/she wants to remove, then clicks YES or NO tp confirm or cancel.    
+  * User clicks on the desired username that he/she wants to remove, then clicks YES or NO to confirm or cancel.    
 ![component](Supporting Files/alpha_remove_player.png)  
 3.	Manage existing tournament or create a new tournament
 
@@ -48,7 +48,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
   * After all the information has been entered, user clicks on the Display Prizes and Profit button and the application will automatically calculate the house profit amount as well as the first, second, and third prizes based on the user inputs.
   * The house profit is calculated based on the House Cut percentage input of the total amount of money collected, which are user modifiable. For example, the 1st, 2nd, and 3rd prizes can be 50%, 30% and 20% of the prize pool remaining after the house cut. Note that the results are rounded to the nearest integer.  
-  * Once the user validate the information, clicks on the Create Tournament button to create a tournament as shown below  
+  * Once the user validates the information, clicks on the Create Tournament button to create a tournament as shown below  
 ![component](Supporting Files/alpha_manager_createT1.png)  
 
   * To manage an existing tournament, user clicks on the Manage Tournament button. In this screen, the user can begin or end matches, and assign the results.  
