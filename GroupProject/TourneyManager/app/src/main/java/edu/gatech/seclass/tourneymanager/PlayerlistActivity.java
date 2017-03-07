@@ -2,8 +2,8 @@ package edu.gatech.seclass.tourneymanager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 
-public class MainActivity extends AppCompatActivity {
+public class PlayerlistActivity extends AppCompatActivity {
 
     int mode; // flag for which mode the app is in.  0 = player, 1 = manager.
     int tourneyActive; // flag for whether or not a tournament is active.  0 = inactive, 1 = active.
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
                                     long arg3) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PlayerlistActivity.this);
                 if (tourneyActive == 0 && mode == 0) {
 
                     ArrayList<Prize> prizes = mProvider.fetchPrizes(players.get(arg2));
