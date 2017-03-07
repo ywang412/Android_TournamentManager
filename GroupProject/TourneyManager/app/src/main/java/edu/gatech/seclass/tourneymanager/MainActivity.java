@@ -2,6 +2,7 @@ package edu.gatech.seclass.tourneymanager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -55,10 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void layoutPlayer(View view) {
 
-        tourneyActive = 0;
+                Intent mainIntent = new Intent(this, PlayerlistActivity.class);
+                startActivity(mainIntent);
+       /*  tourneyActive = 0;
         // tourneyActive = dummyClass.getTourneyStatus();
 
-        setContentView(R.layout.activity_matchlist);
         final ListView playerList = (ListView) findViewById(R.id.playerlist);
         TextView playerListHeader = (TextView) findViewById(R.id.playerListHeader);
         Button addPlayer = (Button) findViewById(R.id.addplayer);
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         playersmatches = new ArrayList<>();
 
-        /* If tournament is active, show matchlist.  If tournament is inactive, show players list and totals */
+        *//* If tournament is active, show matchlist.  If tournament is inactive, show players list and totals *//*
         if (tourneyActive == 1 && mode == 0) {
             playerListHeader.setText("Match List");
 
@@ -153,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-        });
+        });*/
 
     }
 
@@ -180,33 +182,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tourneycreate);
     }
 
-    public void addPlayer(View view) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Player name to add:");
-
-
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mController.registerPlayer(input.getText().toString());
-                setContentView(R.layout.activity_main);
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
 
     public void tourneyCreate(View view) {
 
