@@ -8,14 +8,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
+import edu.gatech.seclass.tourneymanager.tournament.CreateTournamentActivity;
+import edu.gatech.seclass.tourneymanager.tournament.TournamentDetailsActivity;
 
 public class ManagerDashboardActivity extends AppCompatActivity {
 
+    private TextView mTotalProfitView;
+    private TextView mNumTourneyView;
     private Button mCreateTournamentBtn;
     private TourneyManagerProvider mProvider;
 
@@ -27,6 +32,8 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mCreateTournamentBtn = (Button) findViewById(R.id.createTournamentBtn);
+        mTotalProfitView = (TextView) findViewById(R.id.totalProfit);
+        mNumTourneyView = (TextView) findViewById(R.id.numTourneys);
     }
 
     @Override
@@ -34,22 +41,32 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         super.onStart();
         mProvider = new TourneyManagerProvider(getApplicationContext());
 
-        if (activeTournament()) {
+        // set total profit value
+        int totalProfit = mProvider.fetchTotalProfit();
+        mTotalProfitView.setText("$" + String.valueOf(totalProfit));
+
+        // set number of tournaments value
+        mNumTourneyView.setText(String.valueOf(mProvider.fetchTournaments().size()));
+
+        // set tournament button behavior
+        if (mProvider.fetchCurrentTournament() != null) {
+            // there is an active tournament, so prompt to manage it
+            final Intent intent = new Intent(this, TournamentDetailsActivity.class);
             mCreateTournamentBtn.setText(getString(R.string.manage_tournament_btn));
             mCreateTournamentBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO go to matchlist for current tournament
-                    Toast.makeText(getApplicationContext(), "manage tournament", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                 }
             });
         } else {
+            // no active tournament, so prompt to create one
+            final Intent intent = new Intent(this, CreateTournamentActivity.class);
             mCreateTournamentBtn.setText(getString(R.string.create_tournament_btn));
             mCreateTournamentBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO goto tournament creation activity
-                    Toast.makeText(getApplicationContext(), "create tournament", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                 }
             });
         }
@@ -62,22 +79,12 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     }
 
     /**
-     * checks to see if there is an active tournament
-     * @return
-     */
-    protected boolean activeTournament() {
-        return mProvider.fetchCurrentTournament() != null;
-    }
-
-    /**
      * implementation of onClick method for player management button
      * @param view
      */
     public void layoutPlayer(View view) {
-        // TODO goto player management activity
-        Intent mainIntent = new Intent(this, PlayerlistActivity.class);
-        startActivity(mainIntent);
-
+        Intent playerListIntent = new Intent(this, PlayerlistActivity.class);
+        startActivity(playerListIntent);
     }
 
 }

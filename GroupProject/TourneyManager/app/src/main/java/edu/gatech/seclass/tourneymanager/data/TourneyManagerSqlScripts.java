@@ -16,6 +16,7 @@ public class TourneyManagerSqlScripts {
             MatchEntry._ID + " INTEGER PRIMARY KEY," +
             MatchEntry.COLUMN_ROUND + " INTEGER NOT NULL, " +
             MatchEntry.COLUMN_TOURNAMENT_ID + " INTEGER NOT NULL, " +
+            MatchEntry.COLUMN_MATCH_NUMBER + " INTEGER NOT NULL, " +
             MatchEntry.COLUMN_STATUS_ID + " INTEGER, " +
             MatchEntry.COLUMN_PLAYER_1_USERNAME + " TEXT, " +
             MatchEntry.COLUMN_PLAYER_2_USERNAME + " TEXT, " +
@@ -28,7 +29,7 @@ public class TourneyManagerSqlScripts {
             " FOREIGN KEY (" + MatchEntry.COLUMN_PLAYER_1_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_USERNAME + "), " +
             " FOREIGN KEY (" + MatchEntry.COLUMN_PLAYER_2_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_USERNAME + "), " +
 
-            " UNIQUE (" + MatchEntry.COLUMN_TOURNAMENT_ID + ", " + MatchEntry.COLUMN_PLAYER_1_USERNAME + "," + MatchEntry.COLUMN_PLAYER_2_USERNAME + ") ON CONFLICT REPLACE" +
+            " UNIQUE (" + MatchEntry.COLUMN_TOURNAMENT_ID + ", " + MatchEntry.COLUMN_MATCH_NUMBER + ") ON CONFLICT REPLACE" +
             " );";
 
     static final String CREATE_PRIZE_TABLE = "CREATE TABLE " + PrizeEntry.TABLE_NAME + " (" +
@@ -52,10 +53,11 @@ public class TourneyManagerSqlScripts {
     static final String CREATE_TOURNAMENT_TABLE = "CREATE TABLE " + TournamentEntry.TABLE_NAME + " (" +
             TournamentEntry._ID + " INTEGER PRIMARY KEY," +
             TournamentEntry.COLUMN_TOURNAMENT_NAME + " TEXT UNIQUE NOT NULL, " +
-            TournamentEntry.COLUMN_START_DATE + " INTEGER NOT NULL, " +
+            TournamentEntry.COLUMN_START_DATE + " INTEGER, " +
             TournamentEntry.COLUMN_END_DATE + " INTEGER, " +
             TournamentEntry.COLUMN_ENTRY_PRICE + " INTEGER NOT NULL, " +
             TournamentEntry.COLUMN_HOUSE_CUT + " INTEGER NOT NULL, " +
+            TournamentEntry.COLUMN_HOUSE_PROFIT + " INTEGER, " +
             TournamentEntry.COLUMN_STATUS_ID + " INTEGER NOT NULL, " +
 
             " FOREIGN KEY (" + TournamentEntry.COLUMN_STATUS_ID + ") REFERENCES " + StatusEntry.TABLE_NAME + " (" + StatusEntry._ID + ") " +
