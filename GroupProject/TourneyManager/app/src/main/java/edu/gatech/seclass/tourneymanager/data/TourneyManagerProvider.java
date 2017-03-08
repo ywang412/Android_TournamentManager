@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import edu.gatech.seclass.tourneymanager.Deck;
 import edu.gatech.seclass.tourneymanager.Manager;
@@ -110,13 +109,13 @@ public class TourneyManagerProvider {
     public long insertMatch(Match match) {
         ContentValues matchValues = new ContentValues();
         matchValues.put(MatchEntry.COLUMN_TOURNAMENT_ID, match.getTournament().getTournamentId());
-        matchValues.put(MatchEntry.COLUMN_MATCH_NUMBER, match.getMatchId());
-        matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getStatus().statusId);
-        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatchRound());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
+        matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getM_status().statusId);
+        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatch_round());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer_1().getUsername());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer_2().getUsername());
         matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
-        matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
+        matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextmatch_id());
+        System.out.println(match.getMatch_id()+"/"+match.getNextmatch_id()+"/"+match.getTournament().getTournamentId());
         return insert(MatchEntry.TABLE_NAME, matchValues);
     }
 
@@ -128,15 +127,14 @@ public class TourneyManagerProvider {
     public long updateMatch(Match match) {
         ContentValues matchValues = new ContentValues();
         matchValues.put(MatchEntry.COLUMN_TOURNAMENT_ID, match.getTournament().getTournamentId());
-        matchValues.put(MatchEntry.COLUMN_MATCH_NUMBER, match.getMatchId());
-        matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getStatus().statusId);
-        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatchRound());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
+        matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getM_status().statusId);
+        matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatch_round());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer_1().getUsername());
+        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer_2().getUsername());
         matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
-        matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
+        matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextmatch_id());
 
-        return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatchId())});
+        return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatch_id())});
     }
 
     /**
@@ -149,7 +147,6 @@ public class TourneyManagerProvider {
         String[] columns = new String[]{
                 MatchEntry._ID,
                 MatchEntry.COLUMN_TOURNAMENT_ID,
-                MatchEntry.COLUMN_MATCH_NUMBER,
                 MatchEntry.COLUMN_STATUS_ID,
                 MatchEntry.COLUMN_ROUND,
                 MatchEntry.COLUMN_PLAYER_1_USERNAME,
@@ -174,7 +171,6 @@ public class TourneyManagerProvider {
     protected Match mapToMatch(Cursor cursor) {
         int idIndex = cursor.getColumnIndex(MatchEntry._ID);
         int tournamentIdIndex = cursor.getColumnIndex(MatchEntry.COLUMN_TOURNAMENT_ID);
-        int matchNumberIndex = cursor.getColumnIndex(MatchEntry.COLUMN_MATCH_NUMBER);
         int statusIdIndex = cursor.getColumnIndex(MatchEntry.COLUMN_STATUS_ID);
         int roundIndex = cursor.getColumnIndex(MatchEntry.COLUMN_ROUND);
         int player1Index = cursor.getColumnIndex(MatchEntry.COLUMN_PLAYER_1_USERNAME);
@@ -183,14 +179,14 @@ public class TourneyManagerProvider {
         int nextMatchIndex = cursor.getColumnIndex(MatchEntry.COLUMN_NEXT_MATCH_ID);
 
         Match match = new Match();
-        match.setMatchId(cursor.getInt(matchNumberIndex));
+        match.setMatch_id(cursor.getInt(idIndex));
         match.setTournament(fetchTournament(cursor.getInt(tournamentIdIndex)));
-        match.setStatus(fetchStatus(cursor.getInt(statusIdIndex)));
-        match.setMatchRound(cursor.getInt(roundIndex));
-        match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
-        match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
+        match.setM_status(fetchStatus(cursor.getInt(statusIdIndex)));
+        match.setMatch_round(cursor.getInt(roundIndex));
+        match.setPlayer_1(fetchPlayer(cursor.getString(player1Index)));
+        match.setPlayer_2(fetchPlayer(cursor.getString(player2Index)));
         match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
-        match.setNextMatch(cursor.getInt(nextMatchIndex));
+        match.setNextmatch_id(cursor.getInt(nextMatchIndex));
 
         return match;
     }
@@ -205,7 +201,6 @@ public class TourneyManagerProvider {
         String[] columns = new String[]{
                 MatchEntry._ID,
                 MatchEntry.COLUMN_TOURNAMENT_ID,
-                MatchEntry.COLUMN_MATCH_NUMBER,
                 MatchEntry.COLUMN_STATUS_ID,
                 MatchEntry.COLUMN_ROUND,
                 MatchEntry.COLUMN_PLAYER_1_USERNAME,
@@ -230,7 +225,6 @@ public class TourneyManagerProvider {
 
     protected Match mapToMatch(Cursor cursor, Tournament tournament) {
         int idIndex = cursor.getColumnIndex(MatchEntry._ID);
-        int matchNumberIndex = cursor.getColumnIndex(MatchEntry.COLUMN_MATCH_NUMBER);
         int statusIdIndex = cursor.getColumnIndex(MatchEntry.COLUMN_STATUS_ID);
         int roundIndex = cursor.getColumnIndex(MatchEntry.COLUMN_ROUND);
         int player1Index = cursor.getColumnIndex(MatchEntry.COLUMN_PLAYER_1_USERNAME);
@@ -239,14 +233,14 @@ public class TourneyManagerProvider {
         int nextMatchIndex = cursor.getColumnIndex(MatchEntry.COLUMN_NEXT_MATCH_ID);
 
         Match match = new Match();
-        match.setMatchId(cursor.getInt(matchNumberIndex));
+        match.setMatch_id(cursor.getInt(idIndex));
         match.setTournament(tournament);
-        match.setStatus(fetchStatus(cursor.getInt(statusIdIndex)));
-        match.setMatchRound(cursor.getInt(roundIndex));
-        match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
-        match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
+        match.setM_status(fetchStatus(cursor.getInt(statusIdIndex)));
+        match.setMatch_round(cursor.getInt(roundIndex));
+        match.setPlayer_1(fetchPlayer(cursor.getString(player1Index)));
+        match.setPlayer_2(fetchPlayer(cursor.getString(player2Index)));
         match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
-        match.setNextMatch(cursor.getInt(nextMatchIndex));
+        match.setNextmatch_id(cursor.getInt(nextMatchIndex));
 
         return match;
     }
@@ -284,11 +278,7 @@ public class TourneyManagerProvider {
     }
 
     public void deletePlayer(Player player){
-        ContentValues playerValues = new ContentValues();
-        playerValues.put(UserEntry.COLUMN_USERNAME, "deleted" + UUID.randomUUID().toString());
-        playerValues.putNull(UserEntry.COLUMN_NAME);
-        playerValues.putNull(UserEntry.COLUMN_PHONE_NUMBER);
-        update(UserEntry.TABLE_NAME, playerValues, UserEntry.COLUMN_USERNAME + " = ?", new String[]{player.getUsername()});
+        /* TODO */
     }
 
     /**

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.gatech.seclass.tourneymanager.ApplicationController;
 import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
@@ -23,6 +24,8 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     private TextView mNumTourneyView;
     private Button mCreateTournamentBtn;
     private TourneyManagerProvider mProvider;
+    private ApplicationController mController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mProvider = new TourneyManagerProvider(getApplicationContext());
+        mController = new ApplicationController(getApplicationContext());
 
         // set total profit value
         int totalProfit = mProvider.fetchTotalProfit();
@@ -76,6 +80,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mProvider.shutdown();
+        mController.shutdown();
     }
 
     /**

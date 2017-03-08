@@ -27,7 +27,7 @@ public class Tournament {
     private int house_profit;
     private TournamentResult result;
     private Status t_status;
-    private List<Match> matchlist;
+    private List<Match> matchlist = new ArrayList<Match>();;
     private List<Player> playerslist;
 
     public Tournament() {
@@ -35,7 +35,7 @@ public class Tournament {
 
     public Tournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist) {
         this.house_cut = house_cut;
-        this.tournament_id = entry_price;
+        this.tournament_id = tournament_id;
         this.playerslist = playerslist;
         this.t_status = Status.Setup;
         this.house_profit = (int) Math.round(house_cut * entry_price * this.playerslist.size() / 100.);
@@ -50,7 +50,9 @@ public class Tournament {
         //System.out.println(playerslist);
 
 
-        ArrayList<Match> matchlist = new ArrayList<Match>();
+        //ArrayList<Match> matchlist
+        //this.matchlist = matchlist
+
         int match_round;
         for (match_round = 1; match_round<= total_round ; match_round++ ){
 
@@ -60,9 +62,10 @@ public class Tournament {
                     Player player2 = playerslist.get(i+1);
                     nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
 
-                    Match match = new Match(match_id, this, match_round,player1, player2);
-                    match.setNextMatch(nextmatch_id);
+                    Match match = new Match(match_id, this, match_round,player1, player2, nextmatch_id);
+
                     matchlist.add(match);
+                    System.out.println("match_no="+match.getMatch_id());
 //                    MatchDA.addmatch(Match);
     //                TourneyManagerProvider.insert
                     match_id ++;
@@ -73,20 +76,32 @@ public class Tournament {
                 for (int i = 0; i < playerslist.size()/(int)(Math.pow(2,match_round)); i++) {
 
                     nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
-                    Match match = new Match(match_id, this, match_round);
-                    match.setNextMatch(nextmatch_id);
+                    Match match = new Match(match_id, this, match_round, nextmatch_id);
+
                     matchlist.add(match);
+                    System.out.println("match_no="+match.getMatch_id());
 //                    MatchDA.addmatch(Match);
                     match_id ++;
                 }
             }
         }
 
-        Match match = new Match(match_id, this, match_round-1);
+        Match match = new Match(match_id, this, match_round-1, nextmatch_id);
         matchlist.add(match);
-        System.out.println(matchlist.size());
 
-//        MatchDA.addmatch(Match);
+        System.out.println("match_no="+match.getMatch_id()+"next"+match.getMatch_id());
+        System.out.println("matchlist_size="+matchlist.size());
+
+
+        System.out.println(this.getPlayerslist().get(1).getName());
+
+        for (Match matchi: matchlist){
+            System.out.println("no."+matchi.getMatch_id());
+            System.out.println(this.getMatchlist().get(matchi.getMatch_id()-1).getMatch_id());}
+
+
+        System.out.println("done!");
+
 //        TournamentDA.addmatch(this);
     }
 
