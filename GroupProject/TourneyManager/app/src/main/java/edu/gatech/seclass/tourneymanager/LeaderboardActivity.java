@@ -18,13 +18,12 @@ import java.util.ArrayList;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 
-public class PlayerlistActivity extends AppCompatActivity {
+public class LeaderboardActivity extends AppCompatActivity {
 
     int mode; // flag for which mode the app is in.  0 = player, 1 = manager.
     int tourneyActive; // flag for whether or not a tournament is active.  0 = inactive, 1 = active.
 
     ArrayList<Player> players;
-    ArrayList<Player> playersStaging;
 
     private ApplicationController mController;
     private TourneyManagerProvider mProvider;
@@ -51,18 +50,10 @@ public class PlayerlistActivity extends AppCompatActivity {
         TextView playerListHeader = (TextView) findViewById(R.id.playerListHeader);
         Button addPlayer = (Button) findViewById(R.id.addplayer);
         final ArrayAdapter arrayAdapter;
-        final ArrayAdapter[] arrayAdapterNew = new ArrayAdapter[1];
 
 
         players = new ArrayList<>();
-        playersStaging = new ArrayList<>();
-        playersStaging = mProvider.fetchPlayers();
-
-        for (Player p: playersStaging) {
-            if (p.getName() != null) {
-                players.add(p);
-            }
-        }
+        players = mProvider.fetchPlayers();
 
 
         if (mode == 0) {
@@ -81,7 +72,7 @@ public class PlayerlistActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, final int arg2,
                                     long arg3) {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(PlayerlistActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(LeaderboardActivity.this);
                 if (tourneyActive == 0 && mode == 0) {
 
                     ArrayList<Prize> prizes = mProvider.fetchPrizes(players.get(arg2));
@@ -107,19 +98,7 @@ public class PlayerlistActivity extends AppCompatActivity {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     mController.deletePlayer(players.get(arg2));
-                                    playersStaging = mProvider.fetchPlayers();
-
-                                    players.clear();
-                                    for (Player p: playersStaging) {
-                                        if (p.getName() != null) {
-                                            players.add(p);
-                                        }
-                                    }
-
-                                    arrayAdapterNew[0] =
-                                            new ArrayAdapter<Player>(PlayerlistActivity.this, android.R.layout.simple_list_item_1, players);
-                                    playerList.setAdapter(arrayAdapterNew[0]);
-
+                                    players = mProvider.fetchPlayers();
                                     break;
 
                                 case DialogInterface.BUTTON_NEGATIVE:

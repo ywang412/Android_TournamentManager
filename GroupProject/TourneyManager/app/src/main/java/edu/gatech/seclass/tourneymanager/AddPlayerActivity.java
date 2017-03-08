@@ -92,22 +92,24 @@ public class AddPlayerActivity extends AppCompatActivity implements OnItemSelect
 
         deck = String.valueOf(deckInput.getSelectedItem());
 
-        Player Test = new Player(username, name, phonenum, new Deck(deck));
-        mProvider.insertPlayer(Test);
 
         if (errorFound == 0) {
+            Player Test = new Player(username, name, phonenum, new Deck(deck));
+            mProvider.insertPlayer(Test);
             Toast.makeText(getApplicationContext(), "Player added: " + username, Toast.LENGTH_SHORT).show();
             userNameInput.setText("");
             phoneNumInput.setText("");
             nameInput.setText("");
-            deckInput.setSelection(1);
+
         }
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
     }
     public void onNothingSelected(AdapterView<?> arg0) {
+
     }
 
 }
