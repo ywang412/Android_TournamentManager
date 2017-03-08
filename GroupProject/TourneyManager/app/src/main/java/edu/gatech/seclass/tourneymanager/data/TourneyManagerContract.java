@@ -114,6 +114,7 @@ public class TourneyManagerContract {
         public static final String COLUMN_END_DATE = "end_date";
         public static final String COLUMN_ENTRY_PRICE = "entry_price";
         public static final String COLUMN_HOUSE_CUT = "house_cut";
+        public static final String COLUMN_HOUSE_PROFIT = "house_profit";
 
         // foreign keys
         public static final String COLUMN_STATUS_ID = "status_id";

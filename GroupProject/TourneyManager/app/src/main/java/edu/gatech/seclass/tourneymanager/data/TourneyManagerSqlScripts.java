@@ -52,10 +52,11 @@ public class TourneyManagerSqlScripts {
     static final String CREATE_TOURNAMENT_TABLE = "CREATE TABLE " + TournamentEntry.TABLE_NAME + " (" +
             TournamentEntry._ID + " INTEGER PRIMARY KEY," +
             TournamentEntry.COLUMN_TOURNAMENT_NAME + " TEXT UNIQUE NOT NULL, " +
-            TournamentEntry.COLUMN_START_DATE + " INTEGER NOT NULL, " +
+            TournamentEntry.COLUMN_START_DATE + " INTEGER, " +
             TournamentEntry.COLUMN_END_DATE + " INTEGER, " +
             TournamentEntry.COLUMN_ENTRY_PRICE + " INTEGER NOT NULL, " +
             TournamentEntry.COLUMN_HOUSE_CUT + " INTEGER NOT NULL, " +
+            TournamentEntry.COLUMN_HOUSE_PROFIT + " INTEGER, " +
             TournamentEntry.COLUMN_STATUS_ID + " INTEGER NOT NULL, " +
 
             " FOREIGN KEY (" + TournamentEntry.COLUMN_STATUS_ID + ") REFERENCES " + StatusEntry.TABLE_NAME + " (" + StatusEntry._ID + ") " +

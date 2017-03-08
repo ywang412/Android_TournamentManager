@@ -515,6 +515,7 @@ public class TourneyManagerProvider {
         tournamentValue.put(TournamentEntry.COLUMN_TOURNAMENT_NAME, tournament.getTournamentName());
         tournamentValue.put(TournamentEntry.COLUMN_ENTRY_PRICE, tournament.getEntryPrice());
         tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouseCut());
+        tournamentValue.put(TournamentEntry.COLUMN_HOUSE_PROFIT, tournament.getHouseProfit());
         tournamentValue.put(TournamentEntry.COLUMN_STATUS_ID, tournament.getStatus().statusId);
 
         for (Player player : tournament.getPlayerslist()) {
@@ -542,6 +543,7 @@ public class TourneyManagerProvider {
         tournamentValue.put(TournamentEntry.COLUMN_TOURNAMENT_NAME, tournament.getTournamentName());
         tournamentValue.put(TournamentEntry.COLUMN_ENTRY_PRICE, tournament.getEntryPrice());
         tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouseCut());
+        tournamentValue.put(TournamentEntry.COLUMN_HOUSE_PROFIT, tournament.getHouseProfit());
         tournamentValue.put(TournamentEntry.COLUMN_STATUS_ID, tournament.getStatus().statusId);
 
         updatePlayersInTournament(tournament);
@@ -606,6 +608,7 @@ public class TourneyManagerProvider {
                 TournamentEntry.COLUMN_STATUS_ID,
                 TournamentEntry.COLUMN_ENTRY_PRICE,
                 TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_HOUSE_PROFIT,
                 TournamentEntry.COLUMN_START_DATE,
                 TournamentEntry.COLUMN_END_DATE
         };
@@ -622,6 +625,7 @@ public class TourneyManagerProvider {
         int statusIdIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_STATUS_ID);
         int entryPriceIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_ENTRY_PRICE);
         int houseCutIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_CUT);
+        int houseProfitIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_PROFIT);
 
         Tournament tournament = new Tournament();
         tournament.setTournamentId(cursor.getInt(tournamentIdIndex));
@@ -629,6 +633,7 @@ public class TourneyManagerProvider {
         tournament.setStatus(Status.getStatus(cursor.getInt(statusIdIndex)));
         tournament.setEntryPrice(cursor.getInt(entryPriceIndex));
         tournament.setHouseCut(cursor.getInt(houseCutIndex));
+        tournament.setHouseProfit(cursor.getInt(houseProfitIndex));
 
         tournament.setPlayerslist(fetchPlayers(tournament));
         tournament.setMatchlist(fetchMatches(tournament));
@@ -654,6 +659,7 @@ public class TourneyManagerProvider {
                 TournamentEntry.COLUMN_STATUS_ID,
                 TournamentEntry.COLUMN_ENTRY_PRICE,
                 TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_HOUSE_PROFIT,
                 TournamentEntry.COLUMN_START_DATE,
                 TournamentEntry.COLUMN_END_DATE
         };
@@ -675,6 +681,7 @@ public class TourneyManagerProvider {
                 TournamentEntry.COLUMN_STATUS_ID,
                 TournamentEntry.COLUMN_ENTRY_PRICE,
                 TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_HOUSE_PROFIT,
                 TournamentEntry.COLUMN_START_DATE,
                 TournamentEntry.COLUMN_END_DATE
         };
@@ -713,6 +720,16 @@ public class TourneyManagerProvider {
             while (c.moveToNext());
         }
         return tournaments;
+    }
+
+    public int fetchTotalProfit() {
+        String sql = "SELECT SUM(?) FROM ?";
+        String[] selectionArgs = new String[]{
+                TournamentEntry.COLUMN_HOUSE_PROFIT,
+                TournamentEntry.TABLE_NAME
+        };
+        Cursor c = db.rawQuery(sql, selectionArgs);
+        return c.moveToFirst() ? c.getInt(0) : 0;
     }
 
     /**

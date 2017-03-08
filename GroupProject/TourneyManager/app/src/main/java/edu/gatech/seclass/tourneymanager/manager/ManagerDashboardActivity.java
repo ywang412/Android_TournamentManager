@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.gatech.seclass.tourneymanager.R;
@@ -14,6 +15,8 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class ManagerDashboardActivity extends AppCompatActivity {
 
+    private TextView mTotalProfitView;
+    private TextView mNumTourneyView;
     private Button mCreateTournamentBtn;
     private TourneyManagerProvider mProvider;
 
@@ -25,6 +28,8 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mCreateTournamentBtn = (Button) findViewById(R.id.createTournamentBtn);
+        mTotalProfitView = (TextView) findViewById(R.id.totalProfit);
+        mNumTourneyView = (TextView) findViewById(R.id.numTourneys);
     }
 
     @Override
@@ -32,6 +37,14 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         super.onStart();
         mProvider = new TourneyManagerProvider(getApplicationContext());
 
+        // set total profit value
+        int totalProfit = mProvider.fetchTotalProfit();
+        mTotalProfitView.setText("$" + String.valueOf(totalProfit));
+
+        // set number of tournaments value
+        mNumTourneyView.setText(String.valueOf(mProvider.fetchTournaments().size()));
+
+        // set tournament button behavior
         if (activeTournament()) {
             mCreateTournamentBtn.setText(getString(R.string.manage_tournament_btn));
             mCreateTournamentBtn.setOnClickListener(new View.OnClickListener() {
