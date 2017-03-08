@@ -40,6 +40,7 @@
             android:name=".tournament.CreateTournamentActivity"
             android:label="@string/title_activity_create_tournament"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MatchList"></activity>
     </application>
 
 </manifest>

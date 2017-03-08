@@ -32,6 +32,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //TODO remove this line
+        startActivity(new Intent(this, ManagerDashboardActivity.class));
+
         // Set up the login form.
         mUsernameView = (AutoCompleteTextView) findViewById(R.id.username);
 
