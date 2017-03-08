@@ -16,6 +16,10 @@ public class Player extends User {
 
     public Player(){}
 
+    public Player(String username){
+        setUsername(username);
+    }
+
     public Player(String username, String name, String phoneNumber, Deck deck){
         setUsername(username);
         this.name=name;

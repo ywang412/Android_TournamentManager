@@ -11,7 +11,16 @@ public class TournamentResult {
     ArrayList<Prize> prizes;
     int houseProfit;
 
-    public TournamentResult(){};
+    public TournamentResult(){
+
+    }
+
+    public TournamentResult(Tournament tournament){
+        this.tournament = tournament;
+        this.prizes = new ArrayList<>();
+        this.prizes.add(new Prize(this.tournament));
+        this.houseProfit = 1;
+    }
 
     public TournamentResult(Tournament tournament, ArrayList<Prize> prizes, int houseProfit){
         this.tournament=tournament;

@@ -34,7 +34,7 @@ public class MatchList extends AppCompatActivity {
             } else {
                 stringsList.add("");
             }
-            stringsList.add(m.getActionString());
+//            stringsList.add(m.getActionString());
 
         }
         final String[] toShow = new String[stringsList.size()];
@@ -96,7 +96,7 @@ public class MatchList extends AppCompatActivity {
             players.add(new Player("player1", "p1", "", new Deck("")));
             players.add(new Player("player2", "p2", "", new Deck("")));
             matches = new ArrayList<>();
-            matches.add(new Match(1, new Tournament(1, 1, 1, players), 1, players.get(0), players.get(1)));
+//            matches.add(new Match(1, new Tournament(1, 1, 1, players), 1, players.get(0), players.get(1)));
         }
 
         populateGrid();

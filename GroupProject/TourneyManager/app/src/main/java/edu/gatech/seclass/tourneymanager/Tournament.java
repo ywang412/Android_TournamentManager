@@ -27,17 +27,19 @@ public class Tournament {
     private int house_profit;
     private TournamentResult result;
     private Status t_status;
-    private List<Match> matchlist;
+    private List<Match> matchlist = new ArrayList<Match>();;
     private List<Player> playerslist;
 
     public Tournament() {
     }
 
-    public Tournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist) {
+    public Tournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist, Player winner) {
         this.house_cut = house_cut;
         this.tournament_id = entry_price;
         this.playerslist = playerslist;
         this.t_status = Status.Setup;
+        this.tournament_name = "1st";
+        this.result = new TournamentResult(this);
         this.house_profit = (int) Math.round(house_cut * entry_price * this.playerslist.size() / 100.);
         this.priz1st = (int) Math.round((entry_price * this.playerslist.size() - Math.round(house_cut * entry_price * this.playerslist.size() / 100.))*0.5);
         this.priz2nd = (int) Math.round((entry_price * this.playerslist.size() - Math.round(house_cut * entry_price * this.playerslist.size() / 100.))*0.3);
@@ -50,7 +52,9 @@ public class Tournament {
         //System.out.println(playerslist);
 
 
-        ArrayList<Match> matchlist = new ArrayList<Match>();
+        //ArrayList<Match> matchlist
+        //this.matchlist = matchlist
+
         int match_round;
         for (match_round = 1; match_round<= total_round ; match_round++ ){
 
@@ -58,11 +62,13 @@ public class Tournament {
                 for (int i = 0; i < playerslist.size()-1; i=i+2) {
                     Player player1 = playerslist.get(i);
                     Player player2 = playerslist.get(i+1);
+
                     nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
 
-                    Match match = new Match(match_id, this, match_round,player1, player2);
-                    match.setNextMatch(nextmatch_id);
+                    Match match = new Match(match_id, this, match_round,player1, player2, nextmatch_id,winner);
+
                     matchlist.add(match);
+                    System.out.println("match_no="+match.getMatchId());
 //                    MatchDA.addmatch(Match);
     //                TourneyManagerProvider.insert
                     match_id ++;
@@ -73,20 +79,33 @@ public class Tournament {
                 for (int i = 0; i < playerslist.size()/(int)(Math.pow(2,match_round)); i++) {
 
                     nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
-                    Match match = new Match(match_id, this, match_round);
-                    match.setNextMatch(nextmatch_id);
+                    Match match = new Match(match_id, this, match_round,winner, winner, nextmatch_id, winner);
+
                     matchlist.add(match);
+                    System.out.println("match_no="+match.getMatchId());
 //                    MatchDA.addmatch(Match);
                     match_id ++;
                 }
             }
         }
 
-        Match match = new Match(match_id, this, match_round-1);
+        Match match = new Match(match_id, this, match_round-1, winner, winner, nextmatch_id, winner);
         matchlist.add(match);
-        System.out.println(matchlist.size());
 
-//        MatchDA.addmatch(Match);
+        System.out.println("match_no="+match.getMatchId()+"next"+match.getMatchId());
+        System.out.println("matchlist_size="+matchlist.size());
+
+
+        System.out.println("debug"+ this.getPlayerslist().get(1).getName());
+
+
+        for (Match matchi: matchlist){
+            System.out.println("no."+matchi.getMatchId());
+            System.out.println(this.getMatchlist().get(matchi.getMatchId()-1).getMatchId());}
+
+
+        System.out.println("done+createlist in tournament!");
+
 //        TournamentDA.addmatch(this);
     }
 

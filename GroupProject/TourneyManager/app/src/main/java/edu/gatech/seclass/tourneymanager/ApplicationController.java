@@ -48,8 +48,8 @@ public class ApplicationController {
     }
 
 
-    public Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist){
-        Tournament tournament= new Tournament(tournament_id, house_cut,  entry_price, playerslist);
+    public Tournament createTournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist, Player winner){
+        Tournament tournament= new Tournament(tournament_id, house_cut,  entry_price, playerslist, winner);
         mProvider.insertTournament(tournament);
 
         for (Match match : tournament.getMatchlist()){

@@ -10,7 +10,15 @@ public class Prize {
     int place;
     int prizeAmount;
 
-    public Prize() {}
+    public Prize(Tournament tournament) {
+        this.tournament = tournament;
+        this.player = new Player("Random");
+        int place =1;
+        int prizeAmount =1;
+    }
+
+    public Prize( ) {
+    }
 
     public Prize(Tournament tournament, Player player, int place, int prizeAmount){
         this.tournament=tournament;

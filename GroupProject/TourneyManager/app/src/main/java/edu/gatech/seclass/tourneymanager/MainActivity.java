@@ -248,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
             Player player6 = mProvider.fetchPlayer(name6.getText().toString());
             Player player7 = mProvider.fetchPlayer(name7.getText().toString());
             Player player8 = mProvider.fetchPlayer(name8.getText().toString());
+            Player winner = mProvider.fetchPlayer("TBD");
 
             // if one or more players don't exist, need to output error
 
@@ -261,7 +262,7 @@ public class MainActivity extends AppCompatActivity {
             playerlist.add(player8);
 
             int tourneyID = mProvider.fetchTournaments().size();
-            mController.createTournament(tourneyID, housePercentage, entranceFee, playerlist);
+            mController.createTournament(tourneyID, housePercentage, entranceFee, playerlist, winner);
             Toast.makeText(getApplicationContext(), "Tournament created!  ID: " + tourneyID, Toast.LENGTH_SHORT).show();
             tourneyActive = 1;
 
