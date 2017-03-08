@@ -52,6 +52,7 @@ public class TourneyManagerContract {
 
         // foreign keys
         public static final String COLUMN_TOURNAMENT_ID = "tournament_id";
+        public static final String COLUMN_MATCH_NUMBER = "match_number";
         public static final String COLUMN_STATUS_ID = "status_id";
         public static final String COLUMN_WINNER_USERNAME = "winner_username";
         public static final String COLUMN_PLAYER_1_USERNAME = "player_1_username";
