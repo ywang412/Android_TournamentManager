@@ -609,7 +609,8 @@ public class TourneyManagerProvider {
                 TournamentEntry.COLUMN_START_DATE,
                 TournamentEntry.COLUMN_END_DATE
         };
-        String selection = TournamentEntry.COLUMN_STATUS_ID + " NOT ? AND " + TournamentEntry.COLUMN_STATUS_ID + " NOT ?";
+        String selection = TournamentEntry.COLUMN_STATUS_ID + " != ? AND "
+                + TournamentEntry.COLUMN_STATUS_ID + " != ?";
         String[] selectionArgs = new String[]{String.valueOf(Status.Cancelled.statusId), String.valueOf(Status.Completed.statusId)};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
         return c.moveToFirst() ? mapToTournament(c) : null;

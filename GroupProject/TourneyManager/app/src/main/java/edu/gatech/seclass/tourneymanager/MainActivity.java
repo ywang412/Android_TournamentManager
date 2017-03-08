@@ -42,15 +42,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         mController = new ApplicationController(getApplicationContext());
         mProvider = new TourneyManagerProvider(getApplicationContext());
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         mController.shutdown();
         mProvider.shutdown();
     }

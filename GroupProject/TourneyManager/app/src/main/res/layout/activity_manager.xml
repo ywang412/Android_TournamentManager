@@ -18,7 +18,7 @@
         android:text="# of Tournaments:  14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/numtourneys"
+        android:id="@+id/numTourneys"
         android:layout_weight="0.07"
         android:gravity="center"
         android:textSize="24sp" />
@@ -27,7 +27,7 @@
         android:text="Create Tournament"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button3"
+        android:id="@+id/createTournamentBtn"
         android:layout_weight="0.05"
         android:textSize="24sp"
         android:onClick="createTournament"/>
@@ -36,7 +36,7 @@
         android:text="Player Management"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/button4"
+        android:id="@+id/playerMgmtBtn"
         android:layout_weight="0.07"
         android:textSize="24sp"
         android:onClick="layoutPlayer"/>
