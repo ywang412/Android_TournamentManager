@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import edu.gatech.seclass.tourneymanager.Deck;
 import edu.gatech.seclass.tourneymanager.Manager;
@@ -283,7 +284,11 @@ public class TourneyManagerProvider {
     }
 
     public void deletePlayer(Player player){
-        /* TODO */
+        ContentValues playerValues = new ContentValues();
+        playerValues.put(UserEntry.COLUMN_USERNAME, "deleted" + UUID.randomUUID().toString());
+        playerValues.putNull(UserEntry.COLUMN_NAME);
+        playerValues.putNull(UserEntry.COLUMN_PHONE_NUMBER);
+        update(UserEntry.TABLE_NAME, playerValues, UserEntry.COLUMN_USERNAME + " = ?", new String[]{player.getUsername()});
     }
 
     /**
