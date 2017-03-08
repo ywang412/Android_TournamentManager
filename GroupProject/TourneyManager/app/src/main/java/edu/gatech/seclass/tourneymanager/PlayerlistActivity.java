@@ -23,7 +23,6 @@ public class PlayerlistActivity extends AppCompatActivity {
     int mode; // flag for which mode the app is in.  0 = player, 1 = manager.
     int tourneyActive; // flag for whether or not a tournament is active.  0 = inactive, 1 = active.
 
-    ArrayList<String> playersStringList;
     ArrayList<Player> players;
 
     private ApplicationController mController;
@@ -41,7 +40,10 @@ public class PlayerlistActivity extends AppCompatActivity {
         Button addPlayer = (Button) findViewById(R.id.addplayer);
         ArrayAdapter arrayAdapter;
 
+
         players = new ArrayList<>();
+        players = mProvider.fetchPlayers();
+        players.add(new Player("username","name","phonenum",new Deck("testDeck")));
 
         if (mode == 0) {
             playerListHeader.setText("Leaderboard");
@@ -49,8 +51,6 @@ public class PlayerlistActivity extends AppCompatActivity {
         } else {
             addPlayer.setVisibility(View.VISIBLE);
         }
-
-        // players = mProvider.fetchPlayers();
 
         arrayAdapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, players);
