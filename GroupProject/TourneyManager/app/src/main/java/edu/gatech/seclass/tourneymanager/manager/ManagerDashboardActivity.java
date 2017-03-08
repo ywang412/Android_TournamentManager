@@ -1,5 +1,6 @@
 package edu.gatech.seclass.tourneymanager.manager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
@@ -86,7 +88,9 @@ public class ManagerDashboardActivity extends AppCompatActivity {
      */
     public void layoutPlayer(View view) {
         // TODO goto player management activity
-        Toast.makeText(getApplicationContext(), "manage players", Toast.LENGTH_SHORT).show();
+        Intent mainIntent = new Intent(this, PlayerlistActivity.class);
+        startActivity(mainIntent);
+
     }
 
 }
