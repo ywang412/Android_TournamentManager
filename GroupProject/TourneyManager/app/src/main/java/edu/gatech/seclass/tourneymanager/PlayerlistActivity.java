@@ -52,7 +52,7 @@ public class PlayerlistActivity extends AppCompatActivity {
         final ListView playerList = (ListView) findViewById(R.id.playerlist);
         TextView playerListHeader = (TextView) findViewById(R.id.playerListHeader);
         Button addPlayer = (Button) findViewById(R.id.addplayer);
-        ArrayAdapter arrayAdapter;
+        final ArrayAdapter arrayAdapter;
 
 
         players = new ArrayList<>();
@@ -100,8 +100,8 @@ public class PlayerlistActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
-                                    //dummyClass.removePlayer(players.get(arg2));
-                                    // arrayAdapter.NotifyDataSetChanged();
+                                    mController.deletePlayer(players.get(arg2));
+                                    arrayAdapter.notifyDataSetChanged();
                                     break;
 
                                 case DialogInterface.BUTTON_NEGATIVE:
@@ -119,6 +119,8 @@ public class PlayerlistActivity extends AppCompatActivity {
                             switch (which) {
                                 case DialogInterface.BUTTON_POSITIVE:
                                     mController.deletePlayer(players.get(arg2));
+                                    arrayAdapter.notifyDataSetChanged();
+
                                     break;
 
                                 case DialogInterface.BUTTON_NEGATIVE:
@@ -127,8 +129,6 @@ public class PlayerlistActivity extends AppCompatActivity {
                         }
                     };
 
-                    builder.setMessage("End Match?").setPositiveButton("Yes", dialogClickListener)
-                            .setNegativeButton("No", dialogClickListener).show();
                 }
 
             }
