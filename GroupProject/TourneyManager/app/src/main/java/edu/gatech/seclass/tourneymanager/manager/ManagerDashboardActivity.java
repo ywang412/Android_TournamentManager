@@ -47,7 +47,7 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         mNumTourneyView.setText(String.valueOf(mProvider.fetchTournaments().size()));
 
         // set tournament button behavior
-        if (activeTournament()) {
+        if (mProvider.fetchCurrentTournament() != null) {
             mCreateTournamentBtn.setText(getString(R.string.manage_tournament_btn));
             mCreateTournamentBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,22 +75,12 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     }
 
     /**
-     * checks to see if there is an active tournament
-     * @return
-     */
-    protected boolean activeTournament() {
-        return mProvider.fetchCurrentTournament() != null;
-    }
-
-    /**
      * implementation of onClick method for player management button
      * @param view
      */
     public void layoutPlayer(View view) {
-        // TODO goto player management activity
-        Intent mainIntent = new Intent(this, PlayerlistActivity.class);
-        startActivity(mainIntent);
-
+        Intent playerListIntent = new Intent(this, PlayerlistActivity.class);
+        startActivity(playerListIntent);
     }
 
 }

@@ -27,7 +27,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".manager.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
+        <activity android:name=".tournament.TournamentDetailsActivity" />
+        <activity android:name=".tournament.CreateTournamentActivity"></activity>
     </application>
 
 </manifest>

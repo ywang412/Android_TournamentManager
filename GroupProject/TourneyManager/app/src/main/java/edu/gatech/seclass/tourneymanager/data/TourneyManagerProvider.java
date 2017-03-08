@@ -723,12 +723,8 @@ public class TourneyManagerProvider {
     }
 
     public int fetchTotalProfit() {
-        String sql = "SELECT SUM(?) FROM ?";
-        String[] selectionArgs = new String[]{
-                TournamentEntry.COLUMN_HOUSE_PROFIT,
-                TournamentEntry.TABLE_NAME
-        };
-        Cursor c = db.rawQuery(sql, selectionArgs);
+        String sql = "SELECT SUM(" + TournamentEntry.COLUMN_HOUSE_PROFIT + ") FROM " + TournamentEntry.TABLE_NAME;
+        Cursor c = db.rawQuery(sql, null);
         return c.moveToFirst() ? c.getInt(0) : 0;
     }
 
