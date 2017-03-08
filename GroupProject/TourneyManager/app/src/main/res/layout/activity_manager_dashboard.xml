@@ -20,6 +20,19 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_manager_dashboard" />
+    <include layout="@layout/content_manager_dashboard"
+        android:id="@+id/include" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:text="Match management"
+        android:onClick="matchManagement"
+        android:textSize="24sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center_vertical|center_horizontal" />
+
 
 </android.support.design.widget.CoordinatorLayout>

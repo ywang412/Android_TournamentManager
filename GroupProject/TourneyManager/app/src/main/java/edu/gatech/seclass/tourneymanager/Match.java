@@ -26,7 +26,7 @@ public class Match {
             this.match_round = match_round;
             this.player_1 = player1;
             this.player_2 = player2;
-            m_status = Status.Setup;
+            m_status = Status.Ready;
            // System.out.println(match_round+"d"+ match_id+ player1.getName()+ player2.getName()+m_status);
         }
 
@@ -38,6 +38,16 @@ public class Match {
            // System.out.println(match_round+"d"+ match_id+m_status);
         }
 
+        public String getActionString(){
+            switch (m_status){
+                case Ready:
+                    return "Start";
+                case InProgress:
+                    return "End";
+                default:
+                    return "";
+            }
+        }
 
     public void startMatch(){
         this.m_status= Status.InProgress;

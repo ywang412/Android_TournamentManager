@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import edu.gatech.seclass.tourneymanager.MatchList;
 import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
@@ -81,6 +82,11 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     public void layoutPlayer(View view) {
         Intent playerListIntent = new Intent(this, PlayerlistActivity.class);
         startActivity(playerListIntent);
+    }
+
+    public void matchManagement(View view){
+        Intent intent = new Intent(this, MatchList.class);
+        startActivity(intent);
     }
 
 }

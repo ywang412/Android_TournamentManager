@@ -29,7 +29,8 @@
             android:name=".manager.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".tournament.TournamentDetailsActivity" />
-        <activity android:name=".tournament.CreateTournamentActivity"></activity>
+        <activity android:name=".tournament.CreateTournamentActivity" />
+        <activity android:name=".MatchList"></activity>
     </application>
 
 </manifest>
