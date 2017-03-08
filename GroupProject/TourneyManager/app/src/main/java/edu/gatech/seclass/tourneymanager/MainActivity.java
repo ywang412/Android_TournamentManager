@@ -57,8 +57,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void layoutPlayer(View view) {
 
-                Intent mainIntent = new Intent(this, PlayerlistActivity.class);
-                startActivity(mainIntent);
+        // check whether there is a current tournament or not
+        if (mProvider.fetchCurrentTournament() != null) {
+            // if there is a current activity, display matchlist for the tournament
+            // TODO start match list activity
+        } else {
+            // if there's not current tournament, display player list
+            Intent mainIntent = new Intent(this, PlayerlistActivity.class);
+            startActivity(mainIntent);
+        }
+
        /*  tourneyActive = 0;
         // tourneyActive = dummyClass.getTourneyStatus();
 

@@ -15,6 +15,8 @@ import edu.gatech.seclass.tourneymanager.MatchList;
 import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
+import edu.gatech.seclass.tourneymanager.tournament.CreateTournamentActivity;
+import edu.gatech.seclass.tourneymanager.tournament.TournamentDetailsActivity;
 
 public class ManagerDashboardActivity extends AppCompatActivity {
 
@@ -49,21 +51,23 @@ public class ManagerDashboardActivity extends AppCompatActivity {
 
         // set tournament button behavior
         if (mProvider.fetchCurrentTournament() != null) {
+            // there is an active tournament, so prompt to manage it
+            final Intent intent = new Intent(this, TournamentDetailsActivity.class);
             mCreateTournamentBtn.setText(getString(R.string.manage_tournament_btn));
             mCreateTournamentBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO go to matchlist for current tournament
-                    Toast.makeText(getApplicationContext(), "manage tournament", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                 }
             });
         } else {
+            // no active tournament, so prompt to create one
+            final Intent intent = new Intent(this, CreateTournamentActivity.class);
             mCreateTournamentBtn.setText(getString(R.string.create_tournament_btn));
             mCreateTournamentBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO goto tournament creation activity
-                    Toast.makeText(getApplicationContext(), "create tournament", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                 }
             });
         }

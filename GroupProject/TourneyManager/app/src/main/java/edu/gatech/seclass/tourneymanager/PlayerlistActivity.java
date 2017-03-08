@@ -2,6 +2,7 @@ package edu.gatech.seclass.tourneymanager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
 
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
@@ -33,6 +35,18 @@ public class PlayerlistActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playerlist);
 
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        mController = new ApplicationController(getApplicationContext());
+        mProvider = new TourneyManagerProvider(getApplicationContext());
+
+        mode = 1;
         tourneyActive = 0;
 
         final ListView playerList = (ListView) findViewById(R.id.playerlist);
@@ -43,7 +57,7 @@ public class PlayerlistActivity extends AppCompatActivity {
 
         players = new ArrayList<>();
         players = mProvider.fetchPlayers();
-        players.add(new Player("username","name","phonenum",new Deck("testDeck")));
+
 
         if (mode == 0) {
             playerListHeader.setText("Leaderboard");
@@ -121,48 +135,19 @@ public class PlayerlistActivity extends AppCompatActivity {
 
         });
 
-
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mController = new ApplicationController(getApplicationContext());
-        mProvider = new TourneyManagerProvider(getApplicationContext());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         mController.shutdown();
         mProvider.shutdown();
     }
 
     public void addPlayer(View view) {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Player name to add:");
+        Intent mainIntent = new Intent(this, AddPlayerActivity.class);
+        startActivity(mainIntent);
 
-        final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                mController.registerPlayer(input.getText().toString());
-
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
     }
-
-
 }

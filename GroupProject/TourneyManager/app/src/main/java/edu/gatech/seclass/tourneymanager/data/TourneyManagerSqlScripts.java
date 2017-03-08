@@ -16,6 +16,7 @@ public class TourneyManagerSqlScripts {
             MatchEntry._ID + " INTEGER PRIMARY KEY," +
             MatchEntry.COLUMN_ROUND + " INTEGER NOT NULL, " +
             MatchEntry.COLUMN_TOURNAMENT_ID + " INTEGER NOT NULL, " +
+            MatchEntry.COLUMN_MATCH_NUMBER + " INTEGER NOT NULL, " +
             MatchEntry.COLUMN_STATUS_ID + " INTEGER, " +
             MatchEntry.COLUMN_PLAYER_1_USERNAME + " TEXT, " +
             MatchEntry.COLUMN_PLAYER_2_USERNAME + " TEXT, " +
@@ -28,7 +29,7 @@ public class TourneyManagerSqlScripts {
             " FOREIGN KEY (" + MatchEntry.COLUMN_PLAYER_1_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_USERNAME + "), " +
             " FOREIGN KEY (" + MatchEntry.COLUMN_PLAYER_2_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_USERNAME + "), " +
 
-            " UNIQUE (" + MatchEntry.COLUMN_TOURNAMENT_ID + ", " + MatchEntry.COLUMN_PLAYER_1_USERNAME + "," + MatchEntry.COLUMN_PLAYER_2_USERNAME + ") ON CONFLICT REPLACE" +
+            " UNIQUE (" + MatchEntry.COLUMN_TOURNAMENT_ID + ", " + MatchEntry.COLUMN_MATCH_NUMBER + ") ON CONFLICT REPLACE" +
             " );";
 
     static final String CREATE_PRIZE_TABLE = "CREATE TABLE " + PrizeEntry.TABLE_NAME + " (" +
