@@ -20,7 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayerlistActivity" />
+        <activity android:name=".PlayerlistActivity"
+            android:label="Manage Playerlist"/>
+        <activity android:name=".AddPlayerActivity"
+            android:label="Add Player"/>
+
         <activity
             android:name=".manager.ManagerDashboardActivity"
             android:label="@string/title_activity_manager_dashboard"
