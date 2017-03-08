@@ -724,10 +724,12 @@ public class TourneyManagerProvider {
         String tableName = UserEntry.TABLE_NAME;
         String[] columns = new String[]{
                 UserEntry.COLUMN_USERNAME,
-                UserEntry.COLUMN_PASSWORD
+                UserEntry.COLUMN_PASSWORD,
+                UserEntry.COLUMN_IS_MANAGER
         };
-        String selection = UserEntry.COLUMN_USERNAME + " = ?";
-        String[] selectionArgs = new String[]{manager.getUsername()};
+        String selection = UserEntry.COLUMN_USERNAME + " = ? AND "
+                + UserEntry.COLUMN_IS_MANAGER + " = ?";
+        String[] selectionArgs = new String[]{manager.getUsername(), "1"};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
         if (c.moveToFirst()) {
             int passwordIndex = c.getColumnIndex(UserEntry.COLUMN_PASSWORD);

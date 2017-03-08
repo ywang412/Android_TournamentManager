@@ -24,6 +24,13 @@ public class TourneyManagerDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     private static final int DATABASE_VERSION = 1;
+    private static final String[] DEFAULT_DECK_VALUES = new String[] {
+            "Engineer", "Buzz", "Sideways", "Wreck", "T", "RAT"
+    };
+    private static final String[] MANAGER_AUTH = new String[] {
+            "hiteam:team37",
+            "testUsername:testPassword"
+    };
 
     static final String DATABASE_NAME = "tourneymanager.db";
 
@@ -47,6 +54,23 @@ public class TourneyManagerDbHelper extends SQLiteOpenHelper {
             values.put(StatusEntry._ID, status.statusId);
             values.put(StatusEntry.COLUMN_STATUS_NAME, status.name());
             db.insert(StatusEntry.TABLE_NAME, null, values);
+        }
+
+        // insert given deck values
+        for (String deckName : DEFAULT_DECK_VALUES) {
+            ContentValues deckValues = new ContentValues();
+            deckValues.put(DeckEntry.COLUMN_DECK_NAME, deckName);
+            db.insert(DeckEntry.TABLE_NAME, null, deckValues);
+        }
+
+        // insert manager information
+        for (String auth : MANAGER_AUTH) {
+            String[] authArr = auth.split(":");
+            ContentValues managerValues = new ContentValues();
+            managerValues.put(UserEntry.COLUMN_USERNAME, authArr[0]);
+            managerValues.put(UserEntry.COLUMN_PASSWORD, authArr[1]);
+            managerValues.put(UserEntry.COLUMN_IS_MANAGER, 1);
+            db.insert(UserEntry.TABLE_NAME, null, managerValues);
         }
     }
 

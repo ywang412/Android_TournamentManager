@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
+import edu.gatech.seclass.tourneymanager.manager.LoginActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -160,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void layoutManager(View view) {
+        startActivity(new Intent(this, LoginActivity.class));
+        /*
         mode = 1;
         setContentView(R.layout.activity_manager);
 
@@ -176,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView numOfTourneys = (TextView) findViewById(R.id.numtourneys);
         numOfTourneys.setText("# of Tournaments:   " + numberTourneys);
+        */
     }
 
     public void createTournament(View view) {
