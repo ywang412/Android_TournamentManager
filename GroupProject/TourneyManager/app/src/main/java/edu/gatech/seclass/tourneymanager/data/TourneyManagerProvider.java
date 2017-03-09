@@ -59,6 +59,20 @@ public class TourneyManagerProvider {
     }
 
     /**
+     * fetch all decks
+     * @return
+     */
+    public Deck fetchDecks() {
+        String tableName = DeckEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                DeckEntry._ID,
+                DeckEntry.COLUMN_DECK_NAME,
+        };
+        Cursor c = query(tableName, columns, null, null, null, null, null);
+        return c.moveToFirst() ? mapToDeck(c) : null;
+    }
+
+    /**
      * fetch deck by the name
      * @param deckName
      * @return
@@ -329,7 +343,7 @@ public class TourneyManagerProvider {
     }
 
     /**
-     * returns a list of all players
+     * returns a list of all active players
      * @return
      */
     public ArrayList<Player> fetchPlayers() {
@@ -340,7 +354,8 @@ public class TourneyManagerProvider {
                 UserEntry.COLUMN_PHONE_NUMBER,
                 UserEntry.COLUMN_DECK_ID
         };
-        String selection = UserEntry.COLUMN_IS_MANAGER + " = 0";
+        String selection = UserEntry.COLUMN_IS_MANAGER + " = 0 AND "
+                + "ifnull(length(" + UserEntry.COLUMN_NAME + "), 0) != 0";
         Cursor c = query(tableName, columns, selection, null, null, null, null);
         ArrayList<Player> players = new ArrayList<Player>();
         if (c.moveToFirst()) {
