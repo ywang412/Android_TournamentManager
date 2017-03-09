@@ -34,6 +34,9 @@
             android:label="@string/title_activity_login"
             android:noHistory="true"/>
         <activity
+            android:name=".LeaderboardActivity"
+            android:label="Leaderboard" />
+        <activity
             android:name=".tournament.TournamentDetailsActivity"
             android:label="@string/title_activity_tournament_details"
             android:theme="@style/AppTheme.NoActionBar" />
