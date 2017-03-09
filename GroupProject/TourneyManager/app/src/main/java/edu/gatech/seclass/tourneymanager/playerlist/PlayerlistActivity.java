@@ -92,7 +92,12 @@ public class PlayerlistActivity extends AppCompatActivity {
                     }
                 };
 
-                builder.setMessage("Remove Player?").setPositiveButton("Yes", dialogClickListener)
+                Player chosen = players.get(arg2);
+                String name = chosen.getName();
+                String username = chosen.getUsername();
+                String phonenum = chosen.getPhoneNumber();
+
+                builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phonenum +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
                         .setNegativeButton("No", dialogClickListener).show();
 
             }

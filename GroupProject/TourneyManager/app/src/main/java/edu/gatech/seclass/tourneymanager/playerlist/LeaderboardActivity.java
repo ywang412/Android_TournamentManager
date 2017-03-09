@@ -116,7 +116,8 @@ public class LeaderboardActivity extends AppCompatActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(LeaderboardActivity.this);
 
-                ArrayList<Prize> prizes = mProvider.fetchPrizes(players.get(arg2));
+                Player p1 = players.get(arg2);
+                ArrayList<Prize> prizes = mProvider.fetchPrizes(p1);
                 int tourneysWon = 0;
                 int moneyWon = 0;
 
@@ -129,7 +130,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 
                 AlertDialog alertDialog = builder.create();
                 builder.setTitle("Player Details");
-                alertDialog.setMessage("Number of tournaments won: " + tourneysWon + "\nMoney won: $" + moneyWon);
+                alertDialog.setMessage("Player Name: " + p1.getName() + "\nUsername: " + p1.getUsername() + "\n\nNumber of tournaments won: " + tourneysWon + "\nMoney won: $" + moneyWon);
                 Toast.makeText(getApplicationContext(), players.get(arg2).getName(), Toast.LENGTH_SHORT).show();
                 alertDialog.show();
 
