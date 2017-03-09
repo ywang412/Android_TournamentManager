@@ -11,10 +11,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import edu.gatech.seclass.tourneymanager.ApplicationController;
+import edu.gatech.seclass.tourneymanager.Deck;
+import edu.gatech.seclass.tourneymanager.Match;
 import edu.gatech.seclass.tourneymanager.MatchList;
+import edu.gatech.seclass.tourneymanager.Player;
 import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
+import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 import edu.gatech.seclass.tourneymanager.tournament.CreateTournamentActivity;
 import edu.gatech.seclass.tourneymanager.tournament.TournamentDetailsActivity;
@@ -94,8 +100,13 @@ public class ManagerDashboardActivity extends AppCompatActivity {
     }
 
     public void matchManagement(View view){
-        Intent intent = new Intent(this, MatchList.class);
-        startActivity(intent);
+        if (mProvider.fetchCurrentTournament() != null) {
+            Intent intent = new Intent(this, MatchList.class);
+            startActivity(intent);
+        } else {
+            Snackbar.make(view, "Hmmm... No Tournament No Match!", Snackbar.LENGTH_LONG)
+                    .show();
+        }
     }
 
 }
