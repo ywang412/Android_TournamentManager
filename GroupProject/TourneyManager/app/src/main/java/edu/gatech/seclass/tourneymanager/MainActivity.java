@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             // TODO start match list activity
         } else {
             // if there's not current tournament, display player list
-            Intent mainIntent = new Intent(this, PlayerlistActivity.class);
+            Intent mainIntent = new Intent(this, LeaderboardActivity.class);
             startActivity(mainIntent);
         }
 

@@ -8,203 +8,86 @@
     tools:context="edu.gatech.seclass.tourneymanager.tournament.CreateTournamentActivity"
     tools:showIn="@layout/activity_create_tournament">
 
-    <RelativeLayout
-        android:id="@+id/activity_tourney_calc"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        >
+        android:weightSum="1"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Entrance Fee:"
-            android:id="@+id/textView"
-            android:textSize="18sp"
-            android:layout_alignBottom="@+id/entranceFee"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/entranceFee" />
+            android:layout_weight="0.07"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tourney_name_label"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tourneyName"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/entry_fee_label"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/entranceFee"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.07"
+            android:orientation="horizontal">
+            <TextView
+                android:text="@string/house_cut_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/housePercentage"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <Button
-            android:text="Create Tournament"
-            android:layout_width="wrap_content"
+            android:text="@string/create_tournament_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/buttonCalculate"
-            android:onClick="tourneyCreate"
-            android:layout_marginBottom="14dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:textSize="@dimen/text_size"
+            android:layout_weight="0.07"
+            android:onClick="tourneyCreate"/>
 
-
-        <TextView
-            android:text="Entrants:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView2"
-            android:textSize="18sp"
-            android:layout_marginTop="28dp"
-            android:layout_below="@+id/housePercentage"
-            android:layout_alignEnd="@+id/textView" />
-
-        <RadioGroup
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/textView3"
-            android:id="@+id/radioentrants">
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/textView2"
-                android:layout_centerHorizontal="true"
-                android:checked="true"
-                android:text="8" />
-
-            <RadioButton
-                android:text="16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioButton2"
-                android:layout_alignBaseline="@+id/radioButton"
-                android:layout_alignBottom="@+id/radioButton"
-                android:layout_toEndOf="@+id/radioButton"
-                android:layout_marginStart="37dp" />
-        </RadioGroup>
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/entranceFee"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/housePercentage"
-            android:layout_marginTop="15dp"
-            android:layout_below="@+id/entranceFee"
-            android:layout_toEndOf="@+id/textView3"
-            android:layout_marginStart="29dp" />
-
-        <TextView
-            android:text="House Percentage:"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:textSize="18sp"
-            android:layout_alignTop="@+id/housePercentage"
-            android:layout_alignParentStart="true" />
-
-        <EditText
-            android:id="@+id/name3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/name1"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/name2"
-            android:layout_marginTop="16dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player3" />
-
-        <EditText
-            android:id="@+id/name1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player1"
-            android:layout_below="@+id/textView2"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="14dp" />
-
-        <EditText
-            android:id="@+id/name4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/name3"
-            android:layout_alignBottom="@+id/name3"
-            android:layout_alignStart="@+id/name2"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player4" />
-
-        <EditText
-            android:id="@+id/name6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/name5"
-            android:layout_alignBottom="@+id/name5"
-            android:layout_alignStart="@+id/name4"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player6" />
-
-        <EditText
-            android:id="@+id/name5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/name3"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/name3"
-            android:layout_marginTop="11dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player5" />
-
-        <EditText
-            android:id="@+id/name7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/name8"
-            android:layout_alignBottom="@+id/name8"
-            android:layout_alignEnd="@+id/name5"
-            android:layout_alignParentStart="true"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player7" />
-
-        <EditText
-            android:id="@+id/name2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/name1"
-            android:layout_alignBottom="@+id/name1"
-            android:layout_alignStart="@+id/housePercentage"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player2" />
-
-        <EditText
-            android:id="@+id/name8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignStart="@+id/name6"
-            android:layout_below="@+id/name6"
-            android:layout_marginTop="18dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Player8" />
-
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14dp">>
-
-    </RelativeLayout>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

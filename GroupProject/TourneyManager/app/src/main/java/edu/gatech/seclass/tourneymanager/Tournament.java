@@ -1,12 +1,8 @@
 package edu.gatech.seclass.tourneymanager;
 
-import android.net.wifi.WifiConfiguration;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 /**
  * Created by Yu on 2/28/2017.
@@ -22,23 +18,24 @@ public class Tournament {
     private int priz2nd;
     private int priz1st;
     private int priz3rd;
-    private int status_id;
     private int house_cut;
     private int house_profit;
     private TournamentResult result;
     private Status t_status;
-    private List<Match> matchlist = new ArrayList<Match>();;
-    private List<Player> playerslist;
+    private List<Match> matchlist = new ArrayList<>();;
+    private List<Player> playerslist = new ArrayList<>();
 
-    public Tournament() {
+    public Tournament(String tournament_name, int entry_price, int house_cut) {
+        this.tournament_name = tournament_name;
+        this.house_cut = house_cut;
+        this.entry_price = entry_price;
+        this.t_status = Status.Setup;
     }
 
     public Tournament(int tournament_id, int house_cut, int entry_price, List<Player> playerslist, Player winner) {
-        this.house_cut = house_cut;
-        this.tournament_id = entry_price;
+        this(String.valueOf(tournament_id), entry_price, house_cut);
         this.playerslist = playerslist;
         this.t_status = Status.Setup;
-        this.tournament_name = "1st";
         this.result = new TournamentResult(this);
         this.house_profit = (int) Math.round(house_cut * entry_price * this.playerslist.size() / 100.);
         this.priz1st = (int) Math.round((entry_price * this.playerslist.size() - Math.round(house_cut * entry_price * this.playerslist.size() / 100.))*0.5);

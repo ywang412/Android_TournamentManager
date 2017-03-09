@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:paddingLeft="35dp"
+        android:gravity="center"
         android:text="Player Name" />
 
     <EditText
@@ -24,8 +24,8 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:layout_weight="0.07"
-        android:paddingLeft="35dp"
         android:text="Username" />
 
     <EditText
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:paddingLeft="35dp"
+        android:gravity="center"
         android:text="Phone Number" />
 
     <EditText
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
-        android:paddingLeft="35dp"
+        android:gravity="center"
         android:text="Deck" />
 
     <Spinner

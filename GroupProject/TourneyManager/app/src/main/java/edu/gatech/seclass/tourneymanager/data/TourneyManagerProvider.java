@@ -669,12 +669,14 @@ public class TourneyManagerProvider {
         int houseCutIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_CUT);
         int houseProfitIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_PROFIT);
 
-        Tournament tournament = new Tournament();
+        Tournament tournament = new Tournament(
+                cursor.getString(tournamentNameIndex),
+                cursor.getInt(entryPriceIndex),
+                cursor.getInt(houseCutIndex)
+
+        );
         tournament.setTournamentId(cursor.getInt(tournamentIdIndex));
-        tournament.setTournamentName(cursor.getString(tournamentNameIndex));
         tournament.setStatus(Status.getStatus(cursor.getInt(statusIdIndex)));
-        tournament.setEntryPrice(cursor.getInt(entryPriceIndex));
-        tournament.setHouseCut(cursor.getInt(houseCutIndex));
         tournament.setHouseProfit(cursor.getInt(houseProfitIndex));
 
         tournament.setPlayerslist(fetchPlayers(tournament));
