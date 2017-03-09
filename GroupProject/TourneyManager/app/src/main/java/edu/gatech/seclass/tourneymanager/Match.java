@@ -138,6 +138,19 @@ public class Match {
     public String toString() {
         return this.match_id + ". " + this.player_1 + " vs " + this.player_2 + " [" + this.m_status + "]";
     }
+
+    public String getActionString(){
+        switch (m_status){
+            case Setup:
+                return "[Set Ready]";
+            case Ready:
+                return "[Start]";
+            case InProgress:
+                return "[End]";
+            default:
+                return "";
+        }
+    }
 }
 
 

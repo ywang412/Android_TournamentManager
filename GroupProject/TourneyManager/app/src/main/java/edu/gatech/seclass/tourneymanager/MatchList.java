@@ -18,6 +18,45 @@ public class MatchList extends AppCompatActivity {
 
     ArrayList<Match> matches;
 
+    private  void selectWinner(final Match matchClicked) {
+        final String[] toShow = new String[3];
+        toShow[0] = "Please select winner:";
+        toShow[1] = matchClicked.getPlayer1().getName();
+        toShow[2] = matchClicked.getPlayer2().getName();
+        ArrayAdapter<String> prizeAdapter =
+                new ArrayAdapter<String>(this,
+                        R.layout.activity_match_list,
+                        R.id.reusableTextView,
+                        toShow
+                );
+
+        GridView matchGrid = new GridView(this);
+        setContentView(matchGrid);
+        matchGrid.setNumColumns(1);
+
+        matchGrid.setStretchMode(GridView.STRETCH_COLUMN_WIDTH);
+        matchGrid.setGravity(Gravity.CENTER_HORIZONTAL);
+        matchGrid.setGravity(Gravity.CENTER_VERTICAL);
+        matchGrid.setHorizontalSpacing(10);
+        matchGrid.setAdapter(prizeAdapter);
+        matchGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView,
+                                    View view, int position, long rowId) {
+                if (position==0) return;
+                Player theWinner;
+                if (position==1){
+                    theWinner = matchClicked.getPlayer1();
+                }else{
+                    theWinner = matchClicked.getPlayer2();
+                }
+                matchClicked.endMatch(theWinner);
+                populateGrid();
+            }
+        });
+    }
+
+
     private void populateGrid(){
         ArrayList<String> stringsList = new ArrayList<String>();
         stringsList.add("Player1");
@@ -34,7 +73,7 @@ public class MatchList extends AppCompatActivity {
             } else {
                 stringsList.add("");
             }
-//            stringsList.add(m.getActionString());
+            stringsList.add(m.getActionString());
 
         }
         final String[] toShow = new String[stringsList.size()];
@@ -62,21 +101,19 @@ public class MatchList extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView,
                                         View view, int position, long rowId) {
-
-                    // Generate a message based on the position
-                    String message = "You clicked on " + toShow[position];
-                    Snackbar.make(adapterView, message, Snackbar.LENGTH_LONG)
-                            .show();
-
                     if ( (position+1) %5 == 0)
                     {
                         int index = (position+1)/5-1;
                         Match matchClicked = matches.get(index-1); //Magic numbers
-                        if (matchClicked.getStatus() == Status.Ready) {
-                            matchClicked.setStatus(Status.InProgress);
+                        if(matchClicked.getStatus()== Status.Setup){
+                            matchClicked.setStatus(Status.Ready);
+                            populateGrid();
+                        }else if (matchClicked.getStatus() == Status.Ready) {
+                            matchClicked.startMatch();
                             populateGrid();
                         } else {
                             //TODO start new activity to choose player
+                            selectWinner(matchClicked);
                         }
                     }
                 }
@@ -96,7 +133,7 @@ public class MatchList extends AppCompatActivity {
             players.add(new Player("player1", "p1", "", new Deck("")));
             players.add(new Player("player2", "p2", "", new Deck("")));
             matches = new ArrayList<>();
-//            matches.add(new Match(1, new Tournament(1, 1, 1, players), 1, players.get(0), players.get(1)));
+            matches.add(new Match(1, new Tournament(1, 1, 1, players,null), 1, players.get(0), players.get(1), 0, players.get(0)));
         }
 
         populateGrid();
