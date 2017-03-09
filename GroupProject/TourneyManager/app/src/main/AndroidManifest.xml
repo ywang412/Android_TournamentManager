@@ -31,7 +31,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".manager.LoginActivity"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login"
+            android:noHistory="true"/>
         <activity
             android:name=".tournament.TournamentDetailsActivity"
             android:label="@string/title_activity_tournament_details"
@@ -39,7 +40,8 @@
         <activity
             android:name=".tournament.CreateTournamentActivity"
             android:label="@string/title_activity_create_tournament"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"/>
         <activity android:name=".MatchList"></activity>
     </application>
 

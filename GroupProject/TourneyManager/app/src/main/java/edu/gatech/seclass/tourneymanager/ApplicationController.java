@@ -79,7 +79,7 @@ public class ApplicationController {
     }
 
     public Tournament fetchPlayers(){
-        return new Tournament();
+        return null; //new Tournament();
     }
 
 }

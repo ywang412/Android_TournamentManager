@@ -22,13 +22,20 @@
     </string>
 
     <!-- Strings related to Manager Dashboard -->
-    <string name="total_profit_label">Total Profit:</string>
+    <string name="total_profit_label">Total Profit</string>
     <string name="total_profit_default">$0</string>
-    <string name="num_tournaments_label"># of Tournaments:</string>
+    <string name="num_tournaments_label"># of Tournaments</string>
     <string name="num_tournaments_default">0</string>
     <string name="create_tournament_btn">Create Tournament</string>
     <string name="manage_tournament_btn">Manage Current Tournament</string>
     <string name="player_management_btn">Player Management</string>
     <string name="match_management_btn">Match Management</string>
+
+    <!-- Strings related to Create Tournament Form -->
+    <string name="tourney_name_label">Tournament Name</string>
+    <string name="entry_fee_label">Entrance Fee</string>
+    <string name="house_cut_label">House Cut</string>
+    <string name="invalid_fee_error">Invalid Fee</string>
+    <string name="invalid_house_percentage_error">Invalid House Percentage</string>
 
 </resources>

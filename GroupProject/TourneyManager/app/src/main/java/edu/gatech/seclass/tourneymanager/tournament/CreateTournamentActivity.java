@@ -23,15 +23,6 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class CreateTournamentActivity extends AppCompatActivity {
 
-
-    int mode; // flag for which mode the app is in.  0 = player, 1 = manager.
-    int tourneyActive; // flag for whether or not a tournament is active.  0 = inactive, 1 = active.
-
-    ArrayList<String> playersmatches;
-    ArrayList<Player> players;
-    ArrayList<Match> matches;
-
-
     private TourneyManagerProvider mProvider;
     private ApplicationController mController;
 
@@ -48,8 +39,11 @@ public class CreateTournamentActivity extends AppCompatActivity {
         super.onStart();
         mProvider = new TourneyManagerProvider(getApplicationContext());
         mController = new ApplicationController(getApplicationContext());
-        // set tournament button behavior
 
+        // make sure there are no existing tournament.  If there are, then go straight to tournament details
+        if (mProvider.fetchCurrentTournament() != null) {
+            startActivity(new Intent(this, TournamentDetailsActivity.class));
+        }
     }
 
     @Override
@@ -62,96 +56,44 @@ public class CreateTournamentActivity extends AppCompatActivity {
 
     public void tourneyCreate(View view) {
 
-        boolean errorInvalid = false;
-        int entranceFee = 0, entrants = 0, housePercentage = 0;
+        boolean validInputs = true;
+        int entranceFee = 0, housePercentage = 0;
 
-        EditText txt = (EditText) findViewById(R.id.entranceFee);
-        if (txt.getText().toString().length() == 0) {
-            txt.setError("Invalid Fee");
-            errorInvalid = true;
+        EditText tourneyNameEditText = (EditText) findViewById(R.id.tourneyName);
+        EditText entranceFeeEditText = (EditText) findViewById(R.id.entranceFee);
+        EditText housePercentageEditText = (EditText) findViewById(R.id.housePercentage);
+
+        if (entranceFeeEditText.getText().toString().length() == 0) {
+            entranceFeeEditText.setError(getString(R.string.invalid_fee_error));
+            validInputs = false;
         } else {
-            entranceFee = Integer.parseInt(txt.getText().toString());
+            entranceFee = Integer.parseInt(entranceFeeEditText.getText().toString());
             if (entranceFee < 0) {
-                errorInvalid = true;
-                txt.setError("Invalid Fee");
+                validInputs = false;
+                entranceFeeEditText.setError(getString(R.string.invalid_fee_error));
             }
         }
 
-        txt = (EditText) findViewById(R.id.housePercentage);
-        if (txt.getText().toString().length() == 0) {
-            txt.setError("Invalid House Percentage");
-            errorInvalid = true;
+        if (housePercentageEditText.getText().toString().length() == 0) {
+            housePercentageEditText.setError(getString(R.string.invalid_house_percentage_error));
+            validInputs = false;
         } else {
-            housePercentage = Integer.parseInt(txt.getText().toString());
+            housePercentage = Integer.parseInt(housePercentageEditText.getText().toString());
             // 0 to 100 inclusive
-            if (housePercentage < 0 || housePercentage > 100) {
-                errorInvalid = true;
-                txt.setError("Invalid House Percentage");
+            if (housePercentage <= 0 || housePercentage >= 100) {
+                validInputs = false;
+                housePercentageEditText.setError(getString(R.string.invalid_house_percentage_error));
             }
         }
 
-        if (errorInvalid == false) {
+        if (validInputs) {
+            String tourneyName = tourneyNameEditText.getText().toString();
+            Tournament tournament = new Tournament(tourneyName, entranceFee, housePercentage);
+            mProvider.insertTournament(tournament);
 
-            final ArrayList<Player> playerlist = new ArrayList<Player>();
-            RadioGroup rg = (RadioGroup) findViewById(R.id.radioentrants);
-            int entrantsValue = Integer.parseInt(((RadioButton) findViewById(rg.getCheckedRadioButtonId())).getText().toString());
+            Toast.makeText(getApplicationContext(), "Tournament " + tourneyName + " created", Toast.LENGTH_SHORT).show();
 
-            EditText name1 = (EditText) findViewById(R.id.name1);
-            EditText name2 = (EditText) findViewById(R.id.name2);
-            EditText name3 = (EditText) findViewById(R.id.name3);
-            EditText name4 = (EditText) findViewById(R.id.name4);
-            EditText name5 = (EditText) findViewById(R.id.name5);
-            EditText name6 = (EditText) findViewById(R.id.name6);
-            EditText name7 = (EditText) findViewById(R.id.name7);
-            EditText name8 = (EditText) findViewById(R.id.name8);
-
-            Player player1 = mProvider.fetchPlayer(name1.getText().toString());
-            Player player2 = mProvider.fetchPlayer(name2.getText().toString());
-            Player player3 = mProvider.fetchPlayer(name3.getText().toString());
-            Player player4 = mProvider.fetchPlayer(name4.getText().toString());
-            Player player5 = mProvider.fetchPlayer(name5.getText().toString());
-            Player player6 = mProvider.fetchPlayer(name6.getText().toString());
-            Player player7 = mProvider.fetchPlayer(name7.getText().toString());
-            Player player8 = mProvider.fetchPlayer(name8.getText().toString());
-
-            // if one or more players don't exist, need to output error
-
-            playerlist.add(player1);
-            playerlist.add(player2);
-            playerlist.add(player3);
-            playerlist.add(player4);
-            playerlist.add(player5);
-            playerlist.add(player6);
-            playerlist.add(player7);
-            playerlist.add(player8);
-
-            mController.registerPlayer("Player1");
-            mController.registerPlayer("Player2");
-            mController.registerPlayer("Player3");
-            mController.registerPlayer("Player4");
-            mController.registerPlayer("Player5");
-            mController.registerPlayer("Player6");
-            mController.registerPlayer("Player7");
-            mController.registerPlayer("Player8");
-            mController.registerPlayer("TBD");
-
-
-            Player winner = mProvider.fetchPlayer("TBD");
-
-//            int tourneyID = mProvider.fetchTournaments().size();
-            int tourneyID = 1;
-
-            mController.createTournament(tourneyID, housePercentage, entranceFee, playerlist, winner);
-            Toast.makeText(getApplicationContext(), "Tournament created!  ID: " + tourneyID, Toast.LENGTH_SHORT).show();
-
-            System.out.println("succeed!!!!!!!!!!");
-
-            Tournament currentT = mController.fetchCurrentTournament();
-
-            for (Match match :currentT.getMatchlist()){
-                System.out.println("succeed!!!!!!!!!!"+match.getMatchId());
-            }
-
+            startActivity(new Intent(this, TournamentDetailsActivity.class));
         }
     }
 

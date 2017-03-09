@@ -11,6 +11,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:weightSum="1"
         android:orientation="vertical">
 
@@ -23,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/total_profit_label"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size"
                 android:gravity="left"
                 android:layout_weight="1" />
 
@@ -32,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/total_profit_default"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size"
                 android:gravity="left"
                 android:layout_weight="2" />
         </LinearLayout>
@@ -46,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/num_tournaments_label"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size"
                 android:gravity="left"
                 android:layout_weight="1" />
 
@@ -55,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/num_tournaments_default"
-                android:textSize="24sp"
+                android:textSize="@dimen/text_size"
                 android:gravity="left"
                 android:layout_weight="2" />
         </LinearLayout>
@@ -66,7 +70,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/createTournamentBtn"
             android:layout_weight="0.07"
-            android:textSize="24sp"/>
+            android:textSize="@dimen/text_size"/>
 
         <Button
             android:text="@string/player_management_btn"
@@ -74,17 +78,17 @@
             android:layout_height="wrap_content"
             android:id="@+id/playerMgmtBtn"
             android:layout_weight="0.07"
-            android:textSize="24sp"
+            android:textSize="@dimen/text_size"
             android:onClick="layoutPlayer"/>
 
         <Button
             android:text="@string/match_management_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:layout_weight="0.07"
-        android:textSize="24sp"
-        android:onClick="matchManagement"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button3"
+            android:layout_weight="0.07"
+            android:textSize="@dimen/text_size"
+            android:onClick="matchManagement"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
