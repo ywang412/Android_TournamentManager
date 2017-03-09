@@ -564,8 +564,10 @@ public class TourneyManagerProvider {
             insertMatch(match);
         }
 
-        for (Prize prize : tournament.getResult().getPrizes()) {
-            insertPrize(prize);
+        if (tournament.getResult() != null) {
+            for (Prize prize : tournament.getResult().getPrizes()) {
+                insertPrize(prize);
+            }
         }
 
         return insert(TournamentEntry.TABLE_NAME, tournamentValue);
@@ -590,8 +592,10 @@ public class TourneyManagerProvider {
             updateMatch(match);
         }
 
-        for (Prize prize : tournament.getResult().getPrizes()) {
-            updatePrize(prize);
+        if (tournament.getResult() != null) {
+            for (Prize prize : tournament.getResult().getPrizes()) {
+                insertPrize(prize);
+            }
         }
 
         return update(TournamentEntry.TABLE_NAME, tournamentValue, TournamentEntry._ID + " = ? ", new String[]{String.valueOf(tournament.getTournamentId())});
