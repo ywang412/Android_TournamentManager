@@ -56,7 +56,7 @@ As a stand-alone Android app, we did not see the necessity of a deployment diagr
 
 #### Data Schema Diagram
 
-![class](Supporting Files/Data Schema.png)
+![class](Supporting Files/Schema.png)
 
 ## 4 User Interface Design
 
