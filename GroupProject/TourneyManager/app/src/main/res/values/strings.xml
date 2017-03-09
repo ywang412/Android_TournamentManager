@@ -8,6 +8,11 @@
     <string name="title_activity_create_tournament">Create Tournament</string>
     <string name="title_activity_tournament_details">Tournament Details</string>
 
+    <!-- default values -->
+    <string name="currency_default">$0</string>
+    <string name="number_default">0</string>
+    <string name="preference_file_key">edu.gatech.seclass.tourneymanager.spring2017team37</string>
+
     <!-- Strings related to login -->
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
@@ -23,9 +28,7 @@
 
     <!-- Strings related to Manager Dashboard -->
     <string name="total_profit_label">Total Profit</string>
-    <string name="total_profit_default">$0</string>
     <string name="num_tournaments_label"># of Tournaments</string>
-    <string name="num_tournaments_default">0</string>
     <string name="create_tournament_btn">Create Tournament</string>
     <string name="manage_tournament_btn">Manage Current Tournament</string>
     <string name="player_management_btn">Player Management</string>
@@ -37,5 +40,15 @@
     <string name="house_cut_label">House Cut</string>
     <string name="invalid_fee_error">Invalid Fee</string>
     <string name="invalid_house_percentage_error">Invalid House Percentage</string>
+
+    <!-- String related to Tournament Details -->
+    <string name="no_current_tournament_toast">No current tournament! Please create a new tournament.</string>
+    <string name="tournament_status_label">Status</string>
+    <string name="num_players_label"># of Players</string>
+    <string name="profit_label">profit</string>
+    <string name="cancel_tournament_btn">Cancel</string>
+    <string name="player_list_btn">Player List</string>
+    <string name="match_list_btn">Match List</string>
+    <string name="pick_player_prompt">Select a player</string>
 
 </resources>

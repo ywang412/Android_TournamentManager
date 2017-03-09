@@ -33,7 +33,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tourneyName"
+                android:id="@+id/tourneyNameEditText"
                 android:textSize="@dimen/text_size"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:id="@+id/entranceFee"
+                android:id="@+id/entranceFeeEditText"
                 android:textSize="@dimen/text_size"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:id="@+id/housePercentage"
+                android:id="@+id/housePercentageEditText"
                 android:textSize="@dimen/text_size"
                 android:layout_weight="1" />
         </LinearLayout>
@@ -84,7 +84,6 @@
             android:text="@string/create_tournament_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonCalculate"
             android:textSize="@dimen/text_size"
             android:layout_weight="0.07"
             android:onClick="tourneyCreate"/>

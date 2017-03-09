@@ -16,9 +16,9 @@
         android:text="Entrance Fee:"
         android:id="@+id/textView"
         android:textSize="18sp"
-        android:layout_alignBottom="@+id/entranceFee"
+        android:layout_alignBottom="@+id/entranceFeeTextView"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/entranceFee" />
+        android:layout_toStartOf="@+id/entranceFeeTextView" />
 
     <Button
         android:text="Create Tournament"
@@ -38,7 +38,7 @@
         android:id="@+id/textView2"
         android:textSize="18sp"
         android:layout_marginTop="28dp"
-        android:layout_below="@+id/housePercentage"
+        android:layout_below="@+id/housePercentageTextView"
         android:layout_alignEnd="@+id/textView" />
 
     <RadioGroup
@@ -86,7 +86,7 @@
         android:ems="10"
         android:id="@+id/housePercentage"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/entranceFee"
+        android:layout_below="@+id/entranceFeeTextView"
         android:layout_toEndOf="@+id/textView3"
         android:layout_marginStart="29dp" />
 
@@ -96,7 +96,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/textView3"
         android:textSize="18sp"
-        android:layout_alignTop="@+id/housePercentage"
+        android:layout_alignTop="@+id/housePercentageTextView"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -174,7 +174,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/name1"
         android:layout_alignBottom="@+id/name1"
-        android:layout_alignStart="@+id/housePercentage"
+        android:layout_alignStart="@+id/housePercentageTextView"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Player2" />

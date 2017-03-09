@@ -10,7 +10,7 @@ public class Deck {
 
     public Deck(){}
 
-    Deck(String deckName){
+    public Deck(String deckName){
         name = deckName;
     }
 

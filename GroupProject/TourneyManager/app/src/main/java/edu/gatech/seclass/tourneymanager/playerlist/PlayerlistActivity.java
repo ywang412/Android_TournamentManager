@@ -1,4 +1,4 @@
-package edu.gatech.seclass.tourneymanager;
+package edu.gatech.seclass.tourneymanager.playerlist;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,19 +9,20 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import edu.gatech.seclass.tourneymanager.Player;
+import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class PlayerlistActivity extends AppCompatActivity {
 
-    ArrayList<Player> players;
-    ArrayList<Player> playersStaging;
+    List<Player> players;
+    List<Player> playersStaging;
 
-    private ApplicationController mController;
-    private TourneyManagerProvider mProvider;
+    protected TourneyManagerProvider mProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +35,18 @@ public class PlayerlistActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        mController = new ApplicationController(getApplicationContext());
         mProvider = new TourneyManagerProvider(getApplicationContext());
+        renderPlayerList();
+    }
+
+    protected void renderPlayerList() {
 
         final ListView playerList = (ListView) findViewById(R.id.playerlist);
         final ArrayAdapter arrayAdapter;
         final ArrayAdapter[] arrayAdapterNew = new ArrayAdapter[1];
 
         players = new ArrayList<>();
-        playersStaging = new ArrayList<>();
-        playersStaging = mProvider.fetchPlayers();
+        playersStaging = fetchPlayers();
 
         for (Player p : playersStaging) {
             if (p.getName() != null) {
@@ -51,8 +54,7 @@ public class PlayerlistActivity extends AppCompatActivity {
             }
         }
 
-        arrayAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, players);
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, players);
 
         playerList.setAdapter(arrayAdapter);
         playerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,8 +70,8 @@ public class PlayerlistActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case DialogInterface.BUTTON_POSITIVE:
-                                mController.deletePlayer(players.get(arg2));
-                                playersStaging = mProvider.fetchPlayers();
+                                deletePlayer(players.get(arg2));
+                                playersStaging = fetchPlayers();
 
                                 players.clear();
                                 for (Player p : playersStaging) {
@@ -96,14 +98,16 @@ public class PlayerlistActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        mController.shutdown();
         mProvider.shutdown();
+    }
+
+    protected List<Player> fetchPlayers() {
+        return mProvider.fetchPlayers();
     }
 
     public void addPlayer(View view) {
@@ -111,5 +115,9 @@ public class PlayerlistActivity extends AppCompatActivity {
         Intent mainIntent = new Intent(this, AddPlayerActivity.class);
         startActivity(mainIntent);
 
+    }
+
+    public void deletePlayer(Player player) {
+        mProvider.deletePlayer(player);
     }
 }

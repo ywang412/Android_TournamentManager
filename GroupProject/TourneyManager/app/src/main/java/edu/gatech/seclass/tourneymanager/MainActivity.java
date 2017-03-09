@@ -1,26 +1,19 @@
 package edu.gatech.seclass.tourneymanager;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 import edu.gatech.seclass.tourneymanager.manager.LoginActivity;
+import edu.gatech.seclass.tourneymanager.playerlist.LeaderboardActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -61,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         if (mProvider.fetchCurrentTournament() != null) {
             // if there is a current activity, display matchlist for the tournament
             // TODO start match list activity
+            Intent mainIntent = new Intent(this, LeaderboardActivity.class);
+            startActivity(mainIntent);
         } else {
             // if there's not current tournament, display player list
             Intent mainIntent = new Intent(this, LeaderboardActivity.class);
@@ -200,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         boolean errorInvalid = false;
         int entranceFee = 0, entrants = 0, housePercentage = 0;
 
-        EditText txt = (EditText) findViewById(R.id.entranceFee);
+        EditText txt = (EditText) findViewById(R.id.entranceFeeTextView);
         if (txt.getText().toString().length() == 0) {
             txt.setError("Invalid Fee");
             errorInvalid = true;
@@ -212,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        txt = (EditText) findViewById(R.id.housePercentage);
+        txt = (EditText) findViewById(R.id.housePercentageTextView);
         if (txt.getText().toString().length() == 0) {
             txt.setError("Invalid House Percentage");
             errorInvalid = true;

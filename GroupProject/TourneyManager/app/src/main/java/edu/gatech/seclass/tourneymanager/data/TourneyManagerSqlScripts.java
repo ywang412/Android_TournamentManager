@@ -69,7 +69,7 @@ public class TourneyManagerSqlScripts {
             TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + " TEXT, " +
 
             " FOREIGN KEY (" + TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + ") REFERENCES " + TournamentEntry.TABLE_NAME + " (" + TournamentEntry._ID + "), " +
-            " FOREIGN KEY (" + TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry._ID + "), " +
+            " FOREIGN KEY (" + TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + ") REFERENCES " + UserEntry.TABLE_NAME + " (" + UserEntry.COLUMN_USERNAME + "), " +
 
             " UNIQUE (" + TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + ", " + TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + ") ON CONFLICT IGNORE" +
             " );";

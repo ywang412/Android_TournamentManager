@@ -391,9 +391,9 @@ public class TourneyManagerProvider {
         };
         String selection = TournamentPlayerLinkEntry.COLUMN_TOURNAMENT_ID + " = ?";
         String[] selectionArgs = new String[]{String.valueOf(tournament.getTournamentId())};
-        Cursor c = query(tableName, columns, selection, null, null, null, null);
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
-        ArrayList<Player> players = new ArrayList<Player>();
+        ArrayList<Player> players = new ArrayList<>();
         int playerUserNameIndex = c.getColumnIndex(TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME);
         if (c.moveToFirst()) {
             do {
@@ -708,7 +708,7 @@ public class TourneyManagerProvider {
                 TournamentEntry.COLUMN_END_DATE
         };
         String selection = TournamentEntry._ID + " = ? ";
-        String[] selectionArgs = new String[]{String.valueOf(Status.Cancelled.statusId), String.valueOf(Status.Completed.statusId)};
+        String[] selectionArgs = new String[]{String.valueOf(id)};
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
         return c.moveToFirst() ? mapToTournament(c) : null;
     }

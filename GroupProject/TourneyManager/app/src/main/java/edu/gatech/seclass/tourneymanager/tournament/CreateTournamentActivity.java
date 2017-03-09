@@ -5,18 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import edu.gatech.seclass.tourneymanager.ApplicationController;
-import edu.gatech.seclass.tourneymanager.Match;
-import edu.gatech.seclass.tourneymanager.Player;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
@@ -35,6 +27,7 @@ public class CreateTournamentActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
     }
 
+    @Override
     protected void onStart() {
         super.onStart();
         mProvider = new TourneyManagerProvider(getApplicationContext());
@@ -59,9 +52,9 @@ public class CreateTournamentActivity extends AppCompatActivity {
         boolean validInputs = true;
         int entranceFee = 0, housePercentage = 0;
 
-        EditText tourneyNameEditText = (EditText) findViewById(R.id.tourneyName);
-        EditText entranceFeeEditText = (EditText) findViewById(R.id.entranceFee);
-        EditText housePercentageEditText = (EditText) findViewById(R.id.housePercentage);
+        EditText tourneyNameEditText = (EditText) findViewById(R.id.tourneyNameEditText);
+        EditText entranceFeeEditText = (EditText) findViewById(R.id.entranceFeeEditText);
+        EditText housePercentageEditText = (EditText) findViewById(R.id.housePercentageEditText);
 
         if (entranceFeeEditText.getText().toString().length() == 0) {
             entranceFeeEditText.setError(getString(R.string.invalid_fee_error));

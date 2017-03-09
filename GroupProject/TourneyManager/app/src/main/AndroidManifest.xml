@@ -20,9 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayerlistActivity"
+        <activity android:name=".playerlist.PlayerlistActivity"
             android:label="Manage Playerlist"/>
-        <activity android:name=".AddPlayerActivity"
+        <activity android:name=".playerlist.PlayersInTournamentActivity"
+            android:label="Manage Players"/>
+        <activity android:name=".playerlist.AddPlayerActivity"
             android:label="Add Player"/>
 
         <activity
@@ -34,7 +36,7 @@
             android:label="@string/title_activity_login"
             android:noHistory="true"/>
         <activity
-            android:name=".LeaderboardActivity"
+            android:name=".playerlist.LeaderboardActivity"
             android:label="Leaderboard" />
         <activity
             android:name=".tournament.TournamentDetailsActivity"

@@ -2,25 +2,17 @@ package edu.gatech.seclass.tourneymanager.manager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import edu.gatech.seclass.tourneymanager.ApplicationController;
-import edu.gatech.seclass.tourneymanager.Deck;
-import edu.gatech.seclass.tourneymanager.Match;
 import edu.gatech.seclass.tourneymanager.MatchList;
-import edu.gatech.seclass.tourneymanager.Player;
-import edu.gatech.seclass.tourneymanager.PlayerlistActivity;
+import edu.gatech.seclass.tourneymanager.playerlist.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.R;
-import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 import edu.gatech.seclass.tourneymanager.tournament.CreateTournamentActivity;
 import edu.gatech.seclass.tourneymanager.tournament.TournamentDetailsActivity;
