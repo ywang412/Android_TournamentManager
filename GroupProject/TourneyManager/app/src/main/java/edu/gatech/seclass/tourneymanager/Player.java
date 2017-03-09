@@ -37,6 +37,17 @@ public class Player extends User {
 //        return thePrizeList;
     }
 
+    public int prizesTotal (TourneyManagerProvider theProvider) {
+
+        List<Prize> prizesList = theProvider.fetchPrizes(this);
+        int prize = 0;
+
+        for (Prize p: prizesList) {
+            prize+=p.getPrizeAmount();
+        }
+        return prize;
+    }
+
     public void pickDeck(Deck deck){
         this.deck=deck;
     }

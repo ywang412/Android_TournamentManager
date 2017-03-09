@@ -33,6 +33,9 @@
             android:name=".manager.LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
+            android:name=".LeaderboardActivity"
+            android:label="Leaderboard" />
+        <activity
             android:name=".tournament.TournamentDetailsActivity"
             android:label="@string/title_activity_tournament_details"
             android:theme="@style/AppTheme.NoActionBar" />
