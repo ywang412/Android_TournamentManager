@@ -127,9 +127,15 @@ public class TourneyManagerProvider {
         matchValues.put(MatchEntry.COLUMN_MATCH_NUMBER, match.getMatchId());
         matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getStatus().statusId);
         matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatchRound());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
-        matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+        if (match.getPlayer1() != null) {
+            matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
+        }
+        if (match.getPlayer2() != null) {
+            matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
+        }
+        if (match.getWinner() != null) {
+            matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+        }
         matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
         return insert(MatchEntry.TABLE_NAME, matchValues);
     }
@@ -145,9 +151,15 @@ public class TourneyManagerProvider {
         matchValues.put(MatchEntry.COLUMN_MATCH_NUMBER, match.getMatchId());
         matchValues.put(MatchEntry.COLUMN_STATUS_ID, match.getStatus().statusId);
         matchValues.put(MatchEntry.COLUMN_ROUND, match.getMatchRound());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
-        matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
-        matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+        if (match.getPlayer1() != null) {
+            matchValues.put(MatchEntry.COLUMN_PLAYER_1_USERNAME, match.getPlayer1().getUsername());
+        }
+        if (match.getPlayer2() != null) {
+            matchValues.put(MatchEntry.COLUMN_PLAYER_2_USERNAME, match.getPlayer2().getUsername());
+        }
+        if (match.getWinner() != null) {
+            matchValues.put(MatchEntry.COLUMN_WINNER_USERNAME, match.getWinner().getUsername());
+        }
         matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
 
         return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatchId())});
