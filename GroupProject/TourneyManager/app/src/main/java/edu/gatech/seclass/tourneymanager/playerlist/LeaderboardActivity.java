@@ -74,8 +74,9 @@ public class LeaderboardActivity extends AppCompatActivity {
                 players.add(p);
             }
         }
+        
+        Collections.sort(players, Collections.<Player>reverseOrder(new CustomComparator()));
 
-        Collections.sort(players, new CustomComparator());
 
       /*  arrayAdapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_2, android.R.id.text1, players);
