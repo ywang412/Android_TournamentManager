@@ -43,9 +43,15 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 
 *As the application is still in design phase, to avoid frequent updates to the document, testing steps are omitted and will be updated in next version.*
 
- **ID**|**Test Case**|**Purpose**|**Steps**|**Expected result**|**Actual result**|**Pass/Fail**|
------|-----|-----|-----|-----|-----|-----|
-1|Player - View Leaderboard|Verify that a player can view the leaderboard|**1.** Check for any active tournaments.  If there is an ongoing tournament, cancel it.  <br>**2.** Press the "Player" button on the main app screen.|The leaderboard is displayed|Leaderboard displays|Pass
+**ID**|**Test Case**|**Purpose**|**Steps**|**Expected result**|**Actual result**|**Pass/Fail**
+-----|-----|-----|-----|-----|-----|-----
+1|Player - View Leaderboard|Player can log-in and view the leaderboard|1. Check for any active tournaments.  If there is an ongoing tournament, cancel it from Manager mode.  <br>2. Press the "Player" button on the main app screen.|The leaderboard is displayed|Leaderboard displays|Pass
+2|Player - View Matchlist|Player can log-in and view the matchlist|1. Check for any active tournaments.  If there is none, create one in Manager mode.  <br>2. Press the "Player" button on the main app screen.|The matchlist is displayed|Matchlist displays|Pass
+3|Manager - View Playerlist|Manager can log-in and view the playerlist|1. On App main screen, press "Manager" button. <br>2. Press the "Player Management" button.|The playerlist is displayed|Playerlist displays.|Pass
+4|Manager - View Matchlist|Manager can log-in and view the matchlist|1. Check for any active tournaments.  If there is none, create one.<br>2.  On App main screen, press "Manager" button. <br>3.  Press the "Match Management" button.|The matchlist is displayed|Matchlist displays|Pass
+5|Manager - Create Tournament|Manager can create a tournament|1. On App main screen, press "Manager" button. <br>2. Press the "Create Tournament" button.<br>3. Input the tournament name, entrance fee and house cut. <br> 4.  Press "Create Tournament" button.|Tournament created Toast message and Tournament details screen is displayed.|Toast and tournament details displays|Pass
+6|Manager - Add Player To Database|Manager can add a player to the database|1. On App main screen, press "Manager" button. <br>2. Press the "Player Management" button.<br>3.  Press "Add Player" button.<br> 4.  Input all information and then press "Add Player" button.|Player gets added to database and playerlist, as well as a Toast message confirmation.|Playerlist displays the newly added player and Toast confirmation.|Pass
+7|Manager - Delete Player From Database|Manager can delete a player from the database|1. On App main screen, press "Manager" button. <br>2. Press the "Player Management" button.<br>3.  Press on an existing player and click Yes when prompted to remove them.|The player gets removed from the list and database.|Player is removed|Pass
  
  
 | ID | Test Case | Purpose | Expected result | Actual result | Pass/Fail |
