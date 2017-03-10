@@ -58,7 +58,7 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 13|UI - Input Validation|UI will prevent adding players or creating a tournament without all required fields.|1. Add a player without one or more of the following: Username, phone number, name.<br>2.  Create a tournament with invalid house fee percentage or without a name.|A TextError should be displayed and the player fails to add or tournament does not get created.|Fails with error message|Pass
 14|UI - Multiple Resolutions Support|Ensure that the app looks and functions normally under different devices|1. Create virtual devices of different screen sizes and resolutions.<br>2.  Launch the application and check for UI problems.|The UI should stay intact.  Buttons, textviews and such are still visible and not cut off.|Application looks fine under different screen sizes.|Pass
 15|App - Device Compatibility|Ensure the app will run on the minimal API level and later.|1.  Launch the app on API 19 through 25.|The application should launch without errors.|Application launches.|Pass
-
+16|Database Functionality|The database retains data between app sessions.|1. On App main screen, press "Manager" button. <br>2.  Add a player to the database using the "Player Management" button. <br>3.  Close the application<br>4.  Reload the application<br>5.  Navigate to Manager -> "Player Management"|The player that was added before the app was closed should display on the list.|Database works properly, retains data between sessions|Pass
 
 
 
