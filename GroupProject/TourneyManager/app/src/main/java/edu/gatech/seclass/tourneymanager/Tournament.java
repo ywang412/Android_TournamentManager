@@ -75,7 +75,7 @@ public class Tournament {
                 }
             }
         }
-
+        System.out.println("matches_add!");
         Match match = new Match(match_id, this, match_round-1, nextmatch_id);
         matches.add(match);
         return matches;
@@ -84,6 +84,8 @@ public class Tournament {
 
     public void startTournament(){
         setMatchlist(generateMatchList(getPlayerslist()));
+
+        System.out.println("startTournament!");
         this.t_status= Status.InProgress;
         setStartDateTime(new Date());
     }

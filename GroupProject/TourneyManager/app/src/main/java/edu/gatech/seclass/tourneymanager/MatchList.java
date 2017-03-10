@@ -16,6 +16,10 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class MatchList extends AppCompatActivity {
 
+    private TourneyManagerProvider mProvider;
+
+    private Tournament mTournament;
+
     ArrayList<Match> matches;
 
     private  void selectWinner(final Match matchClicked) {
@@ -65,13 +69,27 @@ public class MatchList extends AppCompatActivity {
         stringsList.add("Winner");
         stringsList.add("Action");
         for (Match m : matches){
-            stringsList.add(m.getPlayer1().getName());
-            stringsList.add(m.getPlayer2().getName());
-            stringsList.add(m.getStatus().toString());
-            if (m.getStatus() == Status.Completed) {
-                stringsList.add(m.getWinner().getName());
-            } else {
+
+            if (m.getPlayer1() !=null) {
+                System.out.println(m.getPlayer1().getName());
+                stringsList.add(m.getPlayer1().getName());
+                stringsList.add(m.getPlayer2().getName());
+                stringsList.add(m.getStatus().toString());
+                if (m.getStatus() == Status.Completed) {
+                    stringsList.add("");
+                } else {
+                    stringsList.add("");
+                }
+            }
+            else {
                 stringsList.add("");
+                stringsList.add("");
+                stringsList.add("");
+                if (m.getStatus() == Status.Completed) {
+                    stringsList.add("");
+                } else {
+                    stringsList.add("");
+                }
             }
             stringsList.add(m.getActionString());
 
@@ -127,14 +145,24 @@ public class MatchList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_list);
 
-        //TODO remove this part when DB is functional
-        if (matches==null) {
-            ArrayList<Player> players = new ArrayList<>();
-            players.add(new Player("player1", "p1", "", new Deck("")));
-            players.add(new Player("player2", "p2", "", new Deck("")));
-            matches = new ArrayList<>();
-            matches.add(new Match(1, new Tournament(1, 1, 1, players,null), 1, players.get(0), players.get(1), 0, players.get(0)));
+        mProvider = new TourneyManagerProvider(getApplicationContext());
+        Tournament tournament = mProvider.fetchCurrentTournament();
+        matches =  ((ArrayList<Match>) tournament.getMatchlist());
+
+        for (Match match: matches){
+            System.out.println(match.getMatchId());
         }
+
+//        //TODO remove this part when DB is functional
+//        if (matches==null) {
+//            ArrayList<Player> players = new ArrayList<>();
+//            players.add(new Player("player1", "p1", "", new Deck("")));
+//            players.add(new Player("player2", "p2", "", new Deck("")));
+//            matches = new ArrayList<>();
+//            matches.add(new Match(1, new Tournament(1, 1, 1, players,null), 1, players.get(0), players.get(1), 0, players.get(0)));
+//        }
+
+
 
         populateGrid();
 
