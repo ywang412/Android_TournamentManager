@@ -43,6 +43,10 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 
 *As the application is still in design phase, to avoid frequent updates to the document, testing steps are omitted and will be updated in next version.*
 
+ **ID**|**Test Case**|**Purpose**|**Steps**|**Expected result**|**Actual result**|**Pass/Fail**|
+-----|-----|-----|-----|-----|-----|-----|
+1|Player - View Leaderboard|Verify that a player can view the leaderboard|**1.** Check for any active tournaments.  If there is an ongoing tournament, cancel it.  <br>**2.** Press the "Player" button on the main app screen.|The leaderboard is displayed|Leaderboard displays|Pass
+ 
  
 | ID | Test Case | Purpose | Expected result | Actual result | Pass/Fail |
 | --- | --- | ---  | --- | --- | --- |
