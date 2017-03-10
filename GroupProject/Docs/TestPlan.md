@@ -58,38 +58,7 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 13|UI - Input Validation|UI will prevent adding players or creating a tournament without all required fields.|1. Add a player without one or more of the following: Username, phone number, name.<br>2.  Create a tournament with invalid house fee percentage or without a name.|A TextError should be displayed and the player fails to add or tournament does not get created.|Fails with error message|Pass
 14|UI - Multiple Resolutions Support|Ensure that the app looks and functions normally under different devices|1. Create virtual devices of different screen sizes and resolutions.<br>2.  Launch the application and check for UI problems.|The UI should stay intact.  Buttons, textviews and such are still visible and not cut off.|Application looks fine under different screen sizes.|Pass
 15|App - Device Compatibility|Ensure the app will run on the minimal API level and later.|1.  Launch the app on API 19 through 25.|The application should launch without errors.|Application launches.|Pass
- 
 
-
-
- 
-| ID | Test Case | Purpose | Expected result | Actual result | Pass/Fail |
-| --- | --- | ---  | --- | --- | --- |
-|1|Player log-in	|Player mode selection |		Player Log-in access| | | 		
-|2|	Manager log-in	|Manager mode selection |		Manager Log-in access 		| | |
-|3|	New tournament	|To ensure tournament creation |		Creation of a new tournament without errors				| | |
-|4|	Add player	|New player creation	 |	Player details stored in database				| | |
-|5|	Edit player	information | Player information change	 |	Player details changed in database				| | |
-|6|	Delete player	|Player deletion	 |	Player details deleted from database			| | |	
-|7|	Display total prizes  |	Total prizes ranking display	 |	Total prizes ranking for all player displayed		| | |
-|8|	Display individual prize |	Individual prizes in past tournaments display	 |	Individual player prizes displayed				| | |
-|9|	Display house profits |	House profits in chronological order display |	House profits	displayed			| | |
-|10|	Total prizes calculation |	To test if total prizes for each player	is calculated correctly |	Correct player prizes		| | |
-|11|	House profits calculation |	To test if house profits	calculation is correct |	Correct house profits				| | |
-|12|	View the match list |	Tournament status display	 |	Match list status				| | |
-|13|	Start match	|Allow manager to start a match in list |		Match status "started"			| | |	
-|14|	End match	|Allow manager to end a match in list	 |	Match result display			| | |	
-|15|	End tournament 	|Allow manager to end a tournament  | 	Session log-out | |  |			
-|16|	Hide complete matches | Allow user to filter on-going matches	|	The display will be updated with on-going matches				| | |
-|17|	Log-out	|Session termination	 |	Session log-out		| | | 		
-|18|	Default parameters	|To check if default values are enforced	 |	Default values assigned		| | |	
-|19| Font size change	|To check if the text font size properly adjusted for different screen resolution |		Font adjusted| | | 		
-|20|	Layout change |To check if the Layout properly adjusted for different screen resolution |	Layout adjusted		| | |
-|21|	Recovery	|To check if data is kept when app shuts down |	data is not lost			| | |
-|22|	Input error	massage | To check if invalid input is handled	|	Input Error massage displayed				| | |
-|23|	Exit | Allow user to exit from the app by Home button 	|	App exits				| | |
-|24|	Delete history | Allow user to delete tournament history record 	|	Correctly delete data after confirmation				| | |
-|25|	Session maintenance	|To ensure user is logged on till log-out	|	Session maintained		| | |		
 
 
 
