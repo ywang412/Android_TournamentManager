@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,20 +43,31 @@ public class PlayerlistActivity extends AppCompatActivity {
 
     protected void renderPlayerList() {
 
-        final ListView playerList = (ListView) findViewById(R.id.playerlist);
-        final ArrayAdapter arrayAdapter;
+        final ListView playerList = (ListView) findViewById(R.id.playerListView);
+        final ArrayAdapter<Player> arrayAdapter;
         final ArrayAdapter[] arrayAdapterNew = new ArrayAdapter[1];
 
         players = new ArrayList<>();
         playersStaging = fetchPlayers();
 
         for (Player p : playersStaging) {
-            if (p.getName() != null) {
+            if (p != null && p.getName() != null) {
                 players.add(p);
             }
         }
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, players);
+        arrayAdapter = new ArrayAdapter<Player>(this, android.R.layout.simple_list_item_2, android.R.id.text1, players) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View view = super.getView(position, convertView, parent);
+                TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                text1.setText(players.get(position).getName());
+                text2.setText(players.get(position).getUsername());
+                return view;
+            }
+        };
 
         playerList.setAdapter(arrayAdapter);
         playerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -80,10 +93,7 @@ public class PlayerlistActivity extends AppCompatActivity {
                                     }
                                 }
 
-                                arrayAdapterNew[0] =
-                                        new ArrayAdapter<Player>(PlayerlistActivity.this, android.R.layout.simple_list_item_1, players);
-                                playerList.setAdapter(arrayAdapterNew[0]);
-
+                                renderPlayerList();
                                 break;
 
                             case DialogInterface.BUTTON_NEGATIVE:
@@ -92,17 +102,23 @@ public class PlayerlistActivity extends AppCompatActivity {
                     }
                 };
 
-                Player chosen = players.get(arg2);
-                String name = chosen.getName();
-                String username = chosen.getUsername();
-                String phonenum = chosen.getPhoneNumber();
-
-                builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phonenum +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
-                        .setNegativeButton("No", dialogClickListener).show();
+                renderPlayerDetail(players.get(arg2), builder, dialogClickListener);
 
             }
 
         });
+
+        TextView playerCountTextView = (TextView) findViewById(R.id.playerCountTextView);
+        playerCountTextView.setText(String.valueOf(playersStaging.size()));
+    }
+
+    protected void renderPlayerDetail(Player player, AlertDialog.Builder builder, DialogInterface.OnClickListener dialogClickListener) {
+        String name = player.getName();
+        String username = player.getUsername();
+        String phoneNumber = player.getPhoneNumber();
+
+        builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
     }
 
     @Override

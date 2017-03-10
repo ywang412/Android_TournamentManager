@@ -1,14 +1,15 @@
 package edu.gatech.seclass.tourneymanager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rulan on 3/1/2017.
  */
 
 public class TournamentResult {
-    Tournament tournament;
-    ArrayList<Prize> prizes;
+    private Tournament tournament;
+    private List<Prize> prizes;
     int houseProfit;
 
     public TournamentResult(){
@@ -36,11 +37,11 @@ public class TournamentResult {
         this.tournament = tournament;
     }
 
-    public ArrayList<Prize> getPrizes() {
+    public List<Prize> getPrizes() {
         return prizes;
     }
 
-    public void setPrizes(ArrayList<Prize> prizes) {
+    public void setPrizes(List<Prize> prizes) {
         this.prizes = prizes;
     }
 

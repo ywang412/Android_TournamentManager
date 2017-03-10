@@ -5,6 +5,8 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,6 +14,7 @@ import java.util.List;
 
 import edu.gatech.seclass.tourneymanager.Player;
 import edu.gatech.seclass.tourneymanager.R;
+import edu.gatech.seclass.tourneymanager.Status;
 import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.tournament.TournamentDetailsActivity;
 
@@ -39,6 +42,29 @@ public class PlayersInTournamentActivity extends PlayerlistActivity{
     @Override
     public void deletePlayer(Player player) {
         new RemovePlayerFromTournament().execute(player);
+    }
+
+    @Override
+    protected void renderPlayerList() {
+        super.renderPlayerList();
+        Button addPlayerBtn = (Button) findViewById(R.id.addplayerBtn);
+        addPlayerBtn.setEnabled(playersStaging.size() < 16);
+    }
+
+    @Override
+    protected void renderPlayerDetail(Player player, AlertDialog.Builder builder, DialogInterface.OnClickListener dialogClickListener) {
+        String name = player.getName();
+        String username = player.getUsername();
+        String phoneNumber = player.getPhoneNumber();
+
+        if (Status.Ready.equals(mTournament.getStatus()) || Status.Setup.equals(mTournament.getStatus())) {
+            builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber + "\n\nRemove Player from tournament?").setPositiveButton("Yes", dialogClickListener)
+                    .setNegativeButton("No", dialogClickListener).show();
+        }
+        else {
+            builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber + "\n")
+                    .setNegativeButton("Ok", dialogClickListener).show();
+        }
     }
 
     class PromptPlayersToAdd extends AsyncTask<Tournament, Integer, List<Player>> {
@@ -86,20 +112,22 @@ public class PlayersInTournamentActivity extends PlayerlistActivity{
         @Override
         protected void onPostExecute(Player player) {
             super.onPostExecute(player);
-            mProvider.addPlayerToTournament(mTournament, player);
+            long result = mProvider.addPlayerToTournament(mTournament, player);
+            Toast.makeText(getApplicationContext(), (result > 0) ? player.getName() + " added" : "failed to add player", Toast.LENGTH_SHORT).show();
             renderPlayerList();
         }
     }
 
-    class RemovePlayerFromTournament extends AsyncTask<Player, Integer, Integer> {
+    class RemovePlayerFromTournament extends AsyncTask<Player, Integer, Long> {
         @Override
-        protected Integer doInBackground(Player... params) {
-            mProvider.removePlayerFromTournament(mTournament, params[0]);
-            return null;
+        protected Long doInBackground(Player... params) {
+            long result = mProvider.removePlayerFromTournament(mTournament, params[0]);
+            return result;
         }
 
         @Override
-        protected void onPostExecute(Integer integer) {
+        protected void onPostExecute(Long result) {
+            Toast.makeText(getApplicationContext(), (result > 0) ? "player removed" : "failed to remove player", Toast.LENGTH_SHORT).show();
             renderPlayerList();
         }
     }

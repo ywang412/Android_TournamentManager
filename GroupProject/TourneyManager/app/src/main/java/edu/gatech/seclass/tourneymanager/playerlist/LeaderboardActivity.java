@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import edu.gatech.seclass.tourneymanager.ApplicationController;
 import edu.gatech.seclass.tourneymanager.Player;
 import edu.gatech.seclass.tourneymanager.Prize;
 import edu.gatech.seclass.tourneymanager.R;
@@ -28,7 +27,6 @@ public class LeaderboardActivity extends AppCompatActivity {
     ArrayList<Player> players;
     ArrayList<Player> playersStaging;
 
-    private ApplicationController mController;
     private TourneyManagerProvider mProvider;
 
     public class CustomComparator implements Comparator<Player> {
@@ -63,11 +61,10 @@ public class LeaderboardActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        mController = new ApplicationController(getApplicationContext());
         mProvider = new TourneyManagerProvider(getApplicationContext());
 
-        final ListView playerList = (ListView) findViewById(R.id.playerlist);
-        final ArrayAdapter arrayAdapter;
+        final ListView playerList = (ListView) findViewById(R.id.playerListView);
+        final ArrayAdapter<Player> arrayAdapter;
 
         players = new ArrayList<>();
         playersStaging = mProvider.fetchPlayers();
@@ -86,7 +83,7 @@ public class LeaderboardActivity extends AppCompatActivity {
 */
 
 
-        arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, players) {
+        arrayAdapter = new ArrayAdapter<Player>(this, android.R.layout.simple_list_item_2, android.R.id.text1, players) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
@@ -142,7 +139,6 @@ public class LeaderboardActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mController.shutdown();
         mProvider.shutdown();
     }
 

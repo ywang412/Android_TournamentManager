@@ -1,14 +1,13 @@
 package edu.gatech.seclass.tourneymanager.tournament;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import edu.gatech.seclass.tourneymanager.ApplicationController;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
@@ -16,8 +15,6 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 public class CreateTournamentActivity extends AppCompatActivity {
 
     private TourneyManagerProvider mProvider;
-    private ApplicationController mController;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +28,6 @@ public class CreateTournamentActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         mProvider = new TourneyManagerProvider(getApplicationContext());
-        mController = new ApplicationController(getApplicationContext());
 
         // make sure there are no existing tournament.  If there are, then go straight to tournament details
         if (mProvider.fetchCurrentTournament() != null) {
@@ -43,9 +39,7 @@ public class CreateTournamentActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         mProvider.shutdown();
-        mController.shutdown();
     }
-
 
     public void tourneyCreate(View view) {
 
@@ -82,11 +76,16 @@ public class CreateTournamentActivity extends AppCompatActivity {
         if (validInputs) {
             String tourneyName = tourneyNameEditText.getText().toString();
             Tournament tournament = new Tournament(tourneyName, entranceFee, housePercentage);
-            mProvider.insertTournament(tournament);
+            long result = mProvider.insertTournament(tournament);
 
-            Toast.makeText(getApplicationContext(), "Tournament " + tourneyName + " created", Toast.LENGTH_SHORT).show();
+            if (result > 0) {
+                Toast.makeText(getApplicationContext(), "Tournament " + tourneyName + " created", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(this, TournamentDetailsActivity.class));
+                startActivity(new Intent(this, TournamentDetailsActivity.class));
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Failed to create new tournament, please double check the fields", Toast.LENGTH_LONG).show();
+            }
         }
     }
 

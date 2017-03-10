@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import edu.gatech.seclass.tourneymanager.ApplicationController;
+import edu.gatech.seclass.tourneymanager.Match;
 import edu.gatech.seclass.tourneymanager.MatchList;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.Status;
@@ -27,12 +27,23 @@ public class TournamentDetailsActivity extends AppCompatActivity {
 
     private Tournament mTournament;
 
+
+    private Button playerListButton;
+    private Button matchListButton;
+    private Button cancelButton;
+    private Button startButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tournament_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        playerListButton = (Button) findViewById(R.id.playerListBtn);
+        matchListButton = (Button) findViewById(R.id.matchListBtn);
+        cancelButton = (Button) findViewById(R.id.cancelTournamentBtn);
+        startButton = (Button) findViewById(R.id.startTournamentBtn);
     }
 
     @Override
@@ -76,19 +87,61 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         TextView numPlayersView = (TextView) findViewById(R.id.numPlayersTextView);
         TextView profitView = (TextView) findViewById(R.id.profitTextView);
 
+        int playerCount = mTournament.getPlayerslist().size();
+
+        if (Status.Ready.equals(mTournament.getStatus()) && !(playerCount == 8 || playerCount == 16)) {
+            mTournament.setStatus(Status.Setup);
+            mProvider.updateTournament(mTournament);
+        }
+        else if (Status.Setup.equals(mTournament.getStatus()) && (playerCount == 8 || playerCount == 16)) {
+            mTournament.setStatus(Status.Ready);
+            mProvider.updateTournament(mTournament);
+        }
+
         // display tournament data
         tourneyNameView.setText(mTournament.getTournamentName());
         entranceFeeView.setText("$" + String.valueOf(mTournament.getEntryPrice()));
         houseCutView.setText(String.valueOf(mTournament.getHouseCut()) + "%");
         tournamentStatusView.setText(mTournament.getStatus().name());
-        numPlayersView.setText(String.valueOf(mTournament.getPlayerslist().size()));
+        numPlayersView.setText(String.valueOf(playerCount));
         profitView.setText("$" + computeProfit());
 
         // button appearance
-        Button cancelButton = (Button) findViewById(R.id.cancelTournamentBtn);
-
-        if (mTournament.getStatus().equals(Status.Cancelled) || mTournament.getStatus().equals(Status.Completed)) {
-            cancelButton.setEnabled(false);
+        switch (mTournament.getStatus()) {
+            case Cancelled:
+                matchListButton.setEnabled(true);
+                cancelButton.setEnabled(false);
+                startButton.setEnabled(false);
+                break;
+            case Completed:
+                matchListButton.setEnabled(true);
+                cancelButton.setEnabled(false);
+                startButton.setEnabled(false);
+                break;
+            case InProgress:
+                matchListButton.setEnabled(true);
+                cancelButton.setEnabled(true);
+                startButton.setEnabled(true);
+                for (Match match : mTournament.getMatchlist()) {
+                    if (match.getWinner() == null) {
+                        startButton.setEnabled(false);
+                    }
+                }
+                startButton.setText(getString(R.string.end_tournament_btn));
+                break;
+            case Ready:
+                matchListButton.setEnabled(false);
+                cancelButton.setEnabled(true);
+                startButton.setEnabled(true);
+                break;
+            case Setup:
+                matchListButton.setEnabled(false);
+                cancelButton.setEnabled(true);
+                startButton.setEnabled(false);
+                startButton.setText(getString(R.string.start_tournament_btn));
+                break;
+            default:
+                break;
         }
     }
 
@@ -100,11 +153,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         return (entranceFee * numPlayers * houseCut) / 100;
     }
 
-    private void addButtonOnClickListeners() {
-        Button playerListButton = (Button) findViewById(R.id.playerListBtn);
-        Button matchListButton = (Button) findViewById(R.id.matchListBtn);
-        Button cancelButton = (Button) findViewById(R.id.cancelTournamentBtn);
-
+    protected void addButtonOnClickListeners() {
         final Intent playerListIntent = new Intent(this, PlayersInTournamentActivity.class);
         playerListIntent.putExtra(TOURNAMENT_ID_TO_SHOW, mTournament.getTournamentId());
 
@@ -135,5 +184,33 @@ public class TournamentDetailsActivity extends AppCompatActivity {
                 updateLayout();
             }
         });
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startButtonListner(v);
+            }
+        });
+    }
+
+    protected void startButtonListner(View view) {
+        String message;
+        switch(mTournament.getStatus()) {
+            case Setup:
+            case Ready:
+                mTournament.startTournament();
+                message = "Tournament has started";
+                break;
+            default:
+                mTournament.endTournament();
+                message = "Tournament has ended";
+                break;
+        }
+        long result = mProvider.updateTournament(mTournament);
+        if (result > 0) {
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            fetchTournament();
+            updateLayout();
+        }
     }
 }

@@ -149,11 +149,27 @@
             android:id="@+id/matchListBtn"
             android:textSize="@dimen/text_size"/>
 
-        <Button
-            android:text="@string/cancel_tournament_btn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/cancelTournamentBtn"
-            android:textSize="@dimen/text_size"/>
+            android:orientation="horizontal">
+
+            <Button
+                android:text="@string/start_tournament_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/startTournamentBtn"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+
+            <Button
+                android:text="@string/cancel_tournament_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cancelTournamentBtn"
+                android:textSize="@dimen/text_size"
+                android:layout_weight="1" />
+
+        </LinearLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

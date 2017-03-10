@@ -4,16 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.gatech.seclass.tourneymanager.ApplicationController;
 import edu.gatech.seclass.tourneymanager.Deck;
 import edu.gatech.seclass.tourneymanager.Player;
 import edu.gatech.seclass.tourneymanager.R;
@@ -22,7 +21,6 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class AddPlayerActivity extends AppCompatActivity implements OnItemSelectedListener {
 
-    private ApplicationController mController;
     private TourneyManagerProvider mProvider;
     Spinner deckInput;
 
@@ -37,7 +35,6 @@ public class AddPlayerActivity extends AppCompatActivity implements OnItemSelect
     protected void onStart() {
         super.onStart();
 
-        mController = new ApplicationController(getApplicationContext());
         mProvider = new TourneyManagerProvider(getApplicationContext());
 
         deckInput = (Spinner) findViewById(R.id.deckspinner);
@@ -62,7 +59,6 @@ public class AddPlayerActivity extends AppCompatActivity implements OnItemSelect
     @Override
     protected void onStop() {
         super.onStop();
-        mController.shutdown();
         mProvider.shutdown();
     }
 

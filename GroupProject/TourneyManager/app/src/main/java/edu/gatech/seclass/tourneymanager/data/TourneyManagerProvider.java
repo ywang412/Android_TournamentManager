@@ -269,9 +269,15 @@ public class TourneyManagerProvider {
         match.setTournament(tournament);
         match.setStatus(fetchStatus(cursor.getInt(statusIdIndex)));
         match.setMatchRound(cursor.getInt(roundIndex));
-        match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
-        match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
-        match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
+        if (cursor.getString(player1Index) != null) {
+            match.setPlayer1(fetchPlayer(cursor.getString(player1Index)));
+        }
+        if (cursor.getString(player2Index) != null) {
+            match.setPlayer2(fetchPlayer(cursor.getString(player2Index)));
+        }
+        if (cursor.getString(winnerIndex) != null) {
+            match.setWinner(fetchPlayer(cursor.getString(winnerIndex)));
+        }
         match.setNextMatch(cursor.getInt(nextMatchIndex));
 
         return match;
@@ -310,9 +316,11 @@ public class TourneyManagerProvider {
     }
 
     public void deletePlayer(Player player){
+        delete(TournamentPlayerLinkEntry.TABLE_NAME, TournamentPlayerLinkEntry.COLUMN_PLAYER_USERNAME + " = ?", new String[]{player.getUsername()});
+
         ContentValues playerValues = new ContentValues();
         playerValues.put(UserEntry.COLUMN_USERNAME, "deleted" + UUID.randomUUID().toString());
-        playerValues.putNull(UserEntry.COLUMN_NAME);
+        playerValues.put(UserEntry.COLUMN_NAME, "deleted");
         playerValues.putNull(UserEntry.COLUMN_PHONE_NUMBER);
         update(UserEntry.TABLE_NAME, playerValues, UserEntry.COLUMN_USERNAME + " = ?", new String[]{player.getUsername()});
     }
@@ -367,7 +375,7 @@ public class TourneyManagerProvider {
                 UserEntry.COLUMN_DECK_ID
         };
         String selection = UserEntry.COLUMN_IS_MANAGER + " = 0 AND "
-                + "ifnull(length(" + UserEntry.COLUMN_NAME + "), 0) != 0";
+                + "ifnull(length(" + UserEntry.COLUMN_PHONE_NUMBER + "), 0) != 0";
         Cursor c = query(tableName, columns, selection, null, null, null, null);
         ArrayList<Player> players = new ArrayList<Player>();
         if (c.moveToFirst()) {
@@ -534,7 +542,7 @@ public class TourneyManagerProvider {
     }
 
     protected Status mapToStatus(Cursor cursor) {
-        int nameIndex = cursor.getColumnIndex(DeckEntry.COLUMN_DECK_NAME);
+        int nameIndex = cursor.getColumnIndex(StatusEntry.COLUMN_STATUS_NAME);
         for (Status status : Status.values()) {
             if (status.name().equals(cursor.getString(nameIndex))) {
                 return status;
@@ -589,7 +597,10 @@ public class TourneyManagerProvider {
         updatePlayersInTournament(tournament);
 
         for (Match match : tournament.getMatchlist()) {
-            updateMatch(match);
+            long result = updateMatch(match);
+            if (result <= 0) {
+                insertMatch(match);
+            }
         }
 
         if (tournament.getResult() != null) {
@@ -603,19 +614,28 @@ public class TourneyManagerProvider {
 
 
     public void updatePlayersInTournament(Tournament tournament) {
-        ArrayList<Player> playersInTournament = fetchPlayers(tournament);
-        List<Player> newPlayersInTournament = tournament.getPlayerslist();
+        ArrayList<Player> playersToRemove = fetchPlayers(tournament);
+        List<Player> playersToAdd = tournament.getPlayerslist();
 
-        List<Player> playersToAdd = new ArrayList<>();
-        playersToAdd.addAll(newPlayersInTournament);
-        playersToAdd.removeAll(playersInTournament);
+        List<Player> newPlayersInTournament = new ArrayList<>();
+        newPlayersInTournament.addAll(playersToAdd);
+        List<Player> playersInTournament = new ArrayList<>();
+        playersInTournament.addAll(playersToRemove);
+
+        for (Player newPlayer : newPlayersInTournament) {
+            for (Player oldPlayer : playersInTournament) {
+                if (newPlayer.getUsername().equals(oldPlayer.getUsername())) {
+                    playersToRemove.remove(oldPlayer);
+                    playersToAdd.remove(newPlayer);
+                    break;
+                }
+            }
+        }
+
         for (Player player : playersToAdd) {
             addPlayerToTournament(tournament, player);
         }
 
-        List<Player> playersToRemove = new ArrayList<>();
-        playersToRemove.addAll(playersInTournament);
-        playersToRemove.removeAll(newPlayersInTournament);
         for (Player player : playersToRemove) {
             removePlayerFromTournament(tournament, player);
         }
