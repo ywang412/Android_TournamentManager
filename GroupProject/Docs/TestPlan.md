@@ -41,8 +41,6 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 
 ## 2 Test Cases
 
-*As the application is still in design phase, to avoid frequent updates to the document, testing steps are omitted and will be updated in next version.*
-
 **ID**|**Test Case**|**Purpose**|**Steps**|**Expected result**|**Actual result**|**Pass/Fail**
 -----|-----|-----|-----|-----|-----|-----
 1|Player - View Leaderboard|Player can log-in and view the leaderboard|1. Check for any active tournaments.  If there is an ongoing tournament, cancel it from Manager mode.  <br>2. Press the "Player" button on the main app screen.|The leaderboard is displayed|Leaderboard displays|Pass
@@ -52,7 +50,16 @@ For unit testing of the App, we will depend on JUnit testing. We will also use J
 5|Manager - Create Tournament|Manager can create a tournament|1. On App main screen, press "Manager" button. <br>2. Press the "Create Tournament" button.<br>3. Input the tournament name, entrance fee and house cut. <br> 4.  Press "Create Tournament" button.|Tournament created Toast message and Tournament details screen is displayed.|Toast and tournament details displays|Pass
 6|Manager - Add Player To Database|Manager can add a player to the database|1. On App main screen, press "Manager" button. <br>2. Press the "Player Management" button.<br>3.  Press "Add Player" button.<br> 4.  Input all information and then press "Add Player" button.|Player gets added to database and playerlist, as well as a Toast message confirmation.|Playerlist displays the newly added player and Toast confirmation.|Pass
 7|Manager - Delete Player From Database|Manager can delete a player from the database|1. On App main screen, press "Manager" button. <br>2. Press the "Player Management" button.<br>3.  Press on an existing player and click Yes when prompted to remove them.|The player gets removed from the list and database.|Player is removed|Pass
+8|Manager - View House Profits/Tournaments Hosted|Manager can view the total house profits|1. On App main screen, press "Manager" button. |Total house profit is displayed correctly at the top, alongside total number of tournaments.|Correct profits and tournaments displayed.|Pass
+9|Manager - Start Match|Manager can start a match|1. Check for any active tournaments.  If there is none, create one in Manager mode.  <br>2. Press the "Manager" button on the main app screen.<br>3.  Press the "Match Management" button.<br>4.  Set a match to "Ready Status" and start it.|Match status should change from "Setup" to "Ready" and then finally "InProgress"|Status of match changes.|Pass
+10|Manager - End Match|Manager can end a match and select the winner|1. On the matchlist, Press the "End" action link on any match with an "InProgress" status.<br>2.  Select the winner of the match.|Match status should change from "InProgress" to "Completed" with a winner listed under "Winner"|Winner is displayed, status is "Completed"|Pass
+11|Manager - Cancel Tournament|Manager can cancel a tournament|1. Check for any active tournaments.  If there is none, create one in Manager mode.  <br>2. Press the "Manager" button on the main app screen.<br>3.  Press the "Manage Current Tournament" button.<br>4.  Press the "Cancel" button.|Status of the tournament should display "Cancelled" in the tournament details page.|Status changes to Cancelled.|Pass
+12|App - Multiple Resolutions Support|Ensure that the app looks and functions normally under different devices|1. Create virtual devices of different screen sizes and resolutions.<br>2.  Launch the application and check for UI problems.|The UI should stay intact.  Buttons, textviews and such are still visible and not cut off.|Application looks fine under different screen sizes.|Pass
+13|App - Device Compatibility|Ensure the app will run on the minimal API level and later.|1.  Launch the app on API 19 through 25.|The application should launch without errors.|Application launches.|Pass
  
+
+
+
  
 | ID | Test Case | Purpose | Expected result | Actual result | Pass/Fail |
 | --- | --- | ---  | --- | --- | --- |
