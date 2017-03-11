@@ -63,7 +63,8 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 5. Start/cancel a tournament
   * If tournament hasn't started yet, the "Start" button will be available.  
-  * User then click on "Start" to generate a single elimination match list. 
+  * User click on "Start" to generate a single elimination match list. 
+  * User then click on "Match List" to view current match list. 
 ![component](Supporting Files/14.png) 
 ![component](Supporting Files/15.png) 
 
