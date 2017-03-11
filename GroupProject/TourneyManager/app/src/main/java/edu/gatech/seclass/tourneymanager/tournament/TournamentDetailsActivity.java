@@ -107,20 +107,19 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         mTournament.setHouseProfit(computeProfit());
         profitView.setText("$" + mTournament.getHouseProfit());
 
+        matchListButton.setEnabled(mTournament.getMatchlist().size() > 0);
+
         // button appearance
         switch (mTournament.getStatus()) {
             case Cancelled:
-                matchListButton.setEnabled(true);
                 cancelButton.setEnabled(false);
                 startButton.setEnabled(false);
                 break;
             case Completed:
-                matchListButton.setEnabled(true);
                 cancelButton.setEnabled(false);
                 startButton.setEnabled(false);
                 break;
             case InProgress:
-                matchListButton.setEnabled(true);
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(true);
                 for (Match match : mTournament.getMatchlist()) {
@@ -131,12 +130,10 @@ public class TournamentDetailsActivity extends AppCompatActivity {
                 startButton.setText(getString(R.string.end_tournament_btn));
                 break;
             case Ready:
-                matchListButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(true);
                 break;
             case Setup:
-                matchListButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(false);
                 startButton.setText(getString(R.string.start_tournament_btn));
