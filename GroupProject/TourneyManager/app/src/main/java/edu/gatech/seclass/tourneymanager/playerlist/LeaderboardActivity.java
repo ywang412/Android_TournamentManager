@@ -94,6 +94,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                 text1.setText(position + 1 + ". " + players.get(position).getName());
 
                 ArrayList<Prize> prizes = mProvider.fetchPrizes(players.get(position));
+
                 int moneyWon = 0;
 
                 for (Prize p : prizes) {
@@ -126,9 +127,20 @@ public class LeaderboardActivity extends AppCompatActivity {
                     }
                 }
 
+                ArrayList<Prize> prizeList = mProvider.fetchPrizes(p1);
+
+                String prizees = "Prizes:\n";
+                for (Prize p: prizeList) {
+                    prizees += "Tournament:" + p.getTournament().getTournamentName() + " Rank:" + p.getPlace() + " $" + p.getPrizeAmount() + "\n";
+                }
+                if (prizeList.size() == 0) {
+                    prizees = "Prizes: None\n";;
+                }
+
+
                 AlertDialog alertDialog = builder.create();
                 builder.setTitle("Player Details");
-                alertDialog.setMessage("Player Name: " + p1.getName() + "\nUsername: " + p1.getUsername() + "\n\nNumber of tournaments won: " + tourneysWon + "\nMoney won: $" + moneyWon);
+                alertDialog.setMessage("Player Name: " + p1.getName() + "\nUsername: " + p1.getUsername() + "\n\nNumber of tournaments won: " + tourneysWon + "\nMoney won: $" + moneyWon + "\n\n" + prizees);
                 Toast.makeText(getApplicationContext(), players.get(arg2).getName(), Toast.LENGTH_SHORT).show();
                 alertDialog.show();
 

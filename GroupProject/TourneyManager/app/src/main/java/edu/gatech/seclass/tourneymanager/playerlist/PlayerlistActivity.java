@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.gatech.seclass.tourneymanager.Player;
+import edu.gatech.seclass.tourneymanager.Prize;
 import edu.gatech.seclass.tourneymanager.R;
 import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
@@ -119,7 +120,17 @@ public class PlayerlistActivity extends AppCompatActivity {
         String username = player.getUsername();
         String phoneNumber = player.getPhoneNumber();
 
-        builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
+        ArrayList<Prize> prizeList = mProvider.fetchPrizes(player);
+
+        String prizes = "Prizes:\n";
+        for (Prize p: prizeList) {
+            prizes += "Tournament name: " + p.getTournament().getTournamentName() + " - Placed: " + p.getPlace() + " - Prize: " + p.getPrizeAmount() + "\n";
+        }
+        if (prizeList.size() == 0) {
+            prizes = "Prizes: None\n";;
+        }
+
+        builder.setMessage(prizes + "\nName: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
 
