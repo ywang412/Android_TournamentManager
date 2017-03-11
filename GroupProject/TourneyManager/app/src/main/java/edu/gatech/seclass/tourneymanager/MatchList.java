@@ -29,15 +29,19 @@ public class MatchList extends MatchListPublicActivity {
         {
             int index = (position+1)/5-1;
             Match matchClicked = matches.get(index-1); //Magic numbers
-            if(matchClicked.getStatus()== Status.Setup){
-                matchClicked.setStatus(Status.Ready);
-                populateGrid();
-            }else if (matchClicked.getStatus() == Status.Ready) {
-                matchClicked.startMatch();
-                populateGrid();
-            } else {
-                //TODO start new activity to choose player
-                selectWinner(matchClicked);
+            switch(matchClicked.getStatus()) {
+                case Setup:
+                    matchClicked.setStatus(Status.Ready);
+                    populateGrid();
+                    break;
+                case Ready:
+                    matchClicked.startMatch();
+                    populateGrid();
+                    break;
+                default:
+                    //TODO start new activity to choose player
+                    selectWinner(matchClicked);
+                    break;
             }
         }
     }
@@ -69,12 +73,50 @@ public class MatchList extends MatchListPublicActivity {
                                     View view, int position, long rowId) {
                 if (position==0) return;
                 Player theWinner;
+                Player theLoser;
                 if (position==1){
                     theWinner = matchClicked.getPlayer1();
+                    theLoser = matchClicked.getPlayer2();
                 }else{
+                    theLoser = matchClicked.getPlayer1();
                     theWinner = matchClicked.getPlayer2();
                 }
                 matchClicked.endMatch(theWinner);
+                Match nextMatch = null;
+                Match consolationMatch = null;
+                int totalMatches = matches.size();
+                boolean needConsolationMatch = totalMatches - matchClicked.getNextMatch() <= 1;
+                for (Match match : matches) {
+                    if (match.getMatchId() == matchClicked.getNextMatch()) {
+                        nextMatch = match;
+                    }
+
+                    if (needConsolationMatch && match.getMatchId() == matchClicked.getNextMatch() + 1) {
+                        consolationMatch = match;
+                    }
+
+                    if (nextMatch != null) {
+                        if (!needConsolationMatch || consolationMatch != null) {
+                            break;
+                        }
+                    }
+                }
+                if (nextMatch != null) {
+                    if (matchClicked.getMatchId()%2 > 0) {
+                        nextMatch.setPlayer1(theWinner);
+                    }
+                    else {
+                        nextMatch.setPlayer2(theWinner);
+                    }
+                }
+                if (consolationMatch != null) {
+                    if (matchClicked.getMatchId()%2 > 0) {
+                        consolationMatch.setPlayer1(theLoser);
+                    }
+                    else {
+                        consolationMatch.setPlayer2(theLoser);
+                    }
+                }
                 populateGrid();
             }
         });

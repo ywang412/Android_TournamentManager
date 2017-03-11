@@ -51,29 +51,24 @@ public class MatchListPublicActivity extends AppCompatActivity {
         stringsList.add("Winner");
         stringsList.add("Action");
         for (Match m : matches){
+            String player1 = m.getPlayer1() != null ? m.getPlayer1().getName() : "";
+            String player2 = m.getPlayer2() != null ? m.getPlayer2().getName() : "";
+            String winner = m.getWinner() != null ? m.getWinner().getName() : "";
 
-            if (m.getPlayer1() !=null) {
-                stringsList.add(m.getPlayer1().getName());
-                stringsList.add(m.getPlayer2().getName());
-                stringsList.add(m.getStatus().toString());
-                if (m.getStatus() == Status.Completed) {
-                    stringsList.add("");
-                } else {
-                    stringsList.add("");
-                }
+            String status = "";
+            String action = "";
+            if (!player1.isEmpty() && !player2.isEmpty()) {
+                action = m.getActionString();
             }
-            else {
-                stringsList.add("");
-                stringsList.add("");
-                stringsList.add("");
-                if (m.getStatus() == Status.Completed) {
-                    stringsList.add("");
-                } else {
-                    stringsList.add("");
-                }
+            if (!player1.isEmpty() || !player2.isEmpty()) {
+                status = m.getStatus().toString();
             }
-            stringsList.add(m.getActionString());
 
+            stringsList.add(player1);
+            stringsList.add(player2);
+            stringsList.add(status);
+            stringsList.add(winner);
+            stringsList.add(action);
         }
         final String[] toShow = new String[stringsList.size()];
         stringsList.toArray(toShow);

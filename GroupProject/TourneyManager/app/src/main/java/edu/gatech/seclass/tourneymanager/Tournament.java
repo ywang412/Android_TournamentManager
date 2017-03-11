@@ -43,9 +43,11 @@ public class Tournament {
 
     protected List<Match> generateMatchList(List<Player> players) {
         List<Match> matches = new ArrayList<>();
-        int total_round = (int) (Math.log(players.size())/Math.log(2));
+        int playerCount = players.size();
+        int total_round = (int) (Math.log(playerCount)/Math.log(2));
         int match_id = 1;
-        int nextmatch_id =0;
+        int nextMatchCounter = 0;
+        int nextMatchId = playerCount/2;
 
         int match_round;
         for (match_round = 1; match_round<= total_round ; match_round++ ){
@@ -55,9 +57,12 @@ public class Tournament {
                     Player player1 = players.get(i);
                     Player player2 = players.get(i+1);
 
-                    nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
+                    if (nextMatchCounter % 2 == 0) {
+                        nextMatchId++;
+                    }
+                    nextMatchCounter++;
 
-                    Match match = new Match(match_id, this, match_round,player1, player2, nextmatch_id);
+                    Match match = new Match(match_id, this, match_round,player1, player2, nextMatchId);
 
                     matches.add(match);
                     match_id ++;
@@ -67,8 +72,15 @@ public class Tournament {
             else {
                 for (int i = 0; i < playerslist.size()/(int)(Math.pow(2,match_round)); i++) {
 
-                    nextmatch_id = match_id+total_round/(int)(Math.pow(2,match_round));
-                    Match match = new Match(match_id, this, match_round, nextmatch_id);
+                    if (nextMatchCounter % 2 == 0) {
+                        nextMatchId++;
+                    }
+                    nextMatchCounter++;
+
+                    if (match_round >= total_round) {
+                        nextMatchId = -1;
+                    }
+                    Match match = new Match(match_id, this, match_round, nextMatchId);
 
                     matches.add(match);
                     match_id ++;
@@ -76,7 +88,7 @@ public class Tournament {
             }
         }
         System.out.println("matches_add!");
-        Match match = new Match(match_id, this, match_round-1, nextmatch_id);
+        Match match = new Match(match_id, this, match_round-1, nextMatchId);
         matches.add(match);
         return matches;
     }

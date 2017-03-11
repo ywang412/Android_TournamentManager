@@ -170,7 +170,7 @@ public class TourneyManagerProvider {
      * @param matchId
      * @return
      */
-    public ArrayList<Match> fetchMatch(int matchId) {
+    public Match fetchMatch(int matchId) {
         String tableName = MatchEntry.TABLE_NAME;
         String[] columns = new String[]{
                 MatchEntry._ID,
@@ -188,13 +188,7 @@ public class TourneyManagerProvider {
         Cursor c = query(tableName, columns, selection, selectionArgs, null, null, null);
 
         ArrayList<Match> matchList = new ArrayList<Match>();
-        if (c.moveToFirst()) {
-            do {
-                matchList.add(mapToMatch(c));
-            }
-            while (c.moveToNext());
-        }
-        return matchList;
+        return c.moveToFirst() ? mapToMatch(c) : null;
     }
 
     protected Match mapToMatch(Cursor cursor) {
