@@ -24,11 +24,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import edu.gatech.seclass.tourneymanager.Deck;
 import edu.gatech.seclass.tourneymanager.Player;
+import edu.gatech.seclass.tourneymanager.Status;
+import edu.gatech.seclass.tourneymanager.Tournament;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -36,7 +39,7 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 public class TestDb {
-    private static final String TEST_DECK = "Engineer"; //  “Engineer”, “Buzz”, “Sideways”, “Wreck”, “T”, “RAT”
+    private static final String TEST_DECK = "Test"; //  “Engineer”, “Buzz”, “Sideways”, “Wreck”, “T”, “RAT”
     private static final String TEST_USERNAME = "username";
     private static final String TEST_PLAYER_NAME = "player1";
     private static final String TEST_PHONE_NUMBER = "0123456789";
@@ -56,6 +59,11 @@ public class TestDb {
         InstrumentationRegistry.getTargetContext().deleteDatabase(TourneyManagerDbHelper.DATABASE_NAME);
     }
 
+    /**
+     * modified from https://github.com/udacity/Sunshine-Version-2
+     *
+     * @throws Throwable
+     */
     @Test
     public void testCreateDb() throws Throwable {
         assertEquals(true, provider.isOpen());
@@ -104,6 +112,21 @@ public class TestDb {
     }
 
     @Test
+    public void testAddPlayerToTournament() throws Throwable {
+        testCreateDb();
+        testInsertPlayer();
+        testInsertTournament();
+
+        long res = provider.addPlayerToTournament(provider.fetchCurrentTournament(), provider.fetchPlayer(TEST_USERNAME));
+        assertTrue(res != -1);
+
+        Tournament tournament = provider.fetchCurrentTournament();
+        List<Player> players = provider.fetchPlayers(tournament);
+        assertTrue(players.size() > 0);
+        assertTrue(tournament.getPlayerslist().size() > 0);
+    }
+
+    @Test
     public void testInsertDeck() throws Throwable {
         testCreateDb();
         Deck deck = new Deck();
@@ -141,6 +164,20 @@ public class TestDb {
     }
 
     @Test
+    public void testInsertTournament() throws Throwable {
+        testCreateDb();
+        Tournament tournament = new Tournament("TEST TOURNEY", 10, 5);
+
+        provider.insertTournament(tournament);
+        Tournament fetchedTournament = provider.fetchCurrentTournament();
+
+        assertEquals(fetchedTournament.getTournamentName(), tournament.getTournamentName());
+        assertEquals(fetchedTournament.getEntryPrice(), tournament.getEntryPrice());
+        assertEquals(fetchedTournament.getHouseCut(), tournament.getHouseCut());
+        assertEquals(fetchedTournament.getStatus(), Status.Setup);
+    }
+
+    @Test
     public void testDeckTable() throws Throwable {
         testCreateDb();
         insertDeck();
@@ -160,8 +197,8 @@ public class TestDb {
         Cursor cursor = provider.query(
                 TourneyManagerContract.UserEntry.TABLE_NAME,  // Table to Query
                 null, // leaving "columns" null just returns all the columns.
-                null, // cols for "where" clause
-                null, // values for "where" clause
+                TourneyManagerContract.UserEntry.COLUMN_USERNAME + " = ?", // cols for "where" clause
+                new String[]{TEST_USERNAME}, // values for "where" clause
                 null, // columns to group by
                 null, // columns to filter by row groups
                 null  // sort order
@@ -181,10 +218,10 @@ public class TestDb {
         ContentValues userValues = new ContentValues();
         userValues.put(TourneyManagerContract.UserEntry.COLUMN_DECK_ID, deckRowId);
         userValues.put(TourneyManagerContract.UserEntry.COLUMN_IS_MANAGER, 1);
-        userValues.put(TourneyManagerContract.UserEntry.COLUMN_NAME, "Player 1");
-        userValues.put(TourneyManagerContract.UserEntry.COLUMN_PASSWORD, "gibberish");
-        userValues.put(TourneyManagerContract.UserEntry.COLUMN_PHONE_NUMBER, "1234567890");
-        userValues.put(TourneyManagerContract.UserEntry.COLUMN_USERNAME, "player1");
+        userValues.put(TourneyManagerContract.UserEntry.COLUMN_NAME, TEST_PLAYER_NAME);
+        userValues.put(TourneyManagerContract.UserEntry.COLUMN_PASSWORD, TEST_PASSWORD);
+        userValues.put(TourneyManagerContract.UserEntry.COLUMN_PHONE_NUMBER, TEST_PHONE_NUMBER);
+        userValues.put(TourneyManagerContract.UserEntry.COLUMN_USERNAME, TEST_USERNAME);
 
         return userValues;
     }
@@ -199,8 +236,8 @@ public class TestDb {
         Cursor cursor = provider.query(
                 TourneyManagerContract.DeckEntry.TABLE_NAME,  // Table to Query
                 null, // all columns
-                null, // Columns for the "where" clause
-                null, // Values for the "where" clause
+                TourneyManagerContract.DeckEntry.COLUMN_DECK_NAME + " = ?", // Columns for the "where" clause
+                new String[]{TEST_DECK}, // Values for the "where" clause
                 null, // columns to group by
                 null, // columns to filter by row groups
                 null // sort order
@@ -220,6 +257,12 @@ public class TestDb {
         return testValues;
     }
 
+    /**
+     * copied from https://github.com/udacity/Sunshine-Version-2
+     * @param error
+     * @param valueCursor
+     * @param expectedValues
+     */
     static void validateCurrentRecord(String error, Cursor valueCursor, ContentValues expectedValues) {
         Set<Map.Entry<String, Object>> valueSet = expectedValues.valueSet();
         for (Map.Entry<String, Object> entry : valueSet) {
