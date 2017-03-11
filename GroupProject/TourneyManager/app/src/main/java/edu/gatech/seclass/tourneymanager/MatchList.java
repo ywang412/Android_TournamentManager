@@ -17,6 +17,13 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 public class MatchList extends MatchListPublicActivity {
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        // update matches when we leave this activity
+        mProvider.updateTournament(mTournament);
+    }
+
+    @Override
     protected void itemClickInteraction(AdapterView<?> adapterView, View view, int position, long rowId) {
         if ( (position+1) %5 == 0)
         {

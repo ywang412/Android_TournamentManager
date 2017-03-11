@@ -16,6 +16,7 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 public class MatchListPublicActivity extends AppCompatActivity {
 
     protected TourneyManagerProvider mProvider;
+    protected Tournament mTournament;
     protected List<Match> matches;
 
     @Override
@@ -29,8 +30,8 @@ public class MatchListPublicActivity extends AppCompatActivity {
         super.onStart();
 
         mProvider = new TourneyManagerProvider(getApplicationContext());
-        Tournament tournament = mProvider.fetchCurrentTournament();
-        matches =  tournament.getMatchlist();
+        mTournament = mProvider.fetchCurrentTournament();
+        matches =  mTournament.getMatchlist();
 
         populateGrid();
     }
