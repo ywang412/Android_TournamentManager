@@ -25,7 +25,6 @@ public class Match {
             this.match_round = match_round;
             this.player_1 = player1;
             this.player_2 = player2;
-            this.winner = player2;
             this.nextmatch_id = nextmatch_id;
             m_status = Status.Setup;
            // System.out.println(match_round+"d"+ matchNumber+ player1.getName()+ player2.getName()+m_status);
@@ -39,7 +38,6 @@ public class Match {
         this.player_1 = player1;
         this.player_2 = player2;
         this.winner = winner;
-        this.winner = player2;
         this.nextmatch_id = nextmatch_id;
         m_status = Status.Setup;
         // System.out.println(match_round+"d"+ matchNumber+ player1.getName()+ player2.getName()+m_status);

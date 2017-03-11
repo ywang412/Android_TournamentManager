@@ -124,7 +124,7 @@ public class TournamentDetailsActivity extends AppCompatActivity {
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(true);
                 for (Match match : mTournament.getMatchlist()) {
-                    if (match.getWinner() == null) {
+                    if (!Status.Completed.equals(match.getStatus())) {
                         startButton.setEnabled(false);
                     }
                 }
