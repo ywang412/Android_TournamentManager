@@ -82,8 +82,11 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
   * After all the matches are ended, user clicks on the "End" tournament button to display Prizes. 
   * The 1st, 2nd, and 3rd prizes are automatically awarded. Note that the results are rounded to the nearest integer.  
   * The user can click individual player to see the list of individual prizes.
+  * The user can click tournament history to view post house profits in chronological order.
 ![component](Supporting Files/20.png)  
 ![component](Supporting Files/21.png)  
+![component](Supporting Files/23.png)  
+![component](Supporting Files/22.png)  
 
  Note that if the tournament is ended before all matches finished, the tournament will be considered invalid and the money will be refunded to players. 
  
