@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.format.DateFormat;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +26,8 @@ import edu.gatech.seclass.tourneymanager.Tournament;
  */
 
 public class TourneyManagerProvider {
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
 
     private final Context mContext;
     private final TourneyManagerDbHelper dbHelper;
@@ -559,6 +563,12 @@ public class TourneyManagerProvider {
         tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouseCut());
         tournamentValue.put(TournamentEntry.COLUMN_HOUSE_PROFIT, tournament.getHouseProfit());
         tournamentValue.put(TournamentEntry.COLUMN_STATUS_ID, tournament.getStatus().statusId);
+        if (tournament.getStartDateTime() != null) {
+            tournamentValue.put(TournamentEntry.COLUMN_START_DATE, String.valueOf(DateFormat.format(DATE_FORMAT, tournament.getStartDateTime())));
+        }
+        if (tournament.getEndDateTime() != null) {
+            tournamentValue.put(TournamentEntry.COLUMN_END_DATE, String.valueOf(DateFormat.format(DATE_FORMAT, tournament.getEndDateTime())));
+        }
 
         for (Player player : tournament.getPlayerslist()) {
             addPlayerToTournament(tournament, player);
@@ -589,6 +599,12 @@ public class TourneyManagerProvider {
         tournamentValue.put(TournamentEntry.COLUMN_HOUSE_CUT, tournament.getHouseCut());
         tournamentValue.put(TournamentEntry.COLUMN_HOUSE_PROFIT, tournament.getHouseProfit());
         tournamentValue.put(TournamentEntry.COLUMN_STATUS_ID, tournament.getStatus().statusId);
+        if (tournament.getStartDateTime() != null) {
+            tournamentValue.put(TournamentEntry.COLUMN_START_DATE, String.valueOf(DateFormat.format(DATE_FORMAT, tournament.getStartDateTime())));
+        }
+        if (tournament.getEndDateTime() != null) {
+            tournamentValue.put(TournamentEntry.COLUMN_END_DATE, String.valueOf(DateFormat.format(DATE_FORMAT, tournament.getEndDateTime())));
+        }
 
         updatePlayersInTournament(tournament);
 
@@ -686,6 +702,8 @@ public class TourneyManagerProvider {
         int entryPriceIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_ENTRY_PRICE);
         int houseCutIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_CUT);
         int houseProfitIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_HOUSE_PROFIT);
+        int startDateIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_START_DATE);
+        int endDateIndex = cursor.getColumnIndex(TournamentEntry.COLUMN_END_DATE);
 
         Tournament tournament = new Tournament(
                 cursor.getString(tournamentNameIndex),
@@ -704,6 +722,19 @@ public class TourneyManagerProvider {
         result.setTournament(tournament);
         result.setPrizes(fetchPrizes(tournament));
         tournament.setResult(result);
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+            if (cursor.getString(startDateIndex) != null) {
+                tournament.setStartDateTime(sdf.parse(cursor.getString(startDateIndex)));
+            }
+            if (cursor.getString(endDateIndex) != null) {
+                tournament.setEndDateTime((sdf.parse(cursor.getString(endDateIndex))));
+            }
+        }
+        catch (Exception e) {
+            // ignore excpetion in date parsing
+        }
 
         return tournament;
     }
@@ -748,6 +779,66 @@ public class TourneyManagerProvider {
                 TournamentEntry.COLUMN_END_DATE
         };
         Cursor c = query(tableName, columns, null, null, null, null, null);
+
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                tournaments.add(mapToTournament(c));
+            }
+            while (c.moveToNext());
+        }
+        return tournaments;
+    }
+
+    /**
+     * fetches all tournaments ordered by date
+     * @return
+     */
+    public ArrayList<Tournament> fetchTournamentsOrderByDate() {
+        String tableName = TournamentEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentEntry._ID,
+                TournamentEntry.COLUMN_TOURNAMENT_NAME,
+                TournamentEntry.COLUMN_STATUS_ID,
+                TournamentEntry.COLUMN_ENTRY_PRICE,
+                TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_HOUSE_PROFIT,
+                TournamentEntry.COLUMN_START_DATE,
+                TournamentEntry.COLUMN_END_DATE
+        };
+        String selection = TournamentEntry.COLUMN_STATUS_ID + " = ?";
+        String[] selectionArgs = new String[]{"4"};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, TournamentEntry.COLUMN_START_DATE + " ASC");
+
+        ArrayList<Tournament> tournaments = new ArrayList<>();
+        if (c.moveToFirst()) {
+            do {
+                tournaments.add(mapToTournament(c));
+            }
+            while (c.moveToNext());
+        }
+        return tournaments;
+    }
+
+    /**
+     * fetches all tournaments ordered by date
+     * @return
+     */
+    public ArrayList<Tournament> fetchTournamentsOrderByProfit() {
+        String tableName = TournamentEntry.TABLE_NAME;
+        String[] columns = new String[]{
+                TournamentEntry._ID,
+                TournamentEntry.COLUMN_TOURNAMENT_NAME,
+                TournamentEntry.COLUMN_STATUS_ID,
+                TournamentEntry.COLUMN_ENTRY_PRICE,
+                TournamentEntry.COLUMN_HOUSE_CUT,
+                TournamentEntry.COLUMN_HOUSE_PROFIT,
+                TournamentEntry.COLUMN_START_DATE,
+                TournamentEntry.COLUMN_END_DATE
+        };
+        String selection = TournamentEntry.COLUMN_STATUS_ID + " = ?";
+        String[] selectionArgs = new String[]{"4"};
+        Cursor c = query(tableName, columns, selection, selectionArgs, null, null, TournamentEntry.COLUMN_HOUSE_PROFIT + " DESC");
 
         ArrayList<Tournament> tournaments = new ArrayList<>();
         if (c.moveToFirst()) {

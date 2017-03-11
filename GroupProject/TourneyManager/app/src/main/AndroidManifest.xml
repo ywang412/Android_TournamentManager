@@ -20,13 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".playerlist.PlayerlistActivity"
-            android:label="Manage Playerlist"/>
-        <activity android:name=".playerlist.PlayersInTournamentActivity"
-            android:label="Manage Players"/>
-        <activity android:name=".playerlist.AddPlayerActivity"
-            android:label="Add Player"/>
-
+        <activity
+            android:name=".playerlist.PlayerlistActivity"
+            android:label="Manage Playerlist" />
+        <activity
+            android:name=".playerlist.PlayersInTournamentActivity"
+            android:label="Manage Players" />
+        <activity
+            android:name=".playerlist.AddPlayerActivity"
+            android:label="Add Player" />
         <activity
             android:name=".manager.ManagerDashboardActivity"
             android:label="@string/title_activity_manager_dashboard"
@@ -34,7 +36,7 @@
         <activity
             android:name=".manager.LoginActivity"
             android:label="@string/title_activity_login"
-            android:noHistory="true"/>
+            android:noHistory="true" />
         <activity
             android:name=".playerlist.LeaderboardActivity"
             android:label="Leaderboard" />
@@ -45,12 +47,15 @@
         <activity
             android:name=".tournament.CreateTournamentActivity"
             android:label="@string/title_activity_create_tournament"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true"/>
-        <activity android:name=".MatchList"
-            android:label="@string/title_activity_match_list"/>
-        <activity android:name=".MatchListPublicActivity"
-            android:label="@string/title_activity_match_list"/>
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MatchList"
+            android:label="@string/title_activity_match_list" />
+        <activity
+            android:name=".MatchListPublicActivity"
+            android:label="@string/title_activity_match_list" />
+        <activity android:name=".tournament.TournamentHistoryActivity"></activity>
     </application>
 
 </manifest>
