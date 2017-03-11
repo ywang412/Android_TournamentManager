@@ -104,7 +104,8 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         houseCutView.setText(String.valueOf(mTournament.getHouseCut()) + "%");
         tournamentStatusView.setText(mTournament.getStatus().name());
         numPlayersView.setText(String.valueOf(playerCount));
-        profitView.setText("$" + computeProfit());
+        mTournament.setHouseProfit(computeProfit());
+        profitView.setText("$" + mTournament.getHouseProfit());
 
         // button appearance
         switch (mTournament.getStatus()) {
