@@ -8,7 +8,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 ## Functionality Overview:
 
-![image](Supporting Files/1.png)  
+![image]([height=2in] Supporting Files/1.png)  
 
 - **Manager mode: This mode enables the user to**
 
