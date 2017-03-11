@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class MatchListPublicActivity extends AppCompatActivity {
 
-    private TourneyManagerProvider mProvider;
+    protected TourneyManagerProvider mProvider;
     protected List<Match> matches;
 
     @Override
