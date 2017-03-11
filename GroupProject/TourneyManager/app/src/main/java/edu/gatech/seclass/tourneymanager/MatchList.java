@@ -1,18 +1,10 @@
 package edu.gatech.seclass.tourneymanager;
 
-import android.app.Activity;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-
-import java.util.ArrayList;
-
-import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class MatchList extends MatchListPublicActivity {
 
@@ -88,11 +80,11 @@ public class MatchList extends MatchListPublicActivity {
                 int totalMatches = matches.size();
                 boolean needConsolationMatch = totalMatches - matchClicked.getNextMatch() <= 1;
                 for (Match match : matches) {
-                    if (match.getMatchId() == matchClicked.getNextMatch()) {
+                    if (match.getMatchNumber() == matchClicked.getNextMatch()) {
                         nextMatch = match;
                     }
 
-                    if (needConsolationMatch && match.getMatchId() == matchClicked.getNextMatch() + 1) {
+                    if (needConsolationMatch && match.getMatchNumber() == matchClicked.getNextMatch() + 1) {
                         consolationMatch = match;
                     }
 
@@ -103,7 +95,7 @@ public class MatchList extends MatchListPublicActivity {
                     }
                 }
                 if (nextMatch != null) {
-                    if (matchClicked.getMatchId()%2 > 0) {
+                    if (matchClicked.getMatchNumber()%2 > 0) {
                         nextMatch.setPlayer1(theWinner);
                     }
                     else {
@@ -111,7 +103,7 @@ public class MatchList extends MatchListPublicActivity {
                     }
                 }
                 if (consolationMatch != null) {
-                    if (matchClicked.getMatchId()%2 > 0) {
+                    if (matchClicked.getMatchNumber()%2 > 0) {
                         consolationMatch.setPlayer1(theLoser);
                     }
                     else {
