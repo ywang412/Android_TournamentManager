@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         // check whether there is a current tournament or not
         if (mProvider.fetchCurrentTournament() != null) {
             // if there is a current activity, display matchlist for the tournament
-            Intent mainIntent = new Intent(this, MatchList.class);
+            Intent mainIntent = new Intent(this, MatchListPublicActivity.class);
             startActivity(mainIntent);
         } else {
             // if there's not current tournament, display player list

@@ -47,7 +47,10 @@
             android:label="@string/title_activity_create_tournament"
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true"/>
-        <activity android:name=".MatchList"></activity>
+        <activity android:name=".MatchList"
+            android:label="@string/title_activity_match_list"/>
+        <activity android:name=".MatchListPublicActivity"
+            android:label="@string/title_activity_match_list"/>
     </application>
 
 </manifest>

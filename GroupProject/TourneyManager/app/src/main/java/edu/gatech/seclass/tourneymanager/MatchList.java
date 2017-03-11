@@ -61,7 +61,7 @@ public class MatchList extends AppCompatActivity {
     }
 
 
-    private void populateGrid(){
+    protected void populateGrid(){
         ArrayList<String> stringsList = new ArrayList<String>();
         stringsList.add("Player1");
         stringsList.add("Player2");
