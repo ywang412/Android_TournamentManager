@@ -65,35 +65,36 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
   * If tournament hasn't started yet, the "Start" button will be available.  
   * User click on "Start" to generate a single elimination match list. 
   * User then click on "Match List" to view current match list.
+  * The application will automatically calculate the house profit amount as well as the first, second, and third prizes based on the user inputs.
   
 ![component](Supporting Files/14.png) 
+
+6.	Manage existing tournament or 
+  * User click on "Action" to set-ready, start or end a match list.
+  * User select winner for a match.
+  * Once a winner is selected, it is automatically populated to a match in next round. 
+  * 3rd place playoff match is included in the matchlist.
 ![component](Supporting Files/15.png) 
-
-  * After all the information has been entered, user clicks on the Display Prizes and Profit button and the application will automatically calculate the house profit amount as well as the first, second, and third prizes based on the user inputs.
-  * The house profit is calculated based on the House Cut percentage input of the total amount of money collected, which are user modifiable. For example, the 1st, 2nd, and 3rd prizes can be 50%, 30% and 20% of the prize pool remaining after the house cut. Note that the results are rounded to the nearest integer.  
-  * Once the user validates the information, clicks on the Create Tournament button to create a tournament as shown below  
-![component](Supporting Files/alpha_manager_createT1.png)  
-
-  * To manage an existing tournament, user clicks on the Manage Tournament button. In this screen, the user can begin or end matches, and assign the results.  
-  * Users can end the current tournament by clicking on the End Tournament button. Note that if the tournament is ended before all matches finished, the tournament will be considered invalid and the money will be refunded to players.
+![component](Supporting Files/18.png) 
 
 
-4.	Display house profit and player prizes   
-  * User login with Manager Mode, and Display Prizes and/or Profits
+7.	Display house profit and player prizes
+  * After all the matches are ended, user clicks on the "End" tournament button to display Prizes. 
+  * The 1st, 2nd, and 3rd prizes are automatically awarded. Note that the results are rounded to the nearest integer.  
+![component](Supporting Files/20.png)  
 
+ Note that if the tournament is ended before all matches finished, the tournament will be considered invalid and the money will be refunded to players.
+ 
+ 
 - **Player Mode**
 
-1.	View player prizes
-  * User log with Player Mode. A list of players will be automatically displayed.  
-![component](Supporting Files/alpha_player_list.png)  
 
-  * User then clicks on one player, and the prizes of this specific player will be displayed. As shown below.  
-![component](Supporting Files/alpha_player_prize.png)  
-
-
-
-2.	View current matches in the existing tournament
+1.	View current matches in the existing tournament
   * User logon in Player Mode. And view Match list.
   
-  
-![component](Supporting Files/16.png) 
+![component](Supporting Files/15.png) 
+
+2.	View player prizes
+
+  * User log with Player Mode. A ranking list of players with prizes will be automatically displayed.  
+![component](Supporting Files/20.png)  
