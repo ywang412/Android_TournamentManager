@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
-import edu.gatech.seclass.tourneymanager.manager.LoginActivity;
+import edu.gatech.seclass.tourneymanager.manager.ManagerDashboardActivity;
 import edu.gatech.seclass.tourneymanager.playerlist.LeaderboardActivity;
 
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void layoutManager(View view) {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, ManagerDashboardActivity.class));
     }
 
     public void createTournament(View view) {
