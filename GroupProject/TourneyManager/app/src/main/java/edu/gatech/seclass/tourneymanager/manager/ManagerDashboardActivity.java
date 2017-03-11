@@ -86,15 +86,4 @@ public class ManagerDashboardActivity extends AppCompatActivity {
         Intent playerListIntent = new Intent(this, PlayerlistActivity.class);
         startActivity(playerListIntent);
     }
-
-    public void matchManagement(View view){
-        if (mProvider.fetchCurrentTournament() != null) {
-            Intent intent = new Intent(this, MatchList.class);
-            startActivity(intent);
-        } else {
-            Snackbar.make(view, "Hmmm... No Tournament No Match!", Snackbar.LENGTH_LONG)
-                    .show();
-        }
-    }
-
 }

@@ -81,14 +81,5 @@
             android:textSize="@dimen/text_size"
             android:onClick="layoutPlayer"/>
 
-        <Button
-            android:text="@string/match_management_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/button3"
-            android:layout_weight="0.07"
-            android:textSize="@dimen/text_size"
-            android:onClick="matchManagement"/>
-
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
