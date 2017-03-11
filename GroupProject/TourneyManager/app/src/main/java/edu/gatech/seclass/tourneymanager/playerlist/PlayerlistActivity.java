@@ -120,17 +120,8 @@ public class PlayerlistActivity extends AppCompatActivity {
         String username = player.getUsername();
         String phoneNumber = player.getPhoneNumber();
 
-        ArrayList<Prize> prizeList = mProvider.fetchPrizes(player);
 
-        String prizes = "Prizes:\n";
-        for (Prize p: prizeList) {
-            prizes += "Tournament name: " + p.getTournament().getTournamentName() + " - Placed: " + p.getPlace() + " - Prize: " + p.getPrizeAmount() + "\n";
-        }
-        if (prizeList.size() == 0) {
-            prizes = "Prizes: None\n";;
-        }
-
-        builder.setMessage(prizes + "\nName: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
+        builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
 
