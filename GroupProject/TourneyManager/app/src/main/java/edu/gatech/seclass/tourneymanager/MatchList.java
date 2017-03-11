@@ -31,9 +31,10 @@ public class MatchList extends MatchListPublicActivity {
                     matchClicked.startMatch();
                     populateGrid();
                     break;
-                default:
-                    //TODO start new activity to choose player
+                case InProgress:
                     selectWinner(matchClicked);
+                    break;
+                default:
                     break;
             }
         }
