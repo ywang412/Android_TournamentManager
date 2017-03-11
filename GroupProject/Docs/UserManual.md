@@ -91,7 +91,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 1.	View current matches in the existing tournament
   * User logon in Player Mode. And view Match list.
-  
+  * 
 ![component](Supporting Files/15.png) 
 
 2.	View player prizes
