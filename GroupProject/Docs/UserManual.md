@@ -83,7 +83,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
   * The 1st, 2nd, and 3rd prizes are automatically awarded. Note that the results are rounded to the nearest integer.  
 ![component](Supporting Files/20.png)  
 
- Note that if the tournament is ended before all matches finished, the tournament will be considered invalid and the money will be refunded to players.
+ Note that if the tournament is ended before all matches finished, the tournament will be considered invalid and the money will be refunded to players. 
  
  
 - **Player Mode**
