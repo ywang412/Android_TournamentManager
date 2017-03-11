@@ -614,8 +614,10 @@ public class TourneyManagerProvider {
 
 
     public void updatePlayersInTournament(Tournament tournament) {
-        ArrayList<Player> playersToRemove = fetchPlayers(tournament);
-        List<Player> playersToAdd = tournament.getPlayerslist();
+        List<Player> playersToRemove = new ArrayList<>();
+        playersToRemove.addAll(fetchPlayers(tournament));
+        List<Player> playersToAdd = new ArrayList<>();
+        playersToAdd.addAll(tournament.getPlayerslist());
 
         List<Player> newPlayersInTournament = new ArrayList<>();
         newPlayersInTournament.addAll(playersToAdd);
