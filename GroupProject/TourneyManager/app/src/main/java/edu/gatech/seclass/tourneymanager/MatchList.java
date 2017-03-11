@@ -19,6 +19,7 @@ public class MatchList extends MatchListPublicActivity {
     protected void itemClickInteraction(AdapterView<?> adapterView, View view, int position, long rowId) {
         if ( (position+1) %5 == 0)
         {
+            if (position<=4) return;
             int index = (position+1)/5-1;
             Match matchClicked = matches.get(index-1); //Magic numbers
             switch(matchClicked.getStatus()) {
