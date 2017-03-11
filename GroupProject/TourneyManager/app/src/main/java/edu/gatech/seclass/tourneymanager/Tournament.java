@@ -1,7 +1,6 @@
 package edu.gatech.seclass.tourneymanager;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -108,7 +107,7 @@ public class Tournament {
         Player player3rd = null;
 
         for (Match match : getMatchlist()) {
-            switch(match.getMatchId()){
+            switch(match.getMatchNumber()){
                 case 7:
                     if (player1st == null) {
                         player1st = match.getWinner();

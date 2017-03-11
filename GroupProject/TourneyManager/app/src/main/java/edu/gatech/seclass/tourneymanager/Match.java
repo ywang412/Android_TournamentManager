@@ -1,14 +1,13 @@
 package edu.gatech.seclass.tourneymanager;
 
-import edu.gatech.seclass.tourneymanager.Status;
-
 /**
  * Created by Yu on 2/28/2017.
  */
 
 public class Match {
 
-        private int match_id;
+        private int matchId;
+        private int matchNumber;
         private Tournament tournament;
         private Status m_status;
         private int match_round;
@@ -20,8 +19,8 @@ public class Match {
         public Match() {
         }
 
-        public Match(int match_id,Tournament tournament_id,int match_round,Player player1, Player player2, int nextmatch_id) {
-            this.match_id = match_id;
+        public Match(int matchNumber, Tournament tournament_id, int match_round, Player player1, Player player2, int nextmatch_id) {
+            this.matchNumber = matchNumber;
             this.tournament = tournament_id;
             this.match_round = match_round;
             this.player_1 = player1;
@@ -29,12 +28,12 @@ public class Match {
             this.winner = player2;
             this.nextmatch_id = nextmatch_id;
             m_status = Status.Setup;
-           // System.out.println(match_round+"d"+ match_id+ player1.getName()+ player2.getName()+m_status);
+           // System.out.println(match_round+"d"+ matchNumber+ player1.getName()+ player2.getName()+m_status);
         }
 
 
-    public Match(int match_id,Tournament tournament_id,int match_round,Player player1, Player player2, int nextmatch_id, Player winner) {
-        this.match_id = match_id;
+    public Match(int matchNumber, Tournament tournament_id, int match_round, Player player1, Player player2, int nextmatch_id, Player winner) {
+        this.matchNumber = matchNumber;
         this.tournament = tournament_id;
         this.match_round = match_round;
         this.player_1 = player1;
@@ -43,18 +42,25 @@ public class Match {
         this.winner = player2;
         this.nextmatch_id = nextmatch_id;
         m_status = Status.Setup;
-        // System.out.println(match_round+"d"+ match_id+ player1.getName()+ player2.getName()+m_status);
+        // System.out.println(match_round+"d"+ matchNumber+ player1.getName()+ player2.getName()+m_status);
     }
 
-    public Match(int match_id, Tournament tournament_id, int match_round, int nextmatch_id) {
-            this.match_id = match_id;
+    public Match(int matchNumber, Tournament tournament_id, int match_round, int nextmatch_id) {
+            this.matchNumber = matchNumber;
             this.match_round=match_round;
             this.tournament = tournament_id;
             this.nextmatch_id = nextmatch_id;
             m_status = Status.Setup;
-           // System.out.println(match_round+"d"+ match_id+m_status);
+           // System.out.println(match_round+"d"+ matchNumber+m_status);
         }
 
+    public int getMatchId() {
+        return matchId;
+    }
+
+    public void setMatchId(int matchId) {
+        this.matchId = matchId;
+    }
 
     public void startMatch(){
         this.m_status= Status.InProgress;
@@ -70,12 +76,12 @@ public class Match {
     }
 
 
-    public int getMatchId() {
-        return match_id;
+    public int getMatchNumber() {
+        return matchNumber;
     }
 
-    public void setMatchId(int match_id) {
-        this.match_id = match_id;
+    public void setMatchNumber(int matchNumber) {
+        this.matchNumber = matchNumber;
     }
 
     public Tournament getTournament() {
@@ -136,7 +142,7 @@ public class Match {
 
     @Override
     public String toString() {
-        return this.match_id + ". " + this.player_1 + " vs " + this.player_2 + " [" + this.m_status + "]";
+        return this.matchNumber + ". " + this.player_1 + " vs " + this.player_2 + " [" + this.m_status + "]";
     }
 
     public String getActionString(){
