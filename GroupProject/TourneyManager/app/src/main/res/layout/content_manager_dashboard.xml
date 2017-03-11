@@ -65,6 +65,15 @@
         </LinearLayout>
 
         <Button
+            android:text="@string/player_management_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/playerMgmtBtn"
+            android:layout_weight="0.07"
+            android:textSize="@dimen/text_size"
+            android:onClick="layoutPlayer"/>
+
+        <Button
             android:text="@string/create_tournament_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,13 +82,13 @@
             android:textSize="@dimen/text_size"/>
 
         <Button
-            android:text="@string/player_management_btn"
+            android:text="@string/tournament_history_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/playerMgmtBtn"
+            android:id="@+id/tournamentHistryBtn"
             android:layout_weight="0.07"
             android:textSize="@dimen/text_size"
-            android:onClick="layoutPlayer"/>
+            android:onClick="viewTournamentHistory"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -15,6 +15,7 @@ import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 import edu.gatech.seclass.tourneymanager.playerlist.PlayerlistActivity;
 import edu.gatech.seclass.tourneymanager.tournament.CreateTournamentActivity;
 import edu.gatech.seclass.tourneymanager.tournament.TournamentDetailsActivity;
+import edu.gatech.seclass.tourneymanager.tournament.TournamentHistoryActivity;
 
 public class ManagerDashboardActivity extends AppCompatActivity {
 
@@ -84,6 +85,11 @@ public class ManagerDashboardActivity extends AppCompatActivity {
      */
     public void layoutPlayer(View view) {
         Intent playerListIntent = new Intent(this, PlayerlistActivity.class);
+        startActivity(playerListIntent);
+    }
+
+    public void viewTournamentHistory(View view) {
+        Intent playerListIntent = new Intent(this, TournamentHistoryActivity.class);
         startActivity(playerListIntent);
     }
 }
