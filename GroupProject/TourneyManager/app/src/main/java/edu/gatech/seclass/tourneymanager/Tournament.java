@@ -129,18 +129,10 @@ public class Tournament {
             }
         }
 
-        int numPlayers = getPlayerslist().size();
-        double total = getEntryPrice() * numPlayers;
-        double houseProfit = total * getHouseCut() / 100.0;
-        double prizePool = total - houseProfit;
-        this.prize1st = (int) Math.round(prizePool*0.5);
-        this.prize2nd = (int) Math.round(prizePool*0.3);
-        this.prize3rd = (int) Math.round(prizePool*0.2);
-
         List<Prize> prizes = new ArrayList<>();
-        prizes.add(new Prize(this, player1st, 1, prize1st));
-        prizes.add(new Prize(this, player2nd, 2, prize2nd));
-        prizes.add(new Prize(this, player3rd, 3, prize3rd));
+        prizes.add(new Prize(this, player1st, 1, getPrize1st()));
+        prizes.add(new Prize(this, player2nd, 2, getPrize2nd()));
+        prizes.add(new Prize(this, player3rd, 3, getPrize3rd()));
 
         TournamentResult result = new TournamentResult();
         result.setPrizes(prizes);
@@ -244,5 +236,29 @@ public class Tournament {
 
     public void setPlayerslist(List<Player> playerslist) {
         this.playerslist = playerslist;
+    }
+
+    public int getPrize2nd() {
+        return prize2nd;
+    }
+
+    public void setPrize2nd(int prize2nd) {
+        this.prize2nd = prize2nd;
+    }
+
+    public int getPrize1st() {
+        return prize1st;
+    }
+
+    public void setPrize1st(int prize1st) {
+        this.prize1st = prize1st;
+    }
+
+    public int getPrize3rd() {
+        return prize3rd;
+    }
+
+    public void setPrize3rd(int prize3rd) {
+        this.prize3rd = prize3rd;
     }
 }

@@ -46,7 +46,10 @@
     <string name="no_current_tournament_toast">No current tournament! Please create a new tournament.</string>
     <string name="tournament_status_label">Status</string>
     <string name="num_players_label"># of Players</string>
-    <string name="profit_label">profit</string>
+    <string name="first_place_prize_label">1st Prize</string>
+    <string name="second_place_prize_label">2nd Prize</string>
+    <string name="third_place_prize_label">3rd Prize</string>
+    <string name="profit_label">House Profit</string>
     <string name="cancel_tournament_btn">Cancel</string>
     <string name="start_tournament_btn">Start</string>
     <string name="end_tournament_btn">End</string>

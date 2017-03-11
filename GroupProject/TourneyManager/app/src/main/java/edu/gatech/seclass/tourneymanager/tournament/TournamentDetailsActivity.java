@@ -27,6 +27,17 @@ public class TournamentDetailsActivity extends AppCompatActivity {
 
     private Tournament mTournament;
 
+    // get references to all the views for displaying data
+    TextView tourneyNameView;
+    TextView entranceFeeView;
+    TextView houseCutView;
+    TextView tournamentStatusView;
+    TextView numPlayersView;
+    TextView profitView;
+    TextView firstPrizeView;
+    TextView secondPrizeView;
+    TextView thirdPrizeView;
+
 
     private Button playerListButton;
     private Button matchListButton;
@@ -44,6 +55,17 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         matchListButton = (Button) findViewById(R.id.matchListBtn);
         cancelButton = (Button) findViewById(R.id.cancelTournamentBtn);
         startButton = (Button) findViewById(R.id.startTournamentBtn);
+
+        // get references to all the views for displaying data
+        tourneyNameView = (TextView) findViewById(R.id.tourneyNameTextView);
+        entranceFeeView = (TextView) findViewById(R.id.entranceFeeTextView);
+        houseCutView = (TextView) findViewById(R.id.housePercentageTextView);
+        tournamentStatusView = (TextView) findViewById(R.id.tournamentStatusTextView);
+        numPlayersView = (TextView) findViewById(R.id.numPlayersTextView);
+        profitView = (TextView) findViewById(R.id.profitTextView);
+        firstPrizeView = (TextView) findViewById(R.id.firstPrizeTextView);
+        secondPrizeView = (TextView) findViewById(R.id.secondPrizeTextView);
+        thirdPrizeView = (TextView) findViewById(R.id.thirdPrizeTextView);
     }
 
     @Override
@@ -79,13 +101,6 @@ public class TournamentDetailsActivity extends AppCompatActivity {
     }
 
     protected void updateLayout() {
-        // get references to all the views for displaying data
-        TextView tourneyNameView = (TextView) findViewById(R.id.tourneyNameTextView);
-        TextView entranceFeeView = (TextView) findViewById(R.id.entranceFeeTextView);
-        TextView houseCutView = (TextView) findViewById(R.id.housePercentageTextView);
-        TextView tournamentStatusView = (TextView) findViewById(R.id.tournamentStatusTextView);
-        TextView numPlayersView = (TextView) findViewById(R.id.numPlayersTextView);
-        TextView profitView = (TextView) findViewById(R.id.profitTextView);
 
         int playerCount = mTournament.getPlayerslist().size();
 
@@ -107,36 +122,45 @@ public class TournamentDetailsActivity extends AppCompatActivity {
         mTournament.setHouseProfit(computeProfit());
         profitView.setText("$" + mTournament.getHouseProfit());
 
+        // calculate prizes
+        double total = mTournament.getEntryPrice() * playerCount;
+        double houseProfit = total * mTournament.getHouseCut() / 100.0;
+        double prizePool = total - houseProfit;
+        mTournament.setPrize1st((int) Math.round(prizePool*0.5));
+        mTournament.setPrize2nd((int) Math.round(prizePool*0.3));
+        mTournament.setPrize3rd((int) Math.round(prizePool*0.2));
+
+        firstPrizeView.setText("$" + mTournament.getPrize1st());
+        secondPrizeView.setText("$" + mTournament.getPrize2nd());
+        thirdPrizeView.setText("$" + mTournament.getPrize3rd());
+
+        matchListButton.setEnabled(mTournament.getMatchlist().size() > 0);
+
         // button appearance
         switch (mTournament.getStatus()) {
             case Cancelled:
-                matchListButton.setEnabled(true);
                 cancelButton.setEnabled(false);
                 startButton.setEnabled(false);
                 break;
             case Completed:
-                matchListButton.setEnabled(true);
                 cancelButton.setEnabled(false);
                 startButton.setEnabled(false);
                 break;
             case InProgress:
-                matchListButton.setEnabled(true);
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(true);
                 for (Match match : mTournament.getMatchlist()) {
-                    if (match.getWinner() == null) {
+                    if (!Status.Completed.equals(match.getStatus())) {
                         startButton.setEnabled(false);
                     }
                 }
                 startButton.setText(getString(R.string.end_tournament_btn));
                 break;
             case Ready:
-                matchListButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(true);
                 break;
             case Setup:
-                matchListButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 startButton.setEnabled(false);
                 startButton.setText(getString(R.string.start_tournament_btn));

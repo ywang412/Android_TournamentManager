@@ -162,7 +162,7 @@ public class TourneyManagerProvider {
         }
         matchValues.put(MatchEntry.COLUMN_NEXT_MATCH_ID, match.getNextMatch());
 
-        return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatchNumber())});
+        return update(MatchEntry.TABLE_NAME, matchValues, MatchEntry._ID + " = ?", new String[]{String.valueOf(match.getMatchId())});
     }
 
     /**

@@ -11,12 +11,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.gatech.seclass.tourneymanager.Player;
+import edu.gatech.seclass.tourneymanager.Prize;
 import edu.gatech.seclass.tourneymanager.R;
+import edu.gatech.seclass.tourneymanager.Tournament;
 import edu.gatech.seclass.tourneymanager.data.TourneyManagerProvider;
 
 public class PlayerlistActivity extends AppCompatActivity {
@@ -117,6 +120,7 @@ public class PlayerlistActivity extends AppCompatActivity {
         String username = player.getUsername();
         String phoneNumber = player.getPhoneNumber();
 
+
         builder.setMessage("Name: " + name + "\nUsername: " + username + "\nPhone Number: " + phoneNumber +"\n\nRemove Player?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
     }
@@ -139,6 +143,15 @@ public class PlayerlistActivity extends AppCompatActivity {
     }
 
     public void deletePlayer(Player player) {
+        Tournament tournament = mProvider.fetchCurrentTournament();
+        if (tournament != null) {
+            for (Player playerInTournament : tournament.getPlayerslist()) {
+                if (playerInTournament.getUsername().equals(player.getUsername())) {
+                    Toast.makeText(getApplicationContext(), "Cannot delete this player.  Please end or cancel the current tournament first.", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        }
         mProvider.deletePlayer(player);
     }
 }
