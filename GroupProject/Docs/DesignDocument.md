@@ -50,7 +50,7 @@ As a stand-alone Android app, we did not see the necessity of a deployment diagr
 
 ### 3.1 Class Diagram
 
-![class](Supporting Files/Class Diagram.png)
+![class](Supporting Files/Class.png)
 
 ### 3.2 Other Diagrams
 
