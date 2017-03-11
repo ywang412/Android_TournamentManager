@@ -26,7 +26,7 @@ public class Match {
             this.match_round = match_round;
             this.player_1 = player1;
             this.player_2 = player2;
-            this.winner = player2;
+            this.winner = null;
             this.nextmatch_id = nextmatch_id;
             m_status = Status.Setup;
            // System.out.println(match_round+"d"+ match_id+ player1.getName()+ player2.getName()+m_status);
