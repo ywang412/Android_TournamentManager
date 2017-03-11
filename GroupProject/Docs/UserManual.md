@@ -8,17 +8,23 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 ## Functionality Overview:
 
-![component](Supporting Files/alpha_select_mode.png)
+![component](Supporting Files/1.png)
 
 - **Manager mode: This mode enables the user to**
 
-1.	Add a player to the system
+1.	Register a player to the system
 
 2.	Remove a player from the system
 
-3.	Manage existing tournament or create a new tournament
+3. Create a new tournament
 
-4.	Display house profit and player prizes
+4. Add registered players to the tournament
+
+5. Start/cancel a tournament
+
+6.	Manage existing tournament or 
+
+7.	Display house profit and player prizes
 
 - **Player mode: This mode enables the user to**
 
@@ -30,21 +36,36 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 - **Manager Mode**
 
-![component](Supporting Files/alpha_manager_login.png)  
+![component](Supporting Files/3.png)  
 
-1.	Add a player to the system
+1.	Register a player to the system
   * User login with Manager mode. The player list will automatically displayed. The user then click "Add Player".  
   * The user will enter all the required information: Name, Phone Number, and Deck. Then click OK.  
-![component](Supporting Files/alpha_add_player.png)  
+![component](Supporting Files/4.png)  
+![component](Supporting Files/6.png) 
+![component](Supporting Files/8.png) 
 2.	Remove a player from the system
   * User login with Manager mode. The player list will automatically displayed.
   * User clicks on the desired username that he/she wants to remove, then clicks YES or NO to confirm or cancel.    
-![component](Supporting Files/alpha_remove_player.png)  
-3.	Manage existing tournament or create a new tournament
+![component](Supporting Files/7.png) 
 
+3. Create a new tournament
   * If there is no existing tournament, the Create Tournament button will be available.  
-  * User then click on "Create Tournament" and enter the house cut, entry price, number of players, and a list of players participating in the tournament. Please note that the amount of players is restricted to either 8 or 16.  
-![component](Supporting Files/alpha_manager_createT2.png)  
+  * User enter the house cut, entry price and then click on "Create Tournament".
+![component](Supporting Files/9.png) 
+
+4. Add registered players to the tournament
+  * User click on "Player list" to add registered players participating the tournament. Please note that the amount of players is restricted to either 8 or 16.  
+![component](Supporting Files/10.png) 
+![component](Supporting Files/11.png) 
+![component](Supporting Files/12.png) 
+![component](Supporting Files/13.png) 
+
+5. Start/cancel a tournament
+  * If tournament hasn't started yet, the "Start" button will be available.  
+  * User then click on "Start" to generate a single elimination match list. 
+![component](Supporting Files/14.png) 
+![component](Supporting Files/15.png) 
 
   * After all the information has been entered, user clicks on the Display Prizes and Profit button and the application will automatically calculate the house profit amount as well as the first, second, and third prizes based on the user inputs.
   * The house profit is calculated based on the House Cut percentage input of the total amount of money collected, which are user modifiable. For example, the 1st, 2nd, and 3rd prizes can be 50%, 30% and 20% of the prize pool remaining after the house cut. Note that the results are rounded to the nearest integer.  
@@ -71,3 +92,4 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
 
 2.	View current matches in the existing tournament
   * User logon in Player Mode. And view Match list.
+![component](Supporting Files/16.png) 
