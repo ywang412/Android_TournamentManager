@@ -66,6 +66,7 @@ Tourney Manager is a user friendly E-gaming application that allows users to man
   * User click on "Start" to generate a single elimination match list. 
   * User then click on "Match List" to view current match list.
   * The application will automatically calculate the house profit amount as well as the first, second, and third prizes based on the user inputs.
+  
 ![component](Supporting Files/14.png) 
 
 6.	Manage existing tournament or 
